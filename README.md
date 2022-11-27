@@ -1,3 +1,6 @@
+# Login Information
+user : pass
+
 # Updating the Website on Github Pages
 0. Make sure you have [Node and npm](https://nodejs.org/en/download/) installed by entering:
 ```
