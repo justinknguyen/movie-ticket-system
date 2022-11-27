@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { LinkContainer } from "react-router-bootstrap";
+
+import Routes from "./Routes";
+import { AppContext } from "./lib/contextLib";
+import { useNavigate } from "react-router-dom";
+
+import "./App.css";
 
 function App() {
+  const nav = useNavigate();
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [isuserType, userType] = useState(false);
+
+  function handleLogout() {
+    userHasAuthenticated(false);
+    nav("/movie-ticket-system/");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+          <LinkContainer to="/movie-ticket-system/">
+            <Navbar.Brand className="font-weight-bold text-muted">
+              Movie Ticket System
+            </Navbar.Brand>
+          </LinkContainer>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav activeKey={window.location.pathname}>
+          {isAuthenticated ? ( 
+              <>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              </>
+          ) : (
+            <>
+              <LinkContainer to="/movie-ticket-system/login">
+                <Nav.Link>Login</Nav.Link>
+              </LinkContainer>
+            </>
+          )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, 
+                                    isuserType, userType}}>
+        <Routes />
+      </AppContext.Provider>
     </div>
   );
 }
