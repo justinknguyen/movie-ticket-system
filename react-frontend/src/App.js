@@ -37,6 +37,9 @@ function App() {
               </>
           ) : (
             <>
+              <LinkContainer to="/movie-ticket-system/signup">
+                <Nav.Link>Sign Up</Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/movie-ticket-system/login">
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
