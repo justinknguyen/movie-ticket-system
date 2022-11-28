@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAppContext } from "../lib/contextLib";
 import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
 import "./Signup.css";
 
 export default function Signup() {
@@ -70,7 +71,9 @@ export default function Signup() {
           {renderErrorMessage("pass")}
         </div>
         <div className="button-container">
-          <input type="submit" />
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
         </div>
       </form>
     </div>
