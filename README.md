@@ -1,3 +1,8 @@
+# How to Run
+1. Open the Java files in your preferred IDE
+2. Run `Assignment6Application.java`
+3. Head to the website! https://justinknguyen.github.io/movie-ticket-system/ 
+
 # Login Information
 * user1@gmail.com : pass
 * user2@gmail.com : pass
