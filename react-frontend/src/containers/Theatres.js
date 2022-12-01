@@ -9,8 +9,7 @@ import { Link } from 'react-router-dom';
 
 export default function Theatres() {
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
-//   const [theatres,setTheatres] = useState([])
-  const [theatres,setTheatres] = useState(['Crowfoot Theatre', 'Chinook Mall Theatre'])
+  const [theatres,setTheatres] = useState([])
 
   useEffect(()=>{
     fetch("http://localhost:8080/api/v1/theatres")
@@ -26,9 +25,9 @@ export default function Theatres() {
       <h1>Theatres</h1>
         {theatres.map(theatre=>(
         <Link to={'/movie-ticket-system/movies'}>
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={theatre.id}>
-            {/* Name:{theatre.name} */}
-                {theatre}
+          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={theatre.tId}>
+            ID:{theatre.tId},
+            Name:{theatre.name}
           </Paper>
         </Link>
         ))}

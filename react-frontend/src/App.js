@@ -33,6 +33,9 @@ function App() {
           <Nav activeKey={window.location.pathname}>
           {isAuthenticated ? ( 
               <>
+                <LinkContainer to="/movie-ticket-system/account">
+                  <Nav.Link>Account</Nav.Link>
+                </LinkContainer>
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
           ) : (

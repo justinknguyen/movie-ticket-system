@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppContext } from "../lib/contextLib";
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
@@ -8,45 +8,74 @@ export default function Signup() {
   const nav = useNavigate();
 
   // React States
+  const [isError, setIsError] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { userHasAuthenticated } = useAppContext();
 
-  // User Login info
-  const database = [
-    {
-      username: "user",
-      password: "pass"
-    }
-  ];
+  const [userDB, setUserDB] = useState();
 
   const errors = {
-    uname: "invalid username",
+    uname: "email address already exists",
     pass: "invalid password"
   };
+
+  useEffect(() => {
+		// get registered users
+    fetch("http://localhost:8080/api/v1/registereduser/all", {
+			method: "GET",
+			headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setUserDB(data);
+        })
+        .catch(() => {
+          console.log("Error");
+        });
+	}, []);
 
   const handleSubmit = (event) => {
       //Prevent page reload
       event.preventDefault();
 
-      var { uname, pass } = document.forms[0];
+      var { uname, pass, nme, addr } = document.forms[0];
 
       // Find user login info
-      const userData = database.find((user) => user.username === uname.value);
+      const userData = userDB?.find((user) => user.email === uname.value);
 
       // Compare user info
       if (userData) {
-        if (userData.password !== pass.value) {
-          // Invalid password
-          setErrorMessages({ name: "pass", message: errors.pass });
-        } else {
-          setIsSubmitted(true);
-          userHasAuthenticated(true)
-          nav("/movie-ticket-system/");
-        }
-      } else {
-        // Username not found
+        // Email found
         setErrorMessages({ name: "uname", message: errors.uname });
+        console.log("Error. Email Address Exists.");
+      } else {
+        // Email not found
+        const newUser = {
+          email: uname.value,
+          password: pass.value,
+          name: nme.value,
+          address: addr.value
+        };
+        console.log(newUser);
+        fetch("http://localhost:8080/api/v1/registereduser/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newUser),
+        })
+          .then(() => {
+            console.log(newUser);
+            console.log("New User Added");
+            setIsSubmitted(true);
+            setIsError(false);
+          })
+          .catch(() => {
+            console.log("Error");
+            setIsError(true);
+            setIsSubmitted(false);
+          });
       }
   };
 
@@ -70,6 +99,16 @@ export default function Signup() {
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
+        <div className="input-container">
+          <label>Name </label>
+          <input type="text" name="name" required />
+          {renderErrorMessage("name")}
+        </div>
+        <div className="input-container">
+          <label>Address </label>
+          <input type="text" name="address" required />
+          {renderErrorMessage("address")}
+        </div>
         <div className="button-container">
         <Button variant="contained" onClick={handleSubmit}>
           Submit
@@ -83,7 +122,7 @@ export default function Signup() {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign Up</div>
-        {isSubmitted ? <div>User is successfully signed up</div> : renderForm}
+        {isSubmitted ? <div>You've successfully signed up! Please login.</div> : renderForm}
       </div>
     </div>
   );

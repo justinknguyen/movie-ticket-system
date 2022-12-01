@@ -9,13 +9,12 @@ import { Link } from 'react-router-dom';
 
 export default function Showtimes() {
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
-//   const [showtimes,setShowtimes] = useState([])
-  const [showtimes,setShowtimes] = useState(['4:00 - 5:00 PM', '11:00 - 12:00 AM'])
+  const [showtimes,setShowtimes] = useState([])
   const [tId,settId] = useState('')
   const [mId,setmId] = useState('')
 
   useEffect(()=>{
-    fetch("http://localhost:8080/api/v1/theatres/"+tId+"/movies/"+mId+"/showtimes")
+    fetch("http://localhost:8080/api/v1/showtimes")
     .then(res=>res.json())
     .then(result=>{
       setShowtimes(result);
@@ -28,9 +27,9 @@ export default function Showtimes() {
       <h1>Showtimes</h1>
         {showtimes.map(showtime=>(
         <Link to={'/movie-ticket-system/seats'}>
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={showtime.id}>
-            {/* Name:{showtime.name} */}
-                {showtime}
+          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={showtime.showtime}>
+            ID:{showtime.stId},
+            Start Time:{showtime.showtime}
           </Paper>
         </Link>
         ))}

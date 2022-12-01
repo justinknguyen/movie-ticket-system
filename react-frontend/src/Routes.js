@@ -11,6 +11,7 @@ import Showtimes from "./containers/Showtimes";
 import Seats from "./containers/Seats";
 import Seats2 from "./containers/Seats2";
 import Payment from "./containers/Payment";
+import Account from "./containers/Account";
 
 export default function Links() {
   return (
@@ -23,6 +24,7 @@ export default function Links() {
         <Route path="/movie-ticket-system/showtimes" element={<Showtimes />} />
         <Route path="/movie-ticket-system/seats" element={<Seats2 />} />
         <Route path="/movie-ticket-system/payment" element={<Payment />} />
+        <Route path="/movie-ticket-system/account" element={<Account />} />
         {
           /* Finally, catch all unmatched routes */
         }

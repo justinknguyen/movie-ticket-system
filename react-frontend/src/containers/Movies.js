@@ -9,12 +9,11 @@ import { Link } from 'react-router-dom';
 
 export default function Movies() {
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
-//   const [movies,setMovies] = useState([])
-  const [movies,setMovies] = useState(['Interstellar', 'Cars 2'])
+  const [movies,setMovies] = useState([])
   const [tId,settId] = useState('')
 
   useEffect(()=>{
-    fetch("http://localhost:8080/api/v1/theatres/"+tId+"/movies")
+    fetch("http://localhost:8080/api/v1/movies")
     .then(res=>res.json())
     .then(result=>{
       setMovies(result);
@@ -27,9 +26,10 @@ export default function Movies() {
       <h1>Movies</h1>
         {movies.map(movie=>(
         <Link to={'/movie-ticket-system/showtimes'}>
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={movie.id}>
-            {/* Name:{movie.name} */}
-                {movie}
+          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={movie.mId}>
+            ID:{movie.mId},
+            Name:{movie.name} <br></br>
+            Release Date:{movie.releaseDate}
           </Paper>
         </Link>
         ))}
