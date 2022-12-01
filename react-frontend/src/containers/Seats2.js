@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { theatreSelected } from "./Theatres.js";
 import { movieSelected } from "./Movies.js";
 import { stSelected } from "./Showtimes.js";
-const s= 'test'
-const p=10.00
+
+const s= 'test3'
+const p=20.00
 
 const movies = [
   {
@@ -61,14 +62,13 @@ export default function Seats2() {
             console.log("Ticket Created");
             setIsSubmitted(true);
             setIsError(false);
+            nav("/movie-ticket-system/payment");
           })
           .catch(() => {
             console.log("Error");
             setIsError(true);
             setIsSubmitted(false);
           });
-
-    nav("/movie-ticket-system/payment");
   }
 
   return (

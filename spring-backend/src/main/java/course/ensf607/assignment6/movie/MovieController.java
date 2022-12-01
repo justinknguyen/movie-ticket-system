@@ -29,5 +29,4 @@ public class MovieController {
         movieService.addMovie(movie);
         return ResponseEntity.ok("Movie added.");
     }
-
 }
