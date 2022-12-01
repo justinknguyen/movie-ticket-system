@@ -101,13 +101,13 @@ export default function Signup() {
         </div>
         <div className="input-container">
           <label>Name </label>
-          <input type="text" name="name" required />
-          {renderErrorMessage("name")}
+          <input type="text" name="nme" required />
+          {renderErrorMessage("nme")}
         </div>
         <div className="input-container">
           <label>Address </label>
-          <input type="text" name="address" required />
-          {renderErrorMessage("address")}
+          <input type="text" name="addr" required />
+          {renderErrorMessage("addr")}
         </div>
         <div className="button-container">
         <Button variant="contained" onClick={handleSubmit}>
