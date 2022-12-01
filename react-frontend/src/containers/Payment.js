@@ -5,9 +5,7 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import { useState, useEffect } from 'react';
-import { theatreSelected } from "./Theatres.js";
-import { movieSelected } from "./Movies.js";
-import { stSelected } from "./Showtimes.js";
+
 
 export default function Payment() {
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
@@ -17,6 +15,16 @@ export default function Payment() {
   const [expiry,setExpiry] = useState('')
   const [cvv,setCvv] = useState('')
   const [name,setName] = useState('')
+
+  const [tickets,setTickets] = useState([])
+
+  useEffect(()=>{
+    fetch("http://localhost:8080/api/v1/ticket/all")
+    .then(res=>res.json())
+    .then(result=>{
+      setTickets(result);
+    })
+  },[])
 
   const handleClick=(e)=>{
     e.preventDefault()
@@ -43,12 +51,15 @@ export default function Payment() {
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Ticket</h1>
+        {tickets.map((ticket) =>(
         
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}}>
-            Theatre:{theatreSelected.name},
-            Movie:{movieSelected.name},
-            Showtime:{stSelected.showtime}
-          </Paper>
+            <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={ticket.id}>
+              Theatre:{ticket.theatre} <br></br>
+              Movie:{ticket.movie} <br></br>
+              Showtime:{ticket.showtime}
+            </Paper>
+  
+          ))}
       
       </Paper>
 

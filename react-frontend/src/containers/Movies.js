@@ -21,12 +21,17 @@ export default function Movies() {
     })
   },[])
 
+  const clickHandle = (i) =>{
+    movieSelected = movies[i].name;
+    console.log(movieSelected)
+  }
+
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Movies</h1>
-        {movies.map(movie=>( movieSelected = movie,
-        <Link to={'/movie-ticket-system/showtimes'}>
+        {movies.map((movie,i) =>(
+        <Link to={'/movie-ticket-system/showtimes'} onClick={() => clickHandle(i)}>
           <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={movie.mId}>
             ID:{movie.mId},
             Name:{movie.name} <br></br>
