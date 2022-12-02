@@ -3,8 +3,11 @@ package course.ensf607.assignment6.theatre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import course.ensf607.assignment6.movie.Movie;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TheatreService {
@@ -40,6 +43,12 @@ public class TheatreService {
         return theatreById.get();
     }
 
-
+    public Set<Movie> getMovieListById(Long theatreId) {
+        Theatre theatreById = theatreRepository.findById(theatreId).get();
+        if (theatreById == null) {
+            throw new IllegalStateException("Theatre doesn't exist!");
+        }
+        return theatreById.getMovies();
+    }
 
 }

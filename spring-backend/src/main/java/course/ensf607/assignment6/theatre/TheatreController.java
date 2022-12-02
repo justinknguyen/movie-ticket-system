@@ -20,7 +20,8 @@ public class TheatreController {
     private final ShowtimeService showtimeService;
 
     @Autowired
-    public TheatreController(TheatreService theatreService, MovieService movieService, ShowtimeService showtimeService) {
+    public TheatreController(TheatreService theatreService, MovieService movieService,
+            ShowtimeService showtimeService) {
 
         this.theatreService = theatreService;
         this.movieService = movieService;
@@ -40,36 +41,39 @@ public class TheatreController {
 
     // add showtime by theatre and movie
     @PutMapping("/{tId}/movies/{mId}/showtimes/{stId}")
-    public Movie addShowtimeToMovieAndTheatre(@PathVariable Long tId, @PathVariable Long mId, @PathVariable Long stId) {
+    public Theatre addShowtimeToMovieAndTheatre(@PathVariable Long tId, @PathVariable Long mId,
+            @PathVariable Long stId) {
         Theatre theatre = theatreService.getTheatreById(tId); // is this required?
         Movie movie = movieService.getMovieById(mId);
         Showtime showtime = showtimeService.getShowtimeById(stId);
         movie.addShowtime(showtime);
         movieService.updateMovie(movie);
-//        ArrayList<Movie> movies = new ArrayList<>(theatre.getMovies());
-        return movie;
+        // ArrayList<Movie> movies = new ArrayList<>(theatre.getMovies());
+        return theatre;
     }
 
     // get showtimes by theatre and movie
     @GetMapping("/{tId}/movies/{mId}/showtimes/")
     public Set<Showtime> getShowtimeByMovieAndTheatre(@PathVariable Long tId, @PathVariable Long mId) {
-        Theatre theatre = theatreService.getTheatreById(tId); // is this required?
+        // Theatre theatre = theatreService.getTheatreById(tId); // is this required?
+        // Movie movie = movieService.getMovieById(mId);
+        // // ArrayList<Movie> movies = new ArrayList<>(theatre.getMovies());
+        Set<Movie> movies = theatreService.getMovieListById(tId);
         Movie movie = movieService.getMovieById(mId);
-//        ArrayList<Movie> movies = new ArrayList<>(theatre.getMovies());
         return movie.getShowtimes();
     }
 
     // get movies by theatre
     @GetMapping("/{tId}/movies/")
     public Set<Movie> getMovieByTheatre(@PathVariable Long tId) {
-        Theatre theatre = theatreService.getTheatreById(tId);
-        return theatre.getMovies();
+        Set<Movie> movies = theatreService.getMovieListById(tId);
+        return movies;
     }
 
     // add movie to theatre
     @PutMapping("/{tId}/movies/{mId}")
     public Theatre addMovieToTheatre(@PathVariable Long tId,
-                                     @PathVariable Long mId) {
+            @PathVariable Long mId) {
         Theatre theatre = theatreService.getTheatreById(tId);
         Movie movie = movieService.getMovieById(mId);
         theatre.addMovie(movie);

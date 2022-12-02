@@ -11,23 +11,19 @@ import java.util.List;
 public class MovieConfig {
 
     @Bean
-    CommandLineRunner createMovies(MovieRepository movieRepository){
+    CommandLineRunner createMovies(MovieRepository movieRepository) {
         return args -> {
             Movie interstellar = new Movie(
                     (long) 1,
                     "Interstellar",
-                    LocalDate.of(2014, 11, 7)
-
-            );
+                    LocalDate.of(2014, 11, 7));
             Movie cars2 = new Movie(
                     (long) 2,
                     "Cars 2",
-                    LocalDate.of(2011, 6, 24)
-            );
+                    LocalDate.of(2011, 6, 24));
 
             movieRepository.saveAllAndFlush(
-                    List.of(interstellar, cars2)
-            );
+                    List.of(interstellar, cars2));
         };
     };
 }
