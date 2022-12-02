@@ -38,7 +38,7 @@ export default function Showtimes() {
         {showtimes.map((showtime,i)=>(
         <Link to={'/movie-ticket-system/seats'} onClick={() => clickHandle(i)}>
           <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={showtime.showtime}>
-            ID:{showtime.stId},
+            ID:{showtime.sId},
             Start Time:{showtime.showtime}
           </Paper>
         </Link>

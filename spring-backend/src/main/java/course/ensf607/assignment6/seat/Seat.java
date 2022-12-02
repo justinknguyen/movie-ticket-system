@@ -51,6 +51,14 @@ public class Seat implements Serializable {
         this.seatMap = seatMap;
     }
 
+    public Seat(Long id, char letter_row, boolean isReserved , int number_row) {
+        this.id = id;
+        this.letter_row = letter_row;
+        this.isReserved = isReserved;
+        this.number_row = number_row;
+        this.seat = String.valueOf(letter_row + number_row);
+    }
+
     public Long getId() {
         return id;
     }

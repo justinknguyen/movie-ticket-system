@@ -5,12 +5,12 @@ public class AdminController {
 
     public AdminController(){}
 
-    public void addMovie(Movie movie){}
-    public void removeMovie(Movie movie){}
-    public void addUser(RegisteredUser user){}
-    public void removeUser(RegisteredUser user){}
-    public void addAdmin(Admin staff){}
-    public void removeAdmin(Admin staff){}
+//    public void addMovie(Movie movie){}
+//    public void removeMovie(Movie movie){}
+//    public void addUser(RegisteredUser user){}
+//    public void removeUser(RegisteredUser user){}
+//    public void addAdmin(Admin staff){}
+//    public void removeAdmin(Admin staff){}
 
 
 }
