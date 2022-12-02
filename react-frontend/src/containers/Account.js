@@ -17,9 +17,9 @@ export default function Account() {
 		width: 600,
 		margin: "20px auto",
 	};
-
+	
 	useEffect(()=>{
-		fetch("http://localhost:8080/api/v1/ticket/all")
+		fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
 		.then(res=>res.json())
 		.then(result=>{
 		  setTickets(result);
@@ -41,7 +41,7 @@ export default function Account() {
 			</Paper>
 
 			<Paper elevation={3} style={paperStyle}>
-			<h1>Tickets</h1>
+			<h1>ticket</h1>
 			{tickets.map((ticket) =>(
         
 				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={ticket.id}>
