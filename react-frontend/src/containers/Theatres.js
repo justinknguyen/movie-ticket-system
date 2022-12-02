@@ -21,7 +21,7 @@ export default function Theatres() {
   },[])
 
   const clickHandle = (i) =>{
-    theatreSelected = theatres[i].name;
+    theatreSelected = theatres[i].tId;
     console.log(theatreSelected)
   }
 

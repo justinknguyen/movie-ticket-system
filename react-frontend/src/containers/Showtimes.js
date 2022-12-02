@@ -6,6 +6,8 @@ import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { theatreSelected } from "./Theatres.js";
+import { movieSelected } from "./Movies.js";
 export var stSelected = undefined;
 
 export default function Showtimes() {
@@ -17,7 +19,7 @@ export default function Showtimes() {
   const [mId,setmId] = useState('')
 
   useEffect(()=>{
-    fetch("http://localhost:8080/api/v1/showtimes")
+    fetch("http://localhost:8080/api/v1/theatres/"+theatreSelected+"/movies/"+movieSelected+"/showtimes/")
     .then(res=>res.json())
     .then(result=>{
       setShowtimes(result);

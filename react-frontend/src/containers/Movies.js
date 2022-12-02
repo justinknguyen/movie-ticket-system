@@ -6,6 +6,8 @@ import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { theatreSelected } from "./Theatres.js";
+
 export var movieSelected = undefined;
 
 export default function Movies() {
@@ -14,7 +16,7 @@ export default function Movies() {
   const [tId,settId] = useState('')
 
   useEffect(()=>{
-    fetch("http://localhost:8080/api/v1/movies")
+    fetch( "http://localhost:8080/api/v1/theatres/"+theatreSelected+"/movies/")  
     .then(res=>res.json())
     .then(result=>{
       setMovies(result);
@@ -22,7 +24,7 @@ export default function Movies() {
   },[])
 
   const clickHandle = (i) =>{
-    movieSelected = movies[i].name;
+    movieSelected = movies[i].mId;
     console.log(movieSelected)
   }
 
