@@ -43,4 +43,5 @@ public class RegisteredUserService {
     public void updateRegisteredUser(RegisteredUser ru) {
         registeredUserRepository.save(ru);
     }
+
 }

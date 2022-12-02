@@ -34,23 +34,21 @@ public class RegisteredUser implements Serializable {
     public RegisteredUser() {
     }
 
-    public RegisteredUser(Long id, String email, String password, String name, String address, Set<Ticket> tickets) {
+    public RegisteredUser(Long id, String email, String password, String name, String address) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.address = address;
         this.dateRegistered = LocalDate.now();
-        this.tickets = tickets;
     }
 
-    public RegisteredUser(String email, String password, String name, String address, Set<Ticket> tickets) {
+    public RegisteredUser(String email, String password, String name, String address) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.address = address;
         this.dateRegistered = LocalDate.now();
-        this.tickets = tickets;
     }
 
     public Long getId() {

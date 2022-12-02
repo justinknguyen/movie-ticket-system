@@ -9,6 +9,7 @@ import course.ensf607.assignment6.ticket.Ticket;
 import course.ensf607.assignment6.ticket.TicketService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "api/v1/registereduser/")
@@ -36,6 +37,13 @@ public class RegisteredUserController {
     @GetMapping("{email}")
     public RegisteredUser getByEmail(@PathVariable String email) {
         return registeredUserService.getUserbyEmail(email);
+    }
+
+    @GetMapping("tickets{email}")
+    public Set<Ticket> getTickets(@PathVariable String email) {
+        RegisteredUser ru = registeredUserService.getUserbyEmail(email);
+        Set<Ticket> tickets = ru.getTickets();
+        return tickets;
     }
 
     @PutMapping("{ticketid}/add/{email}")
