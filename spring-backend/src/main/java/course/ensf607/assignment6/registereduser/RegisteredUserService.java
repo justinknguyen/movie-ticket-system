@@ -3,8 +3,11 @@ package course.ensf607.assignment6.registereduser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import course.ensf607.assignment6.ticket.Ticket;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RegisteredUserService {
@@ -28,11 +31,16 @@ public class RegisteredUserService {
         registeredUserRepository.save(registeredUser);
     }
 
-    // public Course getCourseById(Long courseId) {
-    // Optional<Course> courseById = courseRepository.findById(courseId);
-    // if (!courseById.isPresent()) {
-    // throw new IllegalStateException("Course does'nt exist!");
-    // }
-    // return courseById.get();
-    // }
+    public RegisteredUser getUserbyEmail(String email) {
+        Optional<RegisteredUser> user = registeredUserRepository.findByEmail(email);
+        if (!user.isPresent()) {
+            throw new IllegalStateException("email does not exist");
+        }
+
+        return user.get();
+    }
+
+    public void updateRegisteredUser(RegisteredUser ru) {
+        registeredUserRepository.save(ru);
+    }
 }

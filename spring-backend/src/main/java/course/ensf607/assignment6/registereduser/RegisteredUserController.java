@@ -5,6 +5,9 @@ package course.ensf607.assignment6.registereduser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import course.ensf607.assignment6.ticket.Ticket;
+import course.ensf607.assignment6.ticket.TicketService;
+
 import java.util.List;
 
 @RestController
@@ -12,12 +15,12 @@ import java.util.List;
 public class RegisteredUserController {
 
     private final RegisteredUserService registeredUserService;
-
-    // private final StudentService studentService;
+    private final TicketService ticketService;
 
     @Autowired
-    public RegisteredUserController(RegisteredUserService registeredUserService) {
+    public RegisteredUserController(RegisteredUserService registeredUserService, TicketService ticketService) {
         this.registeredUserService = registeredUserService;
+        this.ticketService = ticketService;
     }
 
     @GetMapping("all")
@@ -30,18 +33,19 @@ public class RegisteredUserController {
         registeredUserService.addNewUser(registeredUser);
     }
 
-    // @GetMapping("{email}")
-    // public RegisteredUser getByEmail(@PathVariable String email) {
-    // return registeredUserService.findByEmail(email);
-    // }
+    @GetMapping("{email}")
+    public RegisteredUser getByEmail(@PathVariable String email) {
+        return registeredUserService.getUserbyEmail(email);
+    }
 
-    // @PutMapping("{courseId}/students/{studentId}")
-    // public Course enrollStudentToCourse(@PathVariable Long courseId,
-    // @PathVariable Long studentId) {
-    // Course course = courseService.getCourseById(courseId);
-    // Student student = studentService.getStudentById(studentId);
-    // course.enrolledStudents(student);
-    // courseService.updateCourse(course);
-    // return course;
-    // }
+    @PutMapping("{ticketid}/add/{email}")
+    public RegisteredUser enrollAddTicketToRu(@PathVariable Long ticketid,
+            @PathVariable String email) {
+        Ticket ticket = ticketService.FindById(ticketid);
+        RegisteredUser ru = registeredUserService.getUserbyEmail(email);
+        ru.addTickets(ticket);
+        // ticketService.updateTicket(ticket);
+        registeredUserService.updateRegisteredUser(ru);
+        return ru;
+    }
 }

@@ -1,6 +1,6 @@
 package course.ensf607.assignment6.registereduser;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import course.ensf607.assignment6.ticket.Ticket;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,35 +27,30 @@ public class RegisteredUser implements Serializable {
 
     private LocalDate dateRegistered;
 
-    // @OneToMany(mappedBy = "email")
-    // private Set<Ticket> items;
-
-    // @ManyToMany
-    // @JoinTable(name = "courses_enrolled", joinColumns = @JoinColumn(name =
-    // "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
-    // private Set<Course> enrolledCourses = new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "ruTickets")
+    private Set<Ticket> tickets = new HashSet<>();
 
     public RegisteredUser() {
     }
 
-    public RegisteredUser(Long id, String email, String password, String name, String address) {
+    public RegisteredUser(Long id, String email, String password, String name, String address, Set<Ticket> tickets) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.address = address;
         this.dateRegistered = LocalDate.now();
-        // this.enrolledCourses = enrolledCourses;
+        this.tickets = tickets;
     }
 
-    public RegisteredUser(String email, String password, String name, String address) {
-
+    public RegisteredUser(String email, String password, String name, String address, Set<Ticket> tickets) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.address = address;
-        setDateRegistered(LocalDate.now());
-        // this.enrolledCourses = enrolledCourses;
+        this.dateRegistered = LocalDate.now();
+        this.tickets = tickets;
     }
 
     public Long getId() {
@@ -106,12 +101,16 @@ public class RegisteredUser implements Serializable {
         this.dateRegistered = dateRegistered;
     }
 
-    // public Set<Course> getSubjects() {
-    // return enrolledCourses;
-    // }
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
 
-    // public Student addSubjects(Course subject) {
-    // this.enrolledCourses.add(subject);
-    // return this;
-    // }
+    public RegisteredUser setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+        return this;
+    }
+
+    public void addTickets(Ticket ticket) {
+        tickets.add(ticket);
+    }
 }

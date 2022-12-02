@@ -3,6 +3,12 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
+import { theatreSelected } from "./Theatres.js";
+import { movieSelected } from "./Movies.js";
+import { stSelected } from "./Showtimes.js";
+
+const s= 'test3'
+const p=20.00
 
 const movies = [
   {
@@ -38,7 +44,31 @@ export default function Seats2() {
 
   const handleClick=(e)=>{
     e.preventDefault()
-    nav("/movie-ticket-system/payment");
+    const ticket={
+      theatre: theatreSelected, 
+      movie: movieSelected, 
+      showtime: stSelected, 
+      seat: s, 
+      price: p}
+    console.log(ticket)
+    // TODO: send data to database
+    fetch("http://localhost:8080/api/v1/ticket/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(ticket),
+        })
+          .then(() => {
+            console.log(ticket);
+            console.log("Ticket Created");
+            setIsSubmitted(true);
+            setIsError(false);
+            nav("/movie-ticket-system/payment");
+          })
+          .catch(() => {
+            console.log("Error");
+            setIsError(true);
+            setIsSubmitted(false);
+          });
   }
 
   return (

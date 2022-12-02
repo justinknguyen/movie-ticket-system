@@ -30,7 +30,8 @@ public class Movie {
     @JoinColumn(name = "fk_mId", referencedColumnName = "mId")
     private Set<Showtime> showtimes = new HashSet<>();
 
-    public Movie() {}
+    public Movie() {
+    }
 
     public Movie(Long id, String name, LocalDate releaseDate) {
         this.mId = mId;
@@ -84,5 +85,6 @@ public class Movie {
     }
 
     public void addShowtime(Showtime showtime) {
+        showtimes.add(showtime);
     }
 }

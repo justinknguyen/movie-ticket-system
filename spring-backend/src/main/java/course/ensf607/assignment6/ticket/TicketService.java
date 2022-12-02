@@ -37,6 +37,15 @@ public class TicketService {
         }
     }
 
+    public Ticket FindById(Long id) {
+        Optional<Ticket> ticket1 = ticketRepository.findById(id);
+        if (!ticket1.isPresent()) {
+            throw new IllegalStateException("No Ticket with that");
+        }
+
+        return ticket1.get();
+    }
+
     // public Course getCourseById(Long courseId) {
     // Optional<Course> courseById = courseRepository.findById(courseId);
     // if (!courseById.isPresent()) {
