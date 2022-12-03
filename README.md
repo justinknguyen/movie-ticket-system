@@ -1,7 +1,8 @@
 # How to Run
-1. Open the Java files under `spring-backend` in your preferred IDE
-2. Run `Assignment6Application.java`
-3. Head to the website! https://justinknguyen.github.io/movie-ticket-system/ 
+1. Open and run your local database with the provided `.sql` file
+2. Open the Java files under `spring-backend` in your preferred IDE
+3. Run `Assignment6Application.java`
+4. Head to the website! https://justinknguyen.github.io/movie-ticket-system/ 
 
 # Login Information
 * user1@gmail.com : pass
