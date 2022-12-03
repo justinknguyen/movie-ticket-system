@@ -20,13 +20,19 @@ public class RegisteredUserConfig {
                     "user1@gmail.com",
                     "pass",
                     "Joe",
-                    "123 Street");
+                    "123 Street",
+                    391,
+                    1234,
+                    1828);
             RegisteredUser user2 = new RegisteredUser(
                     (long) 2,
                     "user2@gmail.com",
                     "pass",
                     "Jim",
-                    "321 Street");
+                    "321 Street",
+                    691,
+                    5678,
+                    1825);
 
             registeredUserRepository.saveAllAndFlush(
                     List.of(user1, user2));

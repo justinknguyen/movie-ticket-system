@@ -26,6 +26,9 @@ public class RegisteredUser implements Serializable {
     private String address;
 
     private LocalDate dateRegistered;
+    private int ccv;
+    private int cardNo;
+    private int expiry;
 
     @OneToMany
     @JoinColumn(name = "ruTickets")
@@ -34,21 +37,28 @@ public class RegisteredUser implements Serializable {
     public RegisteredUser() {
     }
 
-    public RegisteredUser(Long id, String email, String password, String name, String address) {
+    public RegisteredUser(Long id, String email, String password, String name, String address, int ccv, int cardNo,
+            int expiry) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.address = address;
         this.dateRegistered = LocalDate.now();
+        this.ccv = ccv;
+        this.cardNo = cardNo;
+        this.expiry = expiry;
     }
 
-    public RegisteredUser(String email, String password, String name, String address) {
+    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.address = address;
         this.dateRegistered = LocalDate.now();
+        this.ccv = ccv;
+        this.cardNo = cardNo;
+        this.expiry = expiry;
     }
 
     public Long getId() {
