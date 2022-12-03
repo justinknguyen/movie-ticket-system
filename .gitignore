@@ -1,2 +1,7 @@
 .history
 .DS_Store
+*.xml
+*.iml
+*.iml
+spring-backend/assignment6.iml
+spring-backend/assignment6.iml

@@ -1,5 +1,6 @@
 package course.ensf607.assignment6.registereduser;
 
+import course.ensf607.assignment6.payment.Payment;
 import course.ensf607.assignment6.ticket.Ticket;
 
 import javax.persistence.*;
@@ -25,7 +26,13 @@ public class RegisteredUser implements Serializable {
 
     private String address;
 
+    private double accountBalance;
+
     private LocalDate dateRegistered;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ruPayments")
+    private Set<Payment> payments = new HashSet<>();;
     private int ccv;
     private int cardNo;
     private int expiry;
@@ -38,7 +45,7 @@ public class RegisteredUser implements Serializable {
     }
 
     public RegisteredUser(Long id, String email, String password, String name, String address, int ccv, int cardNo,
-            int expiry) {
+            int expiry, double accountBalance) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -48,9 +55,10 @@ public class RegisteredUser implements Serializable {
         this.ccv = ccv;
         this.cardNo = cardNo;
         this.expiry = expiry;
+        this.accountBalance = accountBalance;
     }
 
-    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry) {
+    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry, double accountBalance) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -59,6 +67,7 @@ public class RegisteredUser implements Serializable {
         this.ccv = ccv;
         this.cardNo = cardNo;
         this.expiry = expiry;
+        this.accountBalance = accountBalance;
     }
 
     public Long getId() {
@@ -111,6 +120,14 @@ public class RegisteredUser implements Serializable {
 
     public Set<Ticket> getTickets() {
         return tickets;
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 
     public RegisteredUser setTickets(Set<Ticket> tickets) {

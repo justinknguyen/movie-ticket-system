@@ -17,6 +17,7 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RegisteredUser_sequence")
     private Long id;
 
+
     private String theatre;
 
     private String movie;
@@ -27,8 +28,7 @@ public class Ticket implements Serializable {
 
     private Double price;
 
-    //Work in Progress
-    private long paymentId;
+
 
 
 
@@ -108,6 +108,8 @@ public class Ticket implements Serializable {
     public void setSeat(String seat) {
         this.seat = seat;
     }
+
+
 
     // public Set<Course> getSubjects() {
     // return enrolledCourses;

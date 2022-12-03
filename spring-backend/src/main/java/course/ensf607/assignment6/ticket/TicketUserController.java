@@ -41,8 +41,6 @@ public class TicketUserController {
     @GetMapping("getTicketToCancel/{id}")
     public Ticket getTicketToCancel(@PathVariable Long id) {return ticketService.FindById(id);}
 
-    @PostMapping("createRefundPayment")
-    public void createRefundPayment(@RequestBody Payment payment){paymentService.createRefundPayment(payment);}
 
     // @GetMapping("{email}")
     // public RegisteredUser getByEmail(@PathVariable String email) {

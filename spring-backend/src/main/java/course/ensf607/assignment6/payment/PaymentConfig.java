@@ -5,32 +5,26 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
+import course.ensf607.assignment6.registereduser.RegisteredUserConfig;
 
 @Configuration
 public class PaymentConfig {
+
+    RegisteredUserConfig config;
     @Bean
     CommandLineRunner createPayment(PaymentRepository paymentRepository) {
         return args -> {
-            Payment accountOne = new Payment(
+            Payment paymentOne = new Payment(
                     "annual",
-                    "Joe",
-                    "user1@gmail.com",
-                    1234,
-                    590,
-                    1223,
-                    500.00);
+                    config.getUser1()
+                    );
 
-            Payment accountTwo = new Payment(
+            Payment paymentTwo = new Payment(
                     "annual",
-                    "Jim",
-                    "user2@gmail.com",
-                    5678,
-                    592,
-                    1224,
-                    600.00);
+                    config.getUser2());
 
             paymentRepository.saveAllAndFlush(
-                    List.of(accountOne, accountTwo));
+                    List.of(paymentOne, paymentTwo));
         };
     };
 }
