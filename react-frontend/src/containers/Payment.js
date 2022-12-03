@@ -37,9 +37,9 @@ export default function Payment() {
     const creditCard={cardNo, expiry, cvv, name}
     console.log(creditCard)
     // TODO: send data to database
-    fetch("http://localhost:8080/api/v1/payment", 
+    fetch("http://localhost:8080/api/v1/payment/addPayment", 
     {
-      method:"PUT",
+      method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(creditCard)
     }).then(()=>{
