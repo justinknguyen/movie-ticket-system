@@ -13,9 +13,9 @@ import java.util.Set;
 public class Seat implements Serializable {
 
     @Id
-    @Column(name = "SEAT_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seatMap_generator")
-    private Long id;
+    @SequenceGenerator(name = "seatesequence", sequenceName = "seatesequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seatesequence")
+    private long id;
 
     private char letter_row;
 
@@ -24,17 +24,14 @@ public class Seat implements Serializable {
 
     private int number_row;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "seat_map_id")
+    // @JoinColumn(name = "seat_map_id")
     private SeatMap seatMap;
-
-
 
     public Seat() {
     }
 
-    public Seat(Long id, char letter_row, boolean isReserved , int number_row, SeatMap seatMap) {
+    public Seat(Long id, char letter_row, boolean isReserved, int number_row, SeatMap seatMap) {
         this.id = id;
         this.letter_row = letter_row;
         this.isReserved = isReserved;
@@ -51,7 +48,7 @@ public class Seat implements Serializable {
         this.seatMap = seatMap;
     }
 
-    public Seat(Long id, char letter_row, boolean isReserved , int number_row) {
+    public Seat(Long id, char letter_row, boolean isReserved, int number_row) {
         this.id = id;
         this.letter_row = letter_row;
         this.isReserved = isReserved;
@@ -68,18 +65,15 @@ public class Seat implements Serializable {
         return this;
     }
 
-
     public boolean isReserved() {
         return isReserved;
     }
 
-    public void reserve()
-    {
+    public void reserve() {
         isReserved = true;
     }
 
-    public void unreserve()
-    {
+    public void unreserve() {
         isReserved = false;
     }
 

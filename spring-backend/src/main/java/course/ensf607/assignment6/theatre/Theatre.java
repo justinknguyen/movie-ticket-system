@@ -1,6 +1,7 @@
 package course.ensf607.assignment6.theatre;
 
 import course.ensf607.assignment6.movie.Movie;
+import course.ensf607.assignment6.showtime.Showtime;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,13 +18,13 @@ public class Theatre implements Serializable {
     private Long tId;
     private String name;
 
-    @ManyToMany(cascade = { CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "now_playing",
-            joinColumns = {@JoinColumn(name = "tId")},
-            inverseJoinColumns = {@JoinColumn(name = "mId")}
-    )
-    private Set<Movie> movies = new HashSet<>();
+    // @OneToMany(mappedBy = "stId")
+    // private Set<Showtime> showtimes = new HashSet<>();
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinTable(name = "showsandmovies", joinColumns = { @JoinColumn(name = "tId") }, inverseJoinColumns = {
+            @JoinColumn(name = "stId") })
+    private Set<Showtime> showtimes = new HashSet<>();
 
     public Theatre() {
     }
@@ -51,16 +52,18 @@ public class Theatre implements Serializable {
         return this;
     }
 
-    public Set<Movie> getMovies() {
-        return movies;
+    public Set<Showtime> getShowtimes() {
+        return showtimes;
     }
 
-    public Theatre setMovies(Set<Movie> movies) {
-        this.movies = movies;
+    public Theatre setShowtimes(Set<Showtime> showtimes) {
+        this.showtimes = showtimes;
         return this;
     }
 
-    public void addMovie(Movie movie) {
-        movies.add(movie);
+    public void addShowtimes(Showtime showtime) {
+        showtimes.add(showtime);
     }
 }
+
+// hello world

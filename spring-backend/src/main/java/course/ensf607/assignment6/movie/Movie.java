@@ -22,13 +22,9 @@ public class Movie {
     private String name;
     private LocalDate releaseDate;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "movies")
-    private Set<Theatre> theatres = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_mId", referencedColumnName = "mId")
-    private Set<Showtime> showtimes = new HashSet<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "showtime_id")
+    private Showtime showtime;
 
     public Movie() {
     }
@@ -66,25 +62,25 @@ public class Movie {
         return this;
     }
 
-    public Set<Theatre> getTheatres() {
-        return theatres;
-    }
+    // public Set<Theatre> getTheatres() {
+    // return theatres;
+    // }
 
-    public Movie setTheatres(Set<Theatre> theatres) {
-        this.theatres = theatres;
-        return this;
-    }
+    // public Movie setTheatres(Set<Theatre> theatres) {
+    // this.theatres = theatres;
+    // return this;
+    // }
 
-    public Set<Showtime> getShowtimes() {
-        return showtimes;
-    }
+    // public Set<Showtime> getShowtimes() {
+    // return showtimes;
+    // }
 
-    public Movie setShowtimes(Set<Showtime> showtimes) {
-        this.showtimes = showtimes;
-        return this;
-    }
+    // public Movie setShowtimes(Set<Showtime> showtimes) {
+    // this.showtimes = showtimes;
+    // return this;
+    // }
 
-    public void addShowtime(Showtime showtime) {
-        showtimes.add(showtime);
-    }
+    // public void addShowtime(Showtime showtime) {
+    // showtimes.add(showtime);
+    // }
 }

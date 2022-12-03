@@ -1,8 +1,9 @@
 package course.ensf607.assignment6.theatre;
 
 import course.ensf607.assignment6.movie.Movie;
-import course.ensf607.assignment6.movie.MovieConfig;
 import course.ensf607.assignment6.showtime.Showtime;
+import course.ensf607.assignment6.showtime.ShowtimeConfig;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,21 +17,18 @@ import java.util.Set;
 @Configuration
 public class TheatreConfig {
     @Bean
-    CommandLineRunner createTheatres(TheatreRepository theatreRepository){
+    CommandLineRunner createTheatres(TheatreRepository theatreRepository) {
         return args -> {
             Theatre crowfoot = new Theatre(
                     (long) 1,
-                    "Crowfoot"
-            ).setMovies(MovieConfig.getMovies1());
+                    "Crowfoot").setShowtimes(ShowtimeConfig.getShowtimes2());
 
             Theatre chinook = new Theatre(
                     (long) 2,
-                    "Chinook"
-            ).setMovies(MovieConfig.getMovies2());
+                    "Chinook").setShowtimes(ShowtimeConfig.getShowtimes1());
 
             theatreRepository.saveAllAndFlush(
-                    List.of(crowfoot, chinook)
-            );
+                    List.of(crowfoot, chinook));
         };
     };
 }

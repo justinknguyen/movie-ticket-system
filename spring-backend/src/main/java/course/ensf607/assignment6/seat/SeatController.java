@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/seat")
+@RequestMapping(path = "api/v1/seat")
 public class SeatController {
 
     private final SeatService seatService;
@@ -22,7 +22,9 @@ public class SeatController {
     }
 
     @PutMapping("/reserveSeat")
-    public void reserveSeat(@RequestBody Seat seat){seatService.reserve(seat);}
+    public void reserveSeat(@RequestBody Seat seat) {
+        seatService.reserve(seat);
+    }
 
     @PostMapping
     public void registerNewSeat(@RequestBody Seat seat) {

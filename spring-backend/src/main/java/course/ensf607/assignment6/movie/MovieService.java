@@ -1,3 +1,4 @@
+
 package course.ensf607.assignment6.movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,5 @@ public class MovieService {
             throw new IllegalStateException("Showtime doesn't exist!");
         }
         return movieById.get();
-    }
-
-    public void removeMovie(Movie movie) {
-        Optional<Movie> movieByName = movieRepository.findByName(movie.getName());
-        if (!movieByName.isPresent()) {
-            throw new IllegalStateException("Movie doesn't exist!");
-        }
-        movieRepository.delete(movie);
     }
 }

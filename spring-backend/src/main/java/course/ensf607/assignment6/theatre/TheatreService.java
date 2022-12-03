@@ -43,12 +43,12 @@ public class TheatreService {
         return theatreById.get();
     }
 
-    public Set<Movie> getMovieListById(Long theatreId) {
-        Theatre theatreById = theatreRepository.findById(theatreId).get();
-        if (theatreById == null) {
-            throw new IllegalStateException("Theatre doesn't exist!");
-        }
-        return theatreById.getMovies();
-    }
+    // public Set<Movie> getMovieListById(Long theatreId) {
+    // Theatre theatreById = theatreRepository.findById(theatreId).get();
+    // if (theatreById == null) {
+    // throw new IllegalStateException("Theatre doesn't exist!");
+    // }
+    // return theatreById.getMovies();
+    // }
 
 }

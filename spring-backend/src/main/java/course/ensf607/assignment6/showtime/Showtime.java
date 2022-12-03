@@ -2,6 +2,7 @@ package course.ensf607.assignment6.showtime;
 
 import course.ensf607.assignment6.movie.Movie;
 import course.ensf607.assignment6.seat.Seat;
+import course.ensf607.assignment6.theatre.Theatre;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -16,14 +17,18 @@ import java.util.Set;
 public class Showtime {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "stId")
+    @SequenceGenerator(name = "showtimesequence", sequenceName = "showtimesequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "showtimesequence")
     private long stId;
     private LocalDateTime showtime;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_stId", referencedColumnName = "stId")
     private Set<Seat> seats = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id", referencedColumnName = "mId")
+    private Movie movie;
 
     public Showtime() {
     }
@@ -57,6 +62,15 @@ public class Showtime {
 
     public Showtime setSeats(Set<Seat> seats) {
         this.seats = seats;
+        return this;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public Showtime setMovie(Movie movie) {
+        this.movie = movie;
         return this;
     }
 }
