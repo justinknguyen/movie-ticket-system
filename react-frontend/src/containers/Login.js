@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "../lib/contextLib";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import "./Login.css";
 export var userInfo = undefined;
@@ -56,15 +57,24 @@ export default function Login() {
           userInfo = userData;
           setIsSubmitted(true);
           userHasAuthenticated(true)
-          nav("/movie-ticket-system/");
+          nav("/movie-ticket-system/theatres");
         }
       } else {
         // Email not found
         setErrorMessages({ name: "uname", message: errors.uname });
         console.log("Error. Invalid Email.");
       }
-
   };
+
+  const guestHandle = (event) => {
+    event.preventDefault();
+    const uname = "guest";
+    const pass = "guest";
+    userInfo = userDB[0];
+    setIsSubmitted(true);
+    userHasAuthenticated(true)
+    nav("/movie-ticket-system/theatres");
+};
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
@@ -86,10 +96,15 @@ export default function Login() {
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
+        <div className="input-container">
+          <Link onClick={guestHandle}>
+            Continue as Guest
+          </Link>
+        </div>
         <div className="button-container">
-        <Button variant="contained" onClick={handleSubmit}>
-          Submit
-        </Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            Submit
+          </Button>
         </div>
       </form>
     </div>

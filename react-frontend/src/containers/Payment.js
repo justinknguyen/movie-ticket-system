@@ -5,6 +5,7 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import { useState, useEffect } from 'react';
+import { userInfo } from "./Login.js";
 var totalPrice = 0.00;
 
 
@@ -19,11 +20,19 @@ export default function Payment() {
 
   const [tickets,setTickets] = useState([])
 
+  function sortByKey(array, key) {
+		return array.sort(function (a, b) {
+			var x = Number(a[key]);
+			var y = Number(b[key]);
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
+
   useEffect(()=>{
-    fetch("http://localhost:8080/api/v1/ticket/all")
+    fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
     .then(res=>res.json())
     .then(result=>{
-      setTickets(result);
+      setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
     })
   },[])
 
@@ -73,9 +82,10 @@ export default function Payment() {
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
-      <h1>Ticket</h1>
+      <h1>Ticket Cart</h1>
         {tickets.map((ticket) =>( 
             <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={ticket.id}>
+              ID:{ticket.id} <br></br>
               Theatre:{ticket.theatre} <br></br>
               Movie:{ticket.movie} <br></br>
               Showtime:{ticket.showtime} <br></br>

@@ -15,8 +15,18 @@ public class RegisteredUserConfig {
     @Bean
     CommandLineRunner createUsers(RegisteredUserRepository registeredUserRepository) {
         return args -> {
-            RegisteredUser user1 = new RegisteredUser(
+            RegisteredUser guest = new RegisteredUser(
                     (long) 1,
+                    "guest",
+                    "guest",
+                    "guest",
+                    "guest",
+                    0,
+                    0,
+                    0);
+
+            RegisteredUser user1 = new RegisteredUser(
+                    (long) 2,
                     "user1@gmail.com",
                     "pass",
                     "Joe",
@@ -25,7 +35,7 @@ public class RegisteredUserConfig {
                     1234,
                     1828);
             RegisteredUser user2 = new RegisteredUser(
-                    (long) 2,
+                    (long) 3,
                     "user2@gmail.com",
                     "pass",
                     "Jim",
@@ -35,7 +45,7 @@ public class RegisteredUserConfig {
                     1825);
 
             registeredUserRepository.saveAllAndFlush(
-                    List.of(user1, user2));
+                    List.of(guest, user1, user2));
         };
     };
 }

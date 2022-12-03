@@ -23,11 +23,18 @@ function App() {
   return (
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
-          <LinkContainer to="/movie-ticket-system/">
+        {isAuthenticated ? (
+            <LinkContainer to="/movie-ticket-system/theatres">
             <Navbar.Brand className="font-weight-bold text-muted">
               Movie Ticket System
             </Navbar.Brand>
           </LinkContainer>
+          ) : (
+            <Navbar.Brand className="font-weight-bold text-muted">
+              Movie Ticket System
+            </Navbar.Brand>
+          )}
+          
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav activeKey={window.location.pathname}>
@@ -43,7 +50,7 @@ function App() {
               <LinkContainer to="/movie-ticket-system/signup">
                 <Nav.Link>Sign Up</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/movie-ticket-system/login">
+              <LinkContainer to="/movie-ticket-system/">
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
             </>

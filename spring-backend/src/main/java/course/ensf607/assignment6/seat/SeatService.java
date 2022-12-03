@@ -1,5 +1,6 @@
 package course.ensf607.assignment6.seat;
 
+import course.ensf607.assignment6.ticket.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class SeatService {
             throw new IllegalStateException("Seat already exist!");
         }
         seatRepository.save(seat);
+
     }
 
     public Seat getSeatById(Long seatId) {
@@ -39,5 +41,11 @@ public class SeatService {
 
     public void reserve(Seat seat) {
         seat.reserve();
+    }
+
+    public void reserveById(Long id) {
+        Seat seat = getSeatById(id);
+        seat.reserve();
+        seatRepository.save(seat);
     }
 }

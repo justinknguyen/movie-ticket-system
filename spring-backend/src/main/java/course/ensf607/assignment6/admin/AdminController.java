@@ -48,7 +48,7 @@ public class AdminController {
 
     @DeleteMapping("/removeMovie")
     public void removeMovie(@RequestBody Movie movie) {
-        movieService.removeMovie(movie);
+//        movieService.removeMovie(movie);
     }
 
     @PostMapping("/addAdminStaff")

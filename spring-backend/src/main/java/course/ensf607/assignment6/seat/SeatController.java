@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "api/v1/seat")
 public class SeatController {
 
@@ -24,6 +25,11 @@ public class SeatController {
     @PutMapping("/reserveSeat")
     public void reserveSeat(@RequestBody Seat seat) {
         seatService.reserve(seat);
+    }
+
+    @PutMapping("/reserveSeat/{id}")
+    public void reserveSeatById(@PathVariable Long id){
+        seatService.reserveById(id);
     }
 
     @PostMapping

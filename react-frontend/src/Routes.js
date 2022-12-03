@@ -17,9 +17,9 @@ export default function Links() {
   return (
     <Routes>
         {/* <Route path="/movie-ticket-system/" element={<Home />} /> */}
-        <Route path="/movie-ticket-system/login" element={<Login />} />
+        <Route path="/movie-ticket-system/" element={<Login />} />
         <Route path="/movie-ticket-system/signup" element={<Signup />} />
-        <Route path="/movie-ticket-system/" element={<Theatres />} />
+        <Route path="/movie-ticket-system/theatres" element={<Theatres />} />
         <Route path="/movie-ticket-system/movies" element={<Movies />} />
         <Route path="/movie-ticket-system/showtimes" element={<Showtimes />} />
         <Route path="/movie-ticket-system/seats" element={<Seats />} />

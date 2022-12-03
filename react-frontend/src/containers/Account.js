@@ -17,12 +17,20 @@ export default function Account() {
 		width: 600,
 		margin: "20px auto",
 	};
+
+	function sortByKey(array, key) {
+		return array.sort(function (a, b) {
+			var x = Number(a[key]);
+			var y = Number(b[key]);
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
 	
 	useEffect(()=>{
 		fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
 		.then(res=>res.json())
 		.then(result=>{
-		  setTickets(result);
+		  setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
 		})
 	  },[])
 
@@ -41,13 +49,15 @@ export default function Account() {
 			</Paper>
 
 			<Paper elevation={3} style={paperStyle}>
-			<h1>Ticket</h1>
+			<h1>Tickets</h1>
 			{tickets.map((ticket) =>(
         
 				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={ticket.id}>
-				Theatre:{ticket.theatre} <br></br>
-				Movie:{ticket.movie} <br></br>
-				Showtime:{ticket.showtime}
+				ID:{ticket.id} <br></br>
+              Theatre:{ticket.theatre} <br></br>
+              Movie:{ticket.movie} <br></br>
+              Showtime:{ticket.showtime} <br></br>
+              Seat:{ticket.seat}
 				</Paper>
 
 			))}

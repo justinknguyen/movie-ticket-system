@@ -22,7 +22,7 @@ export default function Showtimes() {
     fetch("http://localhost:8080/api/v1/theatres/"+theatreSelected.tId+"/movies/"+movieSelected.mId+"/showtimes/")
     .then(res=>res.json())
     .then(result=>{
-      setShowtimes(sortByKey(JSON.parse(JSON.stringify(result)), "showtime"));
+      setShowtimes(sortByKey(JSON.parse(JSON.stringify(result)), "sId"));
     })
   },[])
 
@@ -45,7 +45,8 @@ export default function Showtimes() {
       <h1>Showtimes</h1>
         {showtimes.map((showtime,i)=>(
         <Link to={'/movie-ticket-system/seats'} onClick={() => clickHandle(i)}>
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={showtime.showtime}> 
+          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={showtime.sId}> 
+            ID:{showtime.sId} <br></br>
             Start Time:{showtime.showtime}
           </Paper>
         </Link>
