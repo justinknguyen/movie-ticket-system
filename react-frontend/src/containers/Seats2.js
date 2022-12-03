@@ -7,7 +7,7 @@ import { theatreSelected } from "./Theatres.js";
 import { movieSelected } from "./Movies.js";
 import { stSelected } from "./Showtimes.js";
 
-const s= 'test3'
+const s= 'test4'
 const p=20.00
 
 const movies = [
@@ -45,9 +45,9 @@ export default function Seats2() {
   const handleClick=(e)=>{
     e.preventDefault()
     const ticket={
-      theatre: theatreSelected, 
-      movie: movieSelected, 
-      showtime: stSelected, 
+      theatre: theatreSelected.name, 
+      movie: movieSelected.name, 
+      showtime: stSelected.showtime, 
       seat: s, 
       price: p}
     console.log(ticket)

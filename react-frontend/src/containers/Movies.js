@@ -16,7 +16,7 @@ export default function Movies() {
   const [tId,settId] = useState('')
 
   useEffect(()=>{
-    fetch( "http://localhost:8080/api/v1/theatres/"+theatreSelected+"/movies/")  
+    fetch( "http://localhost:8080/api/v1/theatres/"+theatreSelected.tId+"/movies/")  
     .then(res=>res.json())
     .then(result=>{
       setMovies(sortByKey(JSON.parse(JSON.stringify(result)), "mId"));
@@ -24,7 +24,7 @@ export default function Movies() {
   },[])
 
   const clickHandle = (i) =>{
-    movieSelected = movies[i].mId;
+    movieSelected = movies[i];
     console.log(movieSelected)
   }
 
