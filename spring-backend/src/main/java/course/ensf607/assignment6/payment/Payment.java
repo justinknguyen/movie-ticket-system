@@ -4,58 +4,57 @@ import course.ensf607.assignment6.registereduser.RegisteredUser;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Entity
 @Table(name = "Payment")
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "pId")
+    @SequenceGenerator(name = "pid_sequence", sequenceName = "pid_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pid_sequence")
     private long pId;
 
-    //Payment Type
-    private String Type;
-    //Description of the Payment Type
-    private String Description;
+    // Payment Type
+    private String type;
+    // Description of the Payment Type
 
-    //User Information
+    // User Information
     private String name;
 
     private String buyerEmail;
 
-    //Credit Card Information
+    // Credit Card Information
     private int cardNo;
     private int ccv;
     private int expiry;
 
-    //Account balance, charged at end of month
+    // Account balance, charged at end of month
     private double accountBalance;
 
-    //Dates for account management
+    // Dates for account management
 
     private LocalDate creationDate;
 
-    private LocalDate currentTime;
+    // private LocalDate currentTime;
 
-
-
-
-    public Payment(String name, String Type, String Description, int ccv, int cardNo, int expiry, String buyerEmail) {
+    public Payment(String type, String name, String buyerEmail, int cardNo, int ccv, int expiry,
+            double accountBalance) {
         this.name = name;
-        this.Type = Type;
-        this.Description = Description;
+        this.type = type;
         this.cardNo = cardNo;
         this.expiry = expiry;
         this.ccv = ccv;
-        this.buyerEmail=buyerEmail;
-        accountBalance = 20; // Starts with annual payment
+        this.buyerEmail = buyerEmail;
+        this.accountBalance = accountBalance;
+        this.creationDate = LocalDate.now();
+
+        // accountBalance = 20; // Starts with annual payment
     }
 
     public Payment(RegisteredUser user) {
         this.name = user.getName();
-        accountBalance = 20; // Starts with annual payment
+        // accountBalance = 20; // Starts with annual payment
     }
-
 
     public Payment() {
 
@@ -69,13 +68,13 @@ public class Payment {
         this.creationDate = creationDate;
     }
 
-    public LocalDate getCurrentTime() {
-        return currentTime;
-    }
+    // public LocalDate getCurrentTime() {
+    // return currentTime;
+    // }
 
-    public void setCurrentTime(LocalDate currentTime) {
-        this.currentTime = currentTime;
-    }
+    // public void setCurrentTime(LocalDate currentTime) {
+    // this.currentTime = currentTime;
+    // }
 
     public String getBuyerEmail() {
         return buyerEmail;
@@ -86,19 +85,11 @@ public class Payment {
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
+        this.type = type;
     }
 
     public String getName() {

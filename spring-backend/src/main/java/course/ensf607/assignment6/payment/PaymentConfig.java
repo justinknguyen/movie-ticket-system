@@ -9,31 +9,28 @@ import java.util.List;
 @Configuration
 public class PaymentConfig {
     @Bean
-    CommandLineRunner createPayment(PaymentRepository paymentRepository){
+    CommandLineRunner createPayment(PaymentRepository paymentRepository) {
         return args -> {
             Payment accountOne = new Payment(
+                    "annual",
                     "Joe",
-                    "Annual",
-                    "Receipt: Annual Due",
-                    1,
-                    1,
-                    0,
-                    "user1@gmail.com"
+                    "user1@gmail.com",
+                    1234,
+                    590,
+                    1223,
+                    500.00);
 
-            );
             Payment accountTwo = new Payment(
+                    "annual",
                     "Jim",
-                    "Annual",
-                    "Receipt: Annual Due",
-                    2,
-                    2,
-                    0,
-                    "user2@gmail.com"
-            );
+                    "user2@gmail.com",
+                    5678,
+                    592,
+                    1224,
+                    600.00);
 
             paymentRepository.saveAllAndFlush(
-                    List.of(accountOne, accountTwo)
-            );
+                    List.of(accountOne, accountTwo));
         };
     };
 }
