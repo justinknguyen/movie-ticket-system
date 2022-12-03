@@ -22,7 +22,7 @@ export default function Links() {
         <Route path="/movie-ticket-system/" element={<Theatres />} />
         <Route path="/movie-ticket-system/movies" element={<Movies />} />
         <Route path="/movie-ticket-system/showtimes" element={<Showtimes />} />
-        <Route path="/movie-ticket-system/seats" element={<Seats2 />} />
+        <Route path="/movie-ticket-system/seats" element={<Seats />} />
         <Route path="/movie-ticket-system/payment" element={<Payment />} />
         <Route path="/movie-ticket-system/account" element={<Account />} />
         {
