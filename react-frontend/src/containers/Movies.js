@@ -19,7 +19,7 @@ export default function Movies() {
     fetch( "http://localhost:8080/api/v1/theatres/"+theatreSelected+"/movies/")  
     .then(res=>res.json())
     .then(result=>{
-      setMovies(result);
+      setMovies(sortByKey(JSON.parse(JSON.stringify(result)), "mId"));
     })
   },[])
 
@@ -27,6 +27,14 @@ export default function Movies() {
     movieSelected = movies[i].mId;
     console.log(movieSelected)
   }
+
+  function sortByKey(array, key) {
+		return array.sort(function (a, b) {
+			var x = Number(a[key]);
+			var y = Number(b[key]);
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
 
   return (
     <Container>

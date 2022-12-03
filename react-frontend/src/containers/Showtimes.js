@@ -22,7 +22,7 @@ export default function Showtimes() {
     fetch("http://localhost:8080/api/v1/theatres/"+theatreSelected+"/movies/"+movieSelected+"/showtimes/")
     .then(res=>res.json())
     .then(result=>{
-      setShowtimes(result);
+      setShowtimes(sortByKey(JSON.parse(JSON.stringify(result)), "sId"));
     })
   },[])
 
@@ -31,13 +31,21 @@ export default function Showtimes() {
     console.log(stSelected);
   }
 
+  function sortByKey(array, key) {
+		return array.sort(function (a, b) {
+			var x = Number(a[key]);
+			var y = Number(b[key]);
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
+
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Showtimes</h1>
         {showtimes.map((showtime,i)=>(
         <Link to={'/movie-ticket-system/seats'} onClick={() => clickHandle(i)}>
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={showtime.showtime}>
+          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={showtime.sId}>
             ID:{showtime.sId},
             Start Time:{showtime.showtime}
           </Paper>
