@@ -15,7 +15,7 @@ export default function Seats() {
   const nav = useNavigate();
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
   const [seats,setSeats] = useState([])
-  // const [seats,setSeats] = useState(['Seat 1', 'Seat 2'])
+
   const [tId,settId] = useState('')
   const [mId,setmId] = useState('')
   const [stId,setstId] = useState('')
@@ -23,10 +23,12 @@ export default function Seats() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(()=>{
-    fetch("http://localhost:8080/seat")
+    console.log(stSelected.sId)
+    fetch("http://localhost:8080/api/v1/theatres/"+theatreSelected.tId+"/movies/"+movieSelected.mId+
+          "/showtimes/"+stSelected.sId+"/seats")
     .then(res=>res.json())
     .then(result=>{
-      setSeats(result);
+      setSeats(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
     })
   },[])
 
@@ -59,6 +61,14 @@ export default function Seats() {
             setIsSubmitted(false);
           });
   }
+
+  function sortByKey(array, key) {
+		return array.sort(function (a, b) {
+			var x = Number(a[key]);
+			var y = Number(b[key]);
+			return x < y ? -1 : x > y ? 1 : 0;
+		});
+	}
 
   return (
     <Container>

@@ -24,7 +24,7 @@ public class ShowtimeController {
     }
 
     @PostMapping("/addShowtime")
-    public ResponseEntity<String> registerNewMovie(@RequestBody Showtime showtime) {
+    public ResponseEntity<String> registerNewShowtime(@RequestBody Showtime showtime) {
         showtimeService.addShowtime(showtime);
         return ResponseEntity.ok("Showtime added.");
     }

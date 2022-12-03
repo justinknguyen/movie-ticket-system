@@ -2,6 +2,7 @@ package course.ensf607.assignment6.showtime;
 
 import course.ensf607.assignment6.movie.Movie;
 import course.ensf607.assignment6.movie.MovieRepository;
+import course.ensf607.assignment6.seat.SeatConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,26 +19,26 @@ public class ShowtimeConfig {
 
     public static Set<Showtime> getShowtimes1 () {
         Set<Showtime> showtimes = new HashSet<>();
-        showtimes.add(st1);
-        showtimes.add(st2);
+        showtimes.add(st1.setSeats(SeatConfig.getSeatsA()));
+        showtimes.add(st2.setSeats(SeatConfig.getSeatsB()));
         return showtimes;
     }
     public static Set<Showtime> getShowtimes2 () {
         Set<Showtime> showtimes = new HashSet<>();
-        showtimes.add(st3);
-        showtimes.add(st4);
+        showtimes.add(st3.setSeats(SeatConfig.getSeatsC()));
+        showtimes.add(st4.setSeats(SeatConfig.getSeatsD()));
         return showtimes;
     }
     public static Set<Showtime> getShowtimes3 () {
         Set<Showtime> showtimes = new HashSet<>();
-        showtimes.add(st5);
-        showtimes.add(st6);
+        showtimes.add(st5.setSeats(SeatConfig.getSeatsE()));
+        showtimes.add(st6.setSeats(SeatConfig.getSeatsF()));
         return showtimes;
     }
     public static Set<Showtime> getShowtimes4 () {
         Set<Showtime> showtimes = new HashSet<>();
-        showtimes.add(st7);
-        showtimes.add(st8);
+        showtimes.add(st7.setSeats(SeatConfig.getSeatsG()));
+        showtimes.add(st8.setSeats(SeatConfig.getSeatsH()));
         return showtimes;
     }
 

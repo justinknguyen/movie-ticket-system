@@ -1,9 +1,13 @@
 package course.ensf607.assignment6.showtime;
 
+import course.ensf607.assignment6.movie.Movie;
+import course.ensf607.assignment6.seat.Seat;
+
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Set;
 //import course.ensf607.assignment6.showtime.Seat;
 
 @Entity
@@ -17,9 +21,9 @@ public class Showtime {
     private long stId;
     private LocalDateTime showtime;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_stId", referencedColumnName = "stId")
-//    private Set<Seats> seats = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_stId", referencedColumnName = "stId")
+    private Set<Seat> seats = new HashSet<>();
 
     public Showtime() {
     }
@@ -47,4 +51,12 @@ public class Showtime {
         return this;
     }
 
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public Showtime setSeats(Set<Seat> seats) {
+        this.seats = seats;
+        return this;
+    }
 }

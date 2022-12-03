@@ -2,6 +2,7 @@ package course.ensf607.assignment6.theatre;
 
 import course.ensf607.assignment6.movie.Movie;
 import course.ensf607.assignment6.movie.MovieService;
+import course.ensf607.assignment6.seat.Seat;
 import course.ensf607.assignment6.showtime.Showtime;
 import course.ensf607.assignment6.showtime.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,16 @@ public class TheatreController {
         movieService.updateMovie(movie);
         // ArrayList<Movie> movies = new ArrayList<>(theatre.getMovies());
         return theatre;
+    }
+
+    // get seats by showtimes and theatre and movie
+    @GetMapping("/{tId}/movies/{mId}/showtimes/{stId}/seats")
+    public Set<Seat> getSeatsByShowtimeAndMovieAndTheatre(@PathVariable Long tId, @PathVariable Long mId,
+                                                          @PathVariable Long stId) {
+        Set<Movie> movies = theatreService.getMovieListById(tId);
+        Movie movie = movieService.getMovieById(mId);
+        Showtime showtime = showtimeService.getShowtimeById(stId);
+        return showtime.getSeats();
     }
 
     // get showtimes by theatre and movie
