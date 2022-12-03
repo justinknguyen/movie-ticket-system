@@ -5,6 +5,7 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import { useState, useEffect } from 'react';
+var totalPrice = 0.00;
 
 
 export default function Payment() {
@@ -25,6 +26,11 @@ export default function Payment() {
       setTickets(result);
     })
   },[])
+
+  useEffect(()=>{
+    totalPrice = tickets.length * 10;
+    console.log(tickets.length);
+  },[tickets]) 
 
   const handleClick=(e)=>{
     e.preventDefault()
@@ -47,25 +53,40 @@ export default function Payment() {
     })
   }
 
+  const handleClick2=(e)=>{
+    e.preventDefault()
+    fetch("http://localhost:8080/seat/reserveSeat", 
+    {
+      method:"PUT",
+      headers:{"Content-Type":"application/json"},
+    }).then(()=>{
+      console.log("Payment Successful")
+      setIsSubmitted(true);
+      setIsError(false);
+    }).catch(()=>{
+      console.log("Error")
+      setIsError(true);
+      setIsSubmitted(false);
+    })
+  }
+
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Ticket</h1>
-        {tickets.map((ticket) =>(
-        
+        {tickets.map((ticket) =>( 
             <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={ticket.id}>
               Theatre:{ticket.theatre} <br></br>
               Movie:{ticket.movie} <br></br>
-              Showtime:{ticket.showtime}
+              Showtime:{ticket.showtime} <br></br>
+              Seat:{ticket.seat}
             </Paper>
-  
           ))}
-      
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
         <h1>Payment</h1>
-        <p>Your total is $8.00</p>
+        <p>Your total is ${totalPrice}</p>
 
     <Box
       component="form"
