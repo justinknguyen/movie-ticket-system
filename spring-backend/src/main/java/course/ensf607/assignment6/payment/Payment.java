@@ -12,30 +12,93 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "pId")
     private long pId;
+
+    //Payment Type
+    private String Type;
+    //Description of the Payment Type
+    private String Description;
+
+    //User Information
     private String name;
+
+    private String buyerEmail;
+
+    //Credit Card Information
     private int cardNo;
     private int ccv;
     private int expiry;
+
+    //Account balance, charged at end of month
     private double accountBalance;
 
-    public Payment(String name,int ccv, int cardNo, int expiry) {
+    //Dates for account management
+
+    private LocalDate creationDate;
+
+    private LocalDate currentTime;
+
+
+
+
+    public Payment(String name, String Type, String Description, int ccv, int cardNo, int expiry, String buyerEmail) {
         this.name = name;
+        this.Type = Type;
+        this.Description = Description;
         this.cardNo = cardNo;
         this.expiry = expiry;
         this.ccv = ccv;
-        accountBalance = 100; // arbitary starting point, adjusted later
+        this.buyerEmail=buyerEmail;
+        accountBalance = 20; // Starts with annual payment
     }
 
     public Payment(RegisteredUser user) {
         this.name = user.getName();
-        accountBalance = 100; // arbitary starting point, adjusted later
+        accountBalance = 20; // Starts with annual payment
     }
-
-
 
 
     public Payment() {
 
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(LocalDate currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public String getBuyerEmail() {
+        return buyerEmail;
+    }
+
+    public void setBuyerEmail(String buyerEmail) {
+        this.buyerEmail = buyerEmail;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 
     public String getName() {
@@ -46,11 +109,11 @@ public class Payment {
         this.name = name;
     }
 
-    public long getpId() {
+    public long getId() {
         return pId;
     }
 
-    public void setpId(long pId) {
+    public void setId(long pId) {
         this.pId = pId;
     }
 

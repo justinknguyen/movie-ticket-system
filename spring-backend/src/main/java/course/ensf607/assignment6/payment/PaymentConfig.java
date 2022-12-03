@@ -12,16 +12,23 @@ public class PaymentConfig {
     CommandLineRunner createPayment(PaymentRepository paymentRepository){
         return args -> {
             Payment accountOne = new Payment(
-                "Hello",
-                1,
-                1,
-                0
+                    "Joe",
+                    "Annual",
+                    "Receipt: Annual Due",
+                    1,
+                    1,
+                    0,
+                    "user1@gmail.com"
+
             );
             Payment accountTwo = new Payment(
-                "World",
-                2,
-                2,
-                0
+                    "Jim",
+                    "Annual",
+                    "Receipt: Annual Due",
+                    2,
+                    2,
+                    0,
+                    "user2@gmail.com"
             );
 
             paymentRepository.saveAllAndFlush(

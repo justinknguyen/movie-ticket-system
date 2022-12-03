@@ -1,5 +1,6 @@
 package course.ensf607.assignment6.payment;
 import course.ensf607.assignment6.movie.Movie;
+import course.ensf607.assignment6.ticket.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,15 @@ public class PaymentService {
             throw new IllegalStateException("Payment already exist!");
         }
         paymentRepository.save(payment);
+    }
+
+    public void createRefundPayment(Payment payment) {
+
+        Optional<Payment> payment1 = paymentRepository.findById(payment.getId());
+        if (payment1.isPresent()) {
+            throw new IllegalStateException("There is already a payment with that id");
+        }
+        paymentRepository.save(payment);
+
     }
 }

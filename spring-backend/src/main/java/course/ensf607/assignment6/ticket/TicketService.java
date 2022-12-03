@@ -46,6 +46,19 @@ public class TicketService {
         return ticket1.get();
     }
 
+    public void cancelTicket(Long id) {
+
+        Ticket ticket1 = ticketRepository.findById(id).get();
+        if (ticket1 == null) {
+            throw new IllegalStateException("There is no ticket with that id");
+        } else {
+
+            //CHECK FOR TIME >72 HOURS
+        }
+    }
+
+
+
     // public Course getCourseById(Long courseId) {
     // Optional<Course> courseById = courseRepository.findById(courseId);
     // if (!courseById.isPresent()) {

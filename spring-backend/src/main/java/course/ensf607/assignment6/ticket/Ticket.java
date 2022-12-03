@@ -27,6 +27,12 @@ public class Ticket implements Serializable {
 
     private Double price;
 
+    //Work in Progress
+    private long paymentId;
+
+
+
+
     // @OneToMany(mappedBy = "email")
     // private Set<Ticket> items;
 
