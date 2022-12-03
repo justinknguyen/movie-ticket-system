@@ -44,4 +44,11 @@ public class RegisteredUserService {
         registeredUserRepository.save(ru);
     }
 
+    public void removeNewUser(RegisteredUser registeredUser) {
+        Optional<RegisteredUser> user = registeredUserRepository.findByEmail(registeredUser.getEmail());
+        if (!user.isPresent()) {
+            throw new IllegalStateException("User doesn't exist!");
+        }
+        registeredUserRepository.delete(registeredUser);
+    }
 }
