@@ -89,12 +89,18 @@ export default function Account() {
 			<Paper elevation={3} style={paperStyle}>
 			<h1>Account Information</h1>
 				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
+					UserType:<br></br>
 					ID:{userInfo.id} <br></br>
 					Email Address:{userInfo.email} <br></br>
 					Password:{userInfo.password} <br></br>
 					Name:{userInfo.name} <br></br>
 					Address:{userInfo.address} <br></br>
-					Date Registered:{userInfo.dateRegistered} <br></br>
+					Date Registered:{userInfo.dateRegistered} <br></br> <br></br>
+					Card Name:{userInfo.name} <br></br>
+					Card Number:{userInfo.cardNo} <br></br>
+					Card CVV:{userInfo.ccv} <br></br>
+					Expiry:{userInfo.expiry} <br></br>
+					Account Balance:${userInfo.accountBalance}.00 <br></br>
 				</Paper>
 			</Paper>
 
@@ -125,19 +131,6 @@ export default function Account() {
               Delete
             </Button>
           </Box>
-			</Paper>
-
-			<Paper elevation={3} style={paperStyle}>
-			<h1>Payment Information</h1>
-				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
-					UserType:<br></br>
-					ID:{userInfo.id} <br></br>
-					Card Name:{userInfo.name} <br></br>
-					Card Number:{userInfo.cardNo} <br></br>
-					Card CVV:{userInfo.ccv} <br></br>
-					Expiry:{userInfo.expiry} <br></br>
-					Account Balance:${userInfo.accountBalance}.00 <br></br>
-				</Paper>
 			</Paper>
 
 		</Container>
