@@ -1,5 +1,8 @@
 package course.ensf607.assignment6.ticket;
 
+import course.ensf607.assignment6.seat.Seat;
+import course.ensf607.assignment6.seat.SeatRepository;
+import course.ensf607.assignment6.seat.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

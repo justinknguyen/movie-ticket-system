@@ -17,7 +17,6 @@ public class SeatService {
         this.seatRepository = seatRepository;
     }
 
-
     public List<Seat> getAllSeats() {
         return seatRepository.findAll();
     }

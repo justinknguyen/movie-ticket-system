@@ -1,6 +1,7 @@
 package course.ensf607.assignment6.ticket;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import course.ensf607.assignment6.seat.Seat;
 // import course.ensf607.assignment6.course.Course;
 
 import javax.persistence.*;
@@ -108,13 +109,4 @@ public class Ticket implements Serializable {
     public void setSeat(String seat) {
         this.seat = seat;
     }
-
-    // public Set<Course> getSubjects() {
-    // return enrolledCourses;
-    // }
-
-    // public Student addSubjects(Course subject) {
-    // this.enrolledCourses.add(subject);
-    // return this;
-    // }
 }
