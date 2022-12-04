@@ -133,9 +133,9 @@ export default function Account() {
 					UserType:<br></br>
 					ID:{userInfo.id} <br></br>
 					Card Name:{userInfo.name} <br></br>
-					Card Number:{paymentInfo.cardNo} <br></br>
-					Card cvv:{paymentInfo.cvv} <br></br>
-					Expiry:{paymentInfo.expiry} <br></br>
+					Card Number:{userInfo.cardNo} <br></br>
+					Card cvv:{userInfo.ccv} <br></br>
+					Expiry:{userInfo.expiry} <br></br>
 					accountBalance:{userInfo.accountBalance} <br></br>
 				</Paper>
 			</Paper>

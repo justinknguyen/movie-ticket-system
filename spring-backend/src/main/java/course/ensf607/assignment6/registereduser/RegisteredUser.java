@@ -137,4 +137,28 @@ public class RegisteredUser implements Serializable {
     public void setAccountBalance(double accountBalance) {
         this.accountBalance = accountBalance;
     }
+
+    public int getCCV() {
+        return ccv;
+    }
+
+    public void setCCV(int ccv) {
+        this.ccv = ccv;
+    }
+
+    public int getCardNo() {
+        return cardNo;
+    }
+
+    public void setCardNo(int cardNo) {
+        this.cardNo = cardNo;
+    }
+
+    public int getExpiry() {
+        return expiry;
+    }
+
+    public void setExpiry(int expiry) {
+        this.expiry = expiry;
+    }
 }
