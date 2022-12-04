@@ -42,8 +42,9 @@ public class TicketUserController {
 
     @DeleteMapping("delete/{id}/{sid}")
     public void removeTicket(@PathVariable Long id, @PathVariable Long sid) {
+        Ticket ticket = ticketService.FindById(id);
+        Seat seat = ticket.getSeats();
         ticketService.removeTicket(id);
-        Seat seat = seatService.getSeatById(sid);
         seat.unreserve();
     }
 
