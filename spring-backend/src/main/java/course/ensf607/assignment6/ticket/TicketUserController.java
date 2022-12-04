@@ -40,8 +40,8 @@ public class TicketUserController {
         ticketService.SetSeatToTicket(ticket, seat);
     }
 
-    @DeleteMapping("delete/{id}/{sid}")
-    public void removeTicket(@PathVariable Long id, @PathVariable Long sid) {
+    @DeleteMapping("delete/{id}")
+    public void removeTicket(@PathVariable Long id) {
         Ticket ticket = ticketService.FindById(id);
         Seat seat = ticket.getSeats();
         ticketService.removeTicket(id);
