@@ -37,8 +37,8 @@ public class Showtime {
     public Showtime(Long id, LocalDateTime showtime) {
         this.stId = id;
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-        String formatDateTime = showtime.format(formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy @ H:mm");
+        String formatDateTime = showtime.format(formatter) + "PM";
         this.showtime = formatDateTime;
     }
 
@@ -56,8 +56,8 @@ public class Showtime {
     }
 
     public Showtime setShowtime(LocalDateTime showtime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-        String formatDateTime = showtime.format(formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy @ H:mm");
+        String formatDateTime = showtime.format(formatter) + "PM";
         this.showtime = formatDateTime;
         return this;
     }
