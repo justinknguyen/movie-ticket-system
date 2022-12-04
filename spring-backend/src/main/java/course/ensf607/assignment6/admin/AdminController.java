@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/admin/")
+@RequestMapping(path = "api/v1/admin")
 public class AdminController {
 
     private final AdminService adminService;
@@ -25,9 +25,30 @@ public class AdminController {
         this.movieService = movieService;
     }
 
-    @GetMapping("/all")
-    public List<Admin> getAllUsers() {
+    @GetMapping("/allStaff")
+    public List<Admin> getAllStaff() {
+        List<Admin> test = adminService.getAllAdminUsers();
         return adminService.getAllAdminUsers();
+    }
+
+    @PostMapping("/addAdminStaff")
+    public String addAdminStaff(@RequestBody Admin staff) {
+        return adminService.addAdminStaff(staff);
+    }
+
+    @DeleteMapping("/removeAdminStaff")
+    public String removeAdminStaff(@RequestBody Admin staff) {
+        return adminService.removeAdminStaff(staff);
+    }
+
+    @GetMapping("{email}")
+    public Admin getStaffByEmail(@PathVariable String email) {
+        return adminService.getAdminUserByEmail(email);
+    }
+
+    @GetMapping("/allRegisteredUsers")
+    public List<RegisteredUser> getAllRegisteredUsers() {
+        return registeredUserService.getAllRegisteredUsers();
     }
 
     @PostMapping("/addRegisteredUser")
@@ -38,6 +59,11 @@ public class AdminController {
     @DeleteMapping("/removeRegisteredUser")
     public void removeNewUser(@RequestBody RegisteredUser registeredUser) {
         registeredUserService.removeNewUser(registeredUser);
+    }
+
+    @GetMapping("/allMovies")
+    public List<Movie> getAllMovies() {
+        return movieService.getMovies();
     }
 
     @PostMapping("/addMovie")
@@ -51,14 +77,5 @@ public class AdminController {
 //        movieService.removeMovie(movie);
     }
 
-    @PostMapping("/addAdminStaff")
-    public void addAdminStaff(@RequestBody Admin staff) {
-        adminService.addAdminStaff(staff);
-    }
-
-    @PostMapping("/removeAdminStaff")
-    public void removeAdminStaff(@RequestBody Admin staff) {
-        adminService.removeAdminStaff(staff);
-    }
 
 }
