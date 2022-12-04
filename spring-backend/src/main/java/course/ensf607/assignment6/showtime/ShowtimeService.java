@@ -56,4 +56,14 @@ public class ShowtimeService {
         }
         return mov;
     }
+
+    public Set<Showtime> getShowtimesBasedonMovie(Set<Showtime> showtime, Long mId) {
+        Set<Showtime> show = new HashSet<>();
+        for (Showtime s : showtime) {
+            if (s.getMovie().getmId() == mId) {
+                show.add(s);
+            }
+        }
+        return show;
+    }
 }

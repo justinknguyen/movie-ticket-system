@@ -61,8 +61,9 @@ public class Theatre implements Serializable {
         return this;
     }
 
-    public void addShowtimes(Showtime showtime) {
+    public Theatre addShowtimes(Showtime showtime) {
         showtimes.add(showtime);
+        return this;
     }
 }
 

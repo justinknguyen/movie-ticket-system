@@ -46,12 +46,12 @@ public class TheatreController {
         return movies;
     }
 
-    @GetMapping("/{tId}/showtimes")
-    public Set<Showtime> getShowtimesBasedOnTheatre(@PathVariable Long tId) {
+    @GetMapping("/{tId}/showtimes/{mId}")
+    public Set<Showtime> getShowtimesBasedOnTheatreAndMovie(@PathVariable Long tId, @PathVariable Long mId) {
         Theatre theatre = theatreService.getTheatreById(tId);
         Set<Showtime> showtime = theatre.getShowtimes();
-
-        return showtime;
+        Set<Showtime> shows = showtimeService.getShowtimesBasedonMovie(showtime, mId);
+        return shows;
     }
 
     @GetMapping("/{stId}/seats")

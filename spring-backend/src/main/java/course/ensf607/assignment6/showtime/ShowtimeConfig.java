@@ -31,15 +31,15 @@ public class ShowtimeConfig {
 
         public static Set<Showtime> getShowtimes3() {
                 Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st5.setSeats(SeatConfig.getSeatsE()));
-                showtimes.add(st6.setSeats(SeatConfig.getSeatsF()));
+                showtimes.add(st5.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsA()));
+                showtimes.add(st6.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsB()));
                 return showtimes;
         }
 
         public static Set<Showtime> getShowtimes4() {
                 Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st7.setSeats(SeatConfig.getSeatsG()));
-                showtimes.add(st8.setSeats(SeatConfig.getSeatsH()));
+                showtimes.add(st7.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsC()));
+                showtimes.add(st8.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsD()));
                 return showtimes;
         }
 
