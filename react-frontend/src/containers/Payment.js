@@ -143,7 +143,7 @@ export default function Payment() {
 
       <Paper elevation={3} style={paperStyle}>
         <h1>Payment</h1>
-        <p>Your total is ${totalPrice}</p>
+        <p>Your total is ${totalPrice}.00</p>
 
     <Box
       component="form"
