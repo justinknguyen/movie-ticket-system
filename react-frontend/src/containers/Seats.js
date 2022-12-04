@@ -170,6 +170,13 @@ export default function Seats() {
         Movie:{movieSelected.name} <br></br>
         Showtime:{stSelected.showtime}
       </p>
+      <p align="center">
+        ___Screen___ <br></br>
+        A1, A2, A3, A4 <br></br>
+        B1, B2, B3, B4 <br></br>
+        C1, C2, C3, C4 <br></br>
+        D1, D2, D3, D4 <br></br>
+      </p>
           <Box textAlign='center'>
             <Button variant="contained" onClick={handleProceed}>
               Pay
