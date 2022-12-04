@@ -21,20 +21,30 @@ public class AdminService {
         return adminRepository.findAll();
     }
 
-    public void addAdminStaff(Admin staff) {
+    public String addAdminStaff(Admin staff) {
         Optional<Admin> newStaff = adminRepository.findByName(staff.getName());
         if (newStaff.isPresent()) {
-            throw new IllegalStateException("Staff already exists!");
+            return "Staff already exists!";
         }
         adminRepository.save(staff);
+        return "Staff added.";
     }
 
-    public void removeAdminStaff(Admin staff) {
+    public String removeAdminStaff(Admin staff) {
         Optional<Admin> newStaff = adminRepository.findByName(staff.getName());
-        if (newStaff.isPresent()) {
-            throw new IllegalStateException("Staff already exists!");
+        if (!newStaff.isPresent()) {
+            return "Staff doesn't exist!";
         }
-        adminRepository.save(staff);
+        adminRepository.delete(staff);
+        return "Staff removed.";
+    }
+
+    public Admin getAdminUserByEmail(String email) {
+        Optional<Admin> staff = adminRepository.findByEmail(email);
+        if (!staff.isPresent()) {
+            throw new IllegalStateException("ID doesn't exist");
+        }
+        return staff.get();
     }
 
 }

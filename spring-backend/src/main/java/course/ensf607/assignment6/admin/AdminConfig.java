@@ -15,10 +15,12 @@ public class AdminConfig {
             Admin staff1 = new Admin(
                     (long) 1,
                     "George",
+                    "George@theatre.com",
                     "pass");
             Admin staff2 = new Admin(
                     (long) 2,
                     "Bob",
+                    "Bob@theatre.com",
                     "pass");
 
             adminRepository.saveAllAndFlush(
