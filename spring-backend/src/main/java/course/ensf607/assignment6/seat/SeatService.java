@@ -47,4 +47,10 @@ public class SeatService {
         seat.reserve();
         seatRepository.save(seat);
     }
+
+    public void unreserveById(Long id) {
+        Seat seat = getSeatById(id);
+        seat.unreserve();
+        seatRepository.save(seat);
+    }
 }

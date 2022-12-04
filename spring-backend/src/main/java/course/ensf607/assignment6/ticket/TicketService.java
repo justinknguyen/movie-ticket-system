@@ -13,12 +13,10 @@ import java.util.Optional;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
-    private final SeatRepository seatRepository;
 
     @Autowired
-    public TicketService(TicketRepository ticketRepository, SeatRepository seatRepository) {
+    public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
-        this.seatRepository = seatRepository;
     }
 
     public List<Ticket> getAllTickets() {
@@ -33,21 +31,19 @@ public class TicketService {
         ticketRepository.save(ticket);
     }
 
-    public void SetSeatToTicket(Ticket ticket, Long sId) {
-        Seat seat = seatRepository.findById(sId).get();
+    public void SetSeatToTicket(Ticket ticket, Seat seat) {
         ticket.setSeats(seat);
         ticketRepository.save(ticket);
     }
 
-    public void removeTicket(Long id, Long sId) {
-        Seat seat = seatRepository.findById(sId).get();
+    public void removeTicket(Long id) {
+
         Ticket ticket1 = ticketRepository.findById(id).get();
         if (ticket1 == null) {
             throw new IllegalStateException("There is no ticket with that id");
         } else {
             ticketRepository.delete(ticket1);
-            seat.unreserve();
-            seatRepository.save(seat);
+
         }
     }
 

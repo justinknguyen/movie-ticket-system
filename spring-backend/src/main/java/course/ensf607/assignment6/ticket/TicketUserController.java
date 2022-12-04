@@ -2,6 +2,9 @@ package course.ensf607.assignment6.ticket;
 
 import course.ensf607.assignment6.payment.Payment;
 import course.ensf607.assignment6.payment.PaymentService;
+import course.ensf607.assignment6.seat.Seat;
+import course.ensf607.assignment6.seat.SeatService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +17,15 @@ public class TicketUserController {
     private final TicketService ticketService;
 
     private final PaymentService paymentService;
+    private final SeatService seatService;
 
     // private final StudentService studentService;
 
     @Autowired
-    public TicketUserController(TicketService ticketService, PaymentService paymentService) {
+    public TicketUserController(TicketService ticketService, PaymentService paymentService, SeatService seatService) {
         this.ticketService = ticketService;
         this.paymentService = paymentService;
+        this.seatService = seatService;
     }
 
     @GetMapping("all")
@@ -31,12 +36,15 @@ public class TicketUserController {
     @PostMapping("add")
     public void addNewTicket(@RequestBody Ticket ticket, @PathVariable Long sid) {
         ticketService.addNewTicket(ticket);
-        ticketService.SetSeatToTicket(ticket, sid);
+        Seat seat = seatService.getSeatById(sid);
+        ticketService.SetSeatToTicket(ticket, seat);
     }
 
     @DeleteMapping("delete/{id}/{sid}")
     public void removeTicket(@PathVariable Long id, @PathVariable Long sid) {
-        ticketService.removeTicket(id, sid);
+        ticketService.removeTicket(id);
+        Seat seat = seatService.getSeatById(sid);
+        seat.unreserve();
     }
 
     @GetMapping("getTicketToCancel/{id}")
