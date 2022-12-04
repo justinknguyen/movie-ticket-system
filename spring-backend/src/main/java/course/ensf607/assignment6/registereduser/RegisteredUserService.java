@@ -51,4 +51,11 @@ public class RegisteredUserService {
         }
         registeredUserRepository.delete(registeredUser);
     }
+
+    public double getRegisteredUser(long id) {
+
+        RegisteredUser updatedUser = registeredUserRepository.getReferenceById(id);
+        return  updatedUser.getAccountBalance();
+
+    }
 }

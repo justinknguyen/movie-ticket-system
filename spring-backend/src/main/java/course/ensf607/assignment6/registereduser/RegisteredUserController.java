@@ -29,6 +29,9 @@ public class RegisteredUserController {
         return registeredUserService.getAllRegisteredUsers();
     }
 
+    @GetMapping("/getUser/{id}")
+    public double getUser(@PathVariable long id){return registeredUserService.getRegisteredUser(id);}
+
     @PostMapping("add")
     public void addNewUser(@RequestBody RegisteredUser registeredUser) {
         registeredUserService.addNewUser(registeredUser);

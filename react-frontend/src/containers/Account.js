@@ -12,6 +12,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import { globalTickets } from "./Payment.js";
+var userType;
 
 export default function Account() {
 	const [isError, setIsError] = useState(false);
@@ -19,12 +20,32 @@ export default function Account() {
 	const [isGuest, setIsGuest] = useState(false);
 	const [checked, setChecked] = useState([]);
 	const [tickets,setTickets] = useState([])
+	var id = userInfo.id;
+
 
 	const paperStyle = {
 		padding: "50px 20px",
 		width: 600,
 		margin: "20px auto",
 	};
+
+	updateUser(id);
+	function updateUser(id) {
+		fetch(`http://localhost:8080/api/v1/registereduser/getUser/${id}`, {
+			method: "GET",
+			headers: { "Content-Type": "application/json" },
+	  })
+		.then((response) => {
+		  return response.json();
+		})
+		.then((data) => {
+		  userInfo.accountBalance = data;
+		})
+		.catch(() => {
+		  console.log("Error");
+		});
+	
+	}
 
 	function sortByKey(array, key) {
 		return array.sort(function (a, b) {
