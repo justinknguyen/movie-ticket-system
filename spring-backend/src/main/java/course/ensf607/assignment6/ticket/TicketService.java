@@ -31,10 +31,10 @@ public class TicketService {
         ticketRepository.save(ticket);
     }
 
-    public void SetSeatToTicket(Ticket ticket, Seat seat) {
-        ticket.setSeats(seat);
-        ticketRepository.save(ticket);
-    }
+    // public void SetSeatToTicket(Ticket ticket, Seat seat) {
+    // ticket.setSeats(seat);
+    // ticketRepository.save(ticket);
+    // }
 
     public void removeTicket(Long id) {
 

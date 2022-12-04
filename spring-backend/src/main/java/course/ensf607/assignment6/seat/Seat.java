@@ -29,9 +29,9 @@ public class Seat implements Serializable {
     // @JoinColumn(name = "seat_map_id")
     private SeatMap seatMap;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ticket_id", referencedColumnName = "id")
-    private Ticket ticket;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "ticket_id", referencedColumnName = "id")
+    // private Ticket ticket;
 
     public Seat() {
     }

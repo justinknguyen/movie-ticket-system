@@ -31,9 +31,9 @@ public class Ticket implements Serializable {
     private long paymentId;
     private String seatDesc;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seat_id")
-    private Seat seats;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "seat_id")
+    // private Seat seats;
 
     public Ticket() {
     }
@@ -106,13 +106,13 @@ public class Ticket implements Serializable {
         this.seat = seat;
     }
 
-    public Seat getSeats() {
-        return seats;
-    }
+    // public Seat getSeats() {
+    // return seats;
+    // }
 
-    public void setSeats(Seat seats) {
-        this.seats = seats;
-    }
+    // public void setSeats(Seat seats) {
+    // this.seats = seats;
+    // }
 
     public String getSeatDesc() {
         return seatDesc;
