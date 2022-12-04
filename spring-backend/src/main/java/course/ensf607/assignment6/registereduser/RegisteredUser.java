@@ -31,8 +31,7 @@ public class RegisteredUser implements Serializable {
     private LocalDate dateRegistered;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ruPayments")
-    private Set<Payment> payments = new HashSet<>();;
+    private Set<Payment> payments = new HashSet<>();
     private int ccv;
     private int cardNo;
     private int expiry;

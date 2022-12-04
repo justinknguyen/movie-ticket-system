@@ -29,9 +29,9 @@ public class PaymentController {
         return ResponseEntity.ok("Confirmed for Payment.");
 
     }
-    @PostMapping("/addPayment")
-    public ResponseEntity<String> registerNewPayment(@RequestBody Payment payment) {
-        paymentService.addPayment(payment);
+    @PutMapping("/addPayment/{cardNo}/{price}")
+    public ResponseEntity<String> registerNewPayment(@RequestBody Payment payment, @PathVariable int cardNo, @PathVariable double price ) {
+        paymentService.addPayment(payment,cardNo, price);
         return ResponseEntity.ok("Payment added.");
     }
 

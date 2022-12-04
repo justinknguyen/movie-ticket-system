@@ -16,18 +16,22 @@ public class Payment {
 
     // Payment Type
     private String type;
-    @ManyToOne
+
+    //Balance at time of payment
+    private double accountBalance;
+    @ManyToOne()
     @JoinColumn(name = "RegisteredUserId")
-    RegisteredUser user;
+    private RegisteredUser user;
 
     // Dates for account management
 
     private LocalDate creationDate;
 
 
-    public Payment(String type, RegisteredUser user) {
+    public Payment(String type, double accountBalance, RegisteredUser user) {
         this.type = type;
-        this.user = user;
+        this.accountBalance = accountBalance;
+        this.user =user;
         this.creationDate = LocalDate.now();
 
         // accountBalance = 20; // Starts with annual payment
@@ -79,5 +83,13 @@ public class Payment {
 
     public void setUser(RegisteredUser user) {
         this.user = user;
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 }

@@ -5,7 +5,7 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import { useState, useEffect } from 'react';
-var totalPrice = 0.00;
+var totalPrice = 0.00
 
 
 export default function Payment() {
@@ -16,6 +16,7 @@ export default function Payment() {
   const [expiry,setExpiry] = useState('')
   const [cvv,setCvv] = useState('')
   const [name,setName] = useState('')
+  const [price,setPrice] = useState('')
 
   const [tickets,setTickets] = useState([])
 
@@ -29,6 +30,7 @@ export default function Payment() {
 
   useEffect(()=>{
     totalPrice = tickets.length * 10;
+    setPrice(totalPrice);
     console.log(tickets.length);
   },[tickets]) 
 
@@ -37,9 +39,9 @@ export default function Payment() {
     const creditCard={cardNo, expiry, cvv, name}
     console.log(creditCard)
     // TODO: send data to database
-    fetch("http://localhost:8080/api/v1/payment/addPayment", 
+    fetch(`http://localhost:8080/api/v1/payment/addPayment/${cardNo}/${price}`, 
     {
-      method:"POST",
+      method:"PUT",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(creditCard)
     }).then(()=>{

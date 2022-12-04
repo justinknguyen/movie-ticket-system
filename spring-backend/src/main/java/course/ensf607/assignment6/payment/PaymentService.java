@@ -7,6 +7,7 @@ import course.ensf607.assignment6.ticket.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -29,12 +30,16 @@ public class PaymentService {
         paymentRepository.save(payment);
     }
 
-    public void addPayment(Payment payment) {
-        Optional<Payment> paymentByName = paymentRepository.findPaymentById(payment.getId());
+    public void addPayment(Payment payment, int cardNo, double totalPrice) {
+        Optional<Payment> paymentByName = paymentRepository.findPaymentBypId(payment.getId());
         if (paymentByName.isPresent()) {
             throw new IllegalStateException("Payment already exist!");
         }
+        RegisteredUser user = registeredUserRepository.findByCardNo(cardNo);
         payment.setType("Ticket Purchase");
+        payment.setCreationDate(LocalDate.now());
+        payment.setUser(user);
+        payment.setAccountBalance(user.getAccountBalance() - totalPrice);
         paymentRepository.save(payment);
     }
 

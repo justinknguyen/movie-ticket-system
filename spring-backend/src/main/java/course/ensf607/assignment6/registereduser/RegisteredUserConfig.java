@@ -2,6 +2,8 @@ package course.ensf607.assignment6.registereduser;
 
 import course.ensf607.assignment6.movie.Movie;
 import course.ensf607.assignment6.movie.MovieRepository;
+import course.ensf607.assignment6.payment.Payment;
+import course.ensf607.assignment6.payment.PaymentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,19 +45,32 @@ public class RegisteredUserConfig {
         };
     };
 
-    public RegisteredUser getUser1() {
-        return user1;
-    }
+    @Bean
+    CommandLineRunner createPayment(PaymentRepository paymentRepository) {
+        return args -> {
 
-    public void setUser1(RegisteredUser user1) {
-        this.user1 = user1;
-    }
 
-    public RegisteredUser getUser2() {
-        return user2;
-    }
 
-    public void setUser2(RegisteredUser user2) {
-        this.user2 = user2;
-    }
+
+            Payment paymentOne = new Payment(
+                    "annual",
+                    500.00,
+                    user1
+            );
+
+
+            Payment paymentTwo = new Payment(
+                    "annual",
+                    600,
+                    user2
+            );
+
+            paymentRepository.saveAllAndFlush(
+                    List.of(paymentOne, paymentTwo));
+        };
+    };
 }
+
+
+
+
