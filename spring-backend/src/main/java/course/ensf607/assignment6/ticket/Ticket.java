@@ -43,6 +43,7 @@ public class Ticket implements Serializable {
         this.theatre = theatre;
         this.movie = movie;
         this.showtime = showtime;
+        this.seatDesc = seatDesc;
         this.seat = seat;
         this.price = price;
     }
@@ -51,6 +52,8 @@ public class Ticket implements Serializable {
         this.theatre = theatre;
         this.movie = movie;
         this.showtime = showtime;
+        this.seatDesc = seatDesc;
+
         this.seat = seat;
         this.price = price;
     }
