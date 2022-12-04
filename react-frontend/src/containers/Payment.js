@@ -10,6 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 var totalPrice = 0.00;
+export var paymentInfo = undefined;
 
 
 export default function Payment() {
@@ -50,6 +51,7 @@ export default function Payment() {
   const handleClick=(e)=>{
     e.preventDefault()
     const creditCard={cardNo, expiry, cvv, name}
+    paymentInfo = creditCard;
     console.log(creditCard)
     // TODO: send data to database
     fetch(`http://localhost:8080/api/v1/payment/addPayment/${cardNo}/${price}`,

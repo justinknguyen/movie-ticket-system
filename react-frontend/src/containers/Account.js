@@ -7,10 +7,12 @@ import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { flexbox } from "@mui/system";
 import { userInfo } from "./Login.js";
+import {paymentInfo} from "./Payment.js"
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import { globalTickets } from "./Payment.js";
+
 
 export default function Account() {
 	const [isError, setIsError] = useState(false);
@@ -124,6 +126,20 @@ export default function Account() {
             </Button>
           </Box>
 			</Paper>
+
+			<Paper elevation={3} style={paperStyle}>
+			<h1>Payment Information</h1>
+				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
+					UserType:<br></br>
+					ID:{userInfo.id} <br></br>
+					Card Name:{userInfo.name} <br></br>
+					Card Number:{paymentInfo.cardNo} <br></br>
+					Card cvv:{paymentInfo.cvv} <br></br>
+					Expiry:{paymentInfo.expiry} <br></br>
+					accountBalance:{userInfo.accountBalance} <br></br>
+				</Paper>
+			</Paper>
+
 		</Container>
 	);
 }
