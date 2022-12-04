@@ -165,8 +165,13 @@ export default function Seats() {
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Seats</h1>
+      <p>
+        Theatre:{theatreSelected.name} <br></br>
+        Movie:{movieSelected.name} <br></br>
+        Showtime:{stSelected.showtime}
+      </p>
           <Box textAlign='center'>
-            <Button variant="contained" onClick={handleProceed} fullWidth>
+            <Button variant="contained" onClick={handleProceed}>
               Pay
             </Button>
           </Box>

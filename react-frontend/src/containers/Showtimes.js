@@ -43,6 +43,10 @@ export default function Showtimes() {
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Showtimes</h1>
+      <p>
+        Theatre:{theatreSelected.name} <br></br>
+        Movie:{movieSelected.name}
+      </p>
         {showtimes.map((showtime,i)=>(
         <Link to={'/movie-ticket-system/seats'} onClick={() => clickHandle(i)} key={showtime.sId}>
           <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}}> 
