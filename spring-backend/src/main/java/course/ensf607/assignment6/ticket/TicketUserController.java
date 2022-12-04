@@ -39,18 +39,18 @@ public class TicketUserController {
 
     }
 
-    @DeleteMapping("delete/{id}")
-    public void removeTicket(@PathVariable Long id) {
-        Ticket ticket = ticketService.FindById(id);
+    @DeleteMapping("delete/{ticid}")
+    public void removeTicket(@PathVariable Long ticid) {
+        Ticket ticket = ticketService.FindById(ticid);
         Long s = ticket.getSeat();
         Seat seat = seatService.getSeatById(s);
-        ticketService.removeTicket(id);
+        ticketService.removeTicket(ticid);
         seat.unreserve();
     }
 
-    @GetMapping("getTicketToCancel/{id}")
-    public Ticket getTicketToCancel(@PathVariable Long id) {
-        return ticketService.FindById(id);
+    @GetMapping("getTicketToCancel/{ticid}")
+    public Ticket getTicketToCancel(@PathVariable Long ticid) {
+        return ticketService.FindById(ticid);
     }
 
     // @PostMapping("createRefundPayment")

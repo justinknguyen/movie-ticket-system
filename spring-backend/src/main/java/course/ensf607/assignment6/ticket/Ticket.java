@@ -14,8 +14,8 @@ import java.util.Set;
 public class Ticket implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "RegisteredUser_sequence", sequenceName = "RegisteredUser_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RegisteredUser_sequence")
+    @SequenceGenerator(name = "ticket_sequence", sequenceName = "ticket_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_sequence")
     private Long id;
 
     private String theatre;
@@ -25,10 +25,10 @@ public class Ticket implements Serializable {
     private String showtime;
 
     private Double price;
-    private Long seat;
+    private long seat;
 
     // Work in Progress
-    private long paymentId;
+    // private long paymentId;
     private String seatDesc;
 
     // @OneToOne(cascade = CascadeType.ALL)
@@ -53,7 +53,6 @@ public class Ticket implements Serializable {
         this.movie = movie;
         this.showtime = showtime;
         this.seatDesc = seatDesc;
-
         this.seat = seat;
         this.price = price;
     }
@@ -98,11 +97,11 @@ public class Ticket implements Serializable {
         this.price = price;
     }
 
-    public Long getSeat() {
+    public long getSeat() {
         return seat;
     }
 
-    public void setSeat(Long seat) {
+    public void setSeat(long seat) {
         this.seat = seat;
     }
 
