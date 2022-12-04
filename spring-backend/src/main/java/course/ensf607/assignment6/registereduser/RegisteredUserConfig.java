@@ -49,7 +49,7 @@ public class RegisteredUserConfig {
                     "guest",
                     0,
                     0,
-                    0
+                    0,
                     100);
 
             registeredUserRepository.saveAllAndFlush(

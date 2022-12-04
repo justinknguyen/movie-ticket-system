@@ -61,13 +61,6 @@ public class Payment {
     // this.currentTime = currentTime;
     // }
 
-    public String getBuyerEmail() {
-        return buyerEmail;
-    }
-
-    public void setBuyerEmail(String buyerEmail) {
-        this.buyerEmail = buyerEmail;
-    }
 
     public String getType() {
         return type;
@@ -77,45 +70,6 @@ public class Payment {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getId() {
-        return pId;
-    }
-
-    public void setId(long pId) {
-        this.pId = pId;
-    }
-
-    public int getCardNo() {
-        return cardNo;
-    }
-
-    public void setCardNo(int cardNo) {
-        this.cardNo = cardNo;
-    }
-
-    public int getCcv() {
-        return ccv;
-    }
-
-    public void setCcv(int ccv) {
-        this.ccv = ccv;
-    }
-
-    public int getExpiry() {
-        return expiry;
-    }
-
-    public void setExpiry(int expiry) {
-        this.expiry = expiry;
-    }
 
     public double getAccountBalance() {
         return accountBalance;
