@@ -24,23 +24,16 @@ public class Ticket implements Serializable {
 
     private String showtime;
 
-    private String seat;
-
     private Double price;
+    private String seat;
+    private Long seatid;
 
-    //Work in Progress
+    // Work in Progress
     private long paymentId;
 
-
-
-
-    // @OneToMany(mappedBy = "email")
-    // private Set<Ticket> items;
-
-    // @ManyToMany
-    // @JoinTable(name = "courses_enrolled", joinColumns = @JoinColumn(name =
-    // "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
-    // private Set<Course> enrolledCourses = new HashSet<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seat_id")
+    private Seat seats;
 
     public Ticket() {
     }
@@ -109,4 +102,21 @@ public class Ticket implements Serializable {
     public void setSeat(String seat) {
         this.seat = seat;
     }
+
+    public Long getSeatid() {
+        return seatid;
+    }
+
+    public void setSeatid(Long seatid) {
+        this.seatid = seatid;
+    }
+
+    public Seat getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Seat seats) {
+        this.seats = seats;
+    }
+
 }

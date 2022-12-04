@@ -29,20 +29,24 @@ public class TicketUserController {
     }
 
     @PostMapping("add")
-    public void addNewTicket(@RequestBody Ticket ticket) {
+    public void addNewTicket(@RequestBody Ticket ticket, @PathVariable Long sid) {
         ticketService.addNewTicket(ticket);
+        ticketService.SetSeatToTicket(ticket, sid);
     }
 
-    @DeleteMapping("delete/{id}")
-    public void removeTicket(@PathVariable Long id) {
-        ticketService.removeTicket(id);
+    @DeleteMapping("delete/{id}/{sid}")
+    public void removeTicket(@PathVariable Long id, @PathVariable Long sid) {
+        ticketService.removeTicket(id, sid);
     }
 
     @GetMapping("getTicketToCancel/{id}")
-    public Ticket getTicketToCancel(@PathVariable Long id) {return ticketService.FindById(id);}
+    public Ticket getTicketToCancel(@PathVariable Long id) {
+        return ticketService.FindById(id);
+    }
 
-   // @PostMapping("createRefundPayment")
-   // public void createRefundPayment(@RequestBody Payment payment){paymentService.createRefundPayment(payment);}
+    // @PostMapping("createRefundPayment")
+    // public void createRefundPayment(@RequestBody Payment
+    // payment){paymentService.createRefundPayment(payment);}
 
     // @GetMapping("{email}")
     // public RegisteredUser getByEmail(@PathVariable String email) {

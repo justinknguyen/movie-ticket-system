@@ -2,6 +2,7 @@ package course.ensf607.assignment6.seat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import course.ensf607.assignment6.seatMap.SeatMap;
+import course.ensf607.assignment6.ticket.Ticket;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,6 +28,10 @@ public class Seat implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     // @JoinColumn(name = "seat_map_id")
     private SeatMap seatMap;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticket_id", referencedColumnName = "id")
+    private Ticket ticket;
 
     public Seat() {
     }

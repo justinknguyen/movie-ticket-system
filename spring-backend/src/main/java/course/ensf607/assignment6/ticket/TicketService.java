@@ -13,10 +13,12 @@ import java.util.Optional;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
+    private final SeatRepository seatRepository;
 
     @Autowired
-    public TicketService(TicketRepository ticketRepository) {
+    public TicketService(TicketRepository ticketRepository, SeatRepository seatRepository) {
         this.ticketRepository = ticketRepository;
+        this.seatRepository = seatRepository;
     }
 
     public List<Ticket> getAllTickets() {
@@ -24,19 +26,28 @@ public class TicketService {
     }
 
     public void addNewTicket(Ticket ticket) {
-        Optional<Ticket> ticket1 = ticketRepository.findBySeat(ticket.getSeat());
+        Optional<Ticket> ticket1 = ticketRepository.findById(ticket.getId());
         if (ticket1.isPresent()) {
             throw new IllegalStateException("There is already a ticket with that id");
         }
         ticketRepository.save(ticket);
     }
 
-    public void removeTicket(Long id) {
+    public void SetSeatToTicket(Ticket ticket, Long sId) {
+        Seat seat = seatRepository.findById(sId).get();
+        ticket.setSeats(seat);
+        ticketRepository.save(ticket);
+    }
+
+    public void removeTicket(Long id, Long sId) {
+        Seat seat = seatRepository.findById(sId).get();
         Ticket ticket1 = ticketRepository.findById(id).get();
         if (ticket1 == null) {
             throw new IllegalStateException("There is no ticket with that id");
         } else {
             ticketRepository.delete(ticket1);
+            seat.unreserve();
+            seatRepository.save(seat);
         }
     }
 
@@ -50,17 +61,14 @@ public class TicketService {
     }
 
     public void cancelTicket(Long id) {
-
         Ticket ticket1 = ticketRepository.findById(id).get();
         if (ticket1 == null) {
             throw new IllegalStateException("There is no ticket with that id");
         } else {
 
-            //CHECK FOR TIME >72 HOURS
+            // CHECK FOR TIME >72 HOURS
         }
     }
-
-
 
     // public Course getCourseById(Long courseId) {
     // Optional<Course> courseById = courseRepository.findById(courseId);
