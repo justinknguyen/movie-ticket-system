@@ -23,7 +23,7 @@ export default function Payment() {
   const [price,setPrice] = useState('')
 
   const [tickets,setTickets] = useState([])
-  const [checked, setChecked] = useState([0]);
+  const [checked, setChecked] = useState([]);
 
   function sortByKey(array, key) {
 		return array.sort(function (a, b) {
@@ -88,6 +88,7 @@ export default function Payment() {
             .then(res=>res.json())
             .then(result=>{
               setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
+              setChecked([]);
             })
         })
         .catch(() => {

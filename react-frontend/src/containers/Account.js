@@ -15,7 +15,7 @@ import { globalTickets } from "./Payment.js";
 export default function Account() {
 	const [isError, setIsError] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [checked, setChecked] = useState([0]);
+	const [checked, setChecked] = useState([]);
 	const [tickets,setTickets] = useState([])
 
 	const paperStyle = {
@@ -60,6 +60,7 @@ export default function Account() {
 				.then(res=>res.json())
 				.then(result=>{
 					setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
+					setChecked([]);
 				})
 			})
 			.catch(() => {
