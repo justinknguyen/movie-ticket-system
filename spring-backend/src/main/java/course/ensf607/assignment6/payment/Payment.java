@@ -16,46 +16,31 @@ public class Payment {
 
     // Payment Type
     private String type;
-    // Description of the Payment Type
 
-    // User Information
-    private String name;
-
-    private String buyerEmail;
-
-    // Credit Card Information
-    private int cardNo;
-    private int ccv;
-    private int expiry;
-
-    // Account balance, charged at end of month
+    //Balance at time of payment
     private double accountBalance;
+    @ManyToOne()
+    @JoinColumn(name = "RegisteredUserId")
+    private RegisteredUser user;
 
     // Dates for account management
 
     private LocalDate creationDate;
 
-    // private LocalDate currentTime;
 
-    public Payment(String type, String name, String buyerEmail, int cardNo, int ccv, int expiry,
-            double accountBalance) {
-        this.name = name;
+    public Payment(String type, double accountBalance, RegisteredUser user) {
         this.type = type;
-        this.cardNo = cardNo;
-        this.expiry = expiry;
-        this.ccv = ccv;
-        this.buyerEmail = buyerEmail;
         this.accountBalance = accountBalance;
+        this.user =user;
         this.creationDate = LocalDate.now();
 
         // accountBalance = 20; // Starts with annual payment
     }
 
     public Payment(RegisteredUser user) {
-        this.name = user.getName();
-        // accountBalance = 20; // Starts with annual payment
+        this.user = user;
+        this.creationDate = LocalDate.now();
     }
-
     public Payment() {
 
     }

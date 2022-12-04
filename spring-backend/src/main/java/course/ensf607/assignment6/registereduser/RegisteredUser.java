@@ -25,7 +25,12 @@ public class RegisteredUser implements Serializable {
 
     private String address;
 
+    private double accountBalance;
+
     private LocalDate dateRegistered;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Payment> payments = new HashSet<>();
     private int ccv;
     private int cardNo;
     private int expiry;
@@ -38,7 +43,7 @@ public class RegisteredUser implements Serializable {
     }
 
     public RegisteredUser(Long id, String email, String password, String name, String address, int ccv, int cardNo,
-            int expiry) {
+                          int expiry, double accountBalance) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -48,9 +53,10 @@ public class RegisteredUser implements Serializable {
         this.ccv = ccv;
         this.cardNo = cardNo;
         this.expiry = expiry;
+        this.accountBalance = accountBalance;
     }
 
-    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry) {
+    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry, double accountBalance) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -59,6 +65,7 @@ public class RegisteredUser implements Serializable {
         this.ccv = ccv;
         this.cardNo = cardNo;
         this.expiry = expiry;
+        this.accountBalance = accountBalance;
     }
 
     public Long getId() {

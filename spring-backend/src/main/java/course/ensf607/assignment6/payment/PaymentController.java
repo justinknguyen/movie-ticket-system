@@ -23,11 +23,25 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @PostMapping("/addPayment")
-    public ResponseEntity<String> registerNewMovie(@RequestBody Payment payment) {
-        paymentService.addPayment(payment);
+    @PutMapping("/confirmPayment/{amount}")
+    public ResponseEntity<String> confirmPayment(@PathVariable double amount) {
+        paymentService.confirmPayment(amount);
+        return ResponseEntity.ok("Confirmed for Payment.");
+
+    }
+    @PutMapping("/addPayment/{cardNo}/{price}")
+    public ResponseEntity<String> registerNewPayment(@RequestBody Payment payment, @PathVariable int cardNo, @PathVariable double price ) {
+        paymentService.addPayment(payment,cardNo, price);
         return ResponseEntity.ok("Payment added.");
     }
+
+    @PutMapping("/addRefundPayment/{refundAmount}/{userId}")
+    public ResponseEntity<String> refundPayment(@PathVariable long userId, @PathVariable double refundAmount, @PathVariable long ticketId) {
+        paymentService.createRefundPayment(userId, refundAmount);
+        return ResponseEntity.ok("Refunded");
+    }
+
+
 
     /*
      * public void sendPayment(double amount){

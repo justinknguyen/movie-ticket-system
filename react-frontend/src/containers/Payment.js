@@ -17,6 +17,7 @@ export default function Payment() {
   const [expiry,setExpiry] = useState('')
   const [cvv,setCvv] = useState('')
   const [name,setName] = useState('')
+  const [price,setPrice] = useState('')
 
   const [tickets,setTickets] = useState([])
 
@@ -38,20 +39,21 @@ export default function Payment() {
 
   useEffect(()=>{
     totalPrice = tickets.length * 10;
+    setPrice(totalPrice);
     console.log(tickets.length);
-  },[tickets]) 
+  },[tickets])
 
   const handleClick=(e)=>{
     e.preventDefault()
     const creditCard={cardNo, expiry, cvv, name}
     console.log(creditCard)
     // TODO: send data to database
-    fetch("http://localhost:8080/api/v1/payment/addPayment", 
-    {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(creditCard)
-    }).then(()=>{
+    fetch(`http://localhost:8080/api/v1/payment/addPayment/${cardNo}/${price}`,
+        {
+          method:"PUT",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(creditCard)
+        }).then(()=>{
       console.log("Payment Successful")
       setIsSubmitted(true);
       setIsError(false);
