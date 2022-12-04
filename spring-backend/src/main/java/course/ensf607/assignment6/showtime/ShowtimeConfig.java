@@ -17,31 +17,33 @@ public class ShowtimeConfig {
 
         public static Set<Showtime> getShowtimes1() {
                 Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st1.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsA()));
-                showtimes.add(st2.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsB()));
+                showtimes.add(st1.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeats1()));
+                showtimes.add(st2.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeats2()));
+                showtimes.add(st3.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeats3()));
+
                 return showtimes;
         }
 
         public static Set<Showtime> getShowtimes2() {
                 Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st3.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsC()));
-                showtimes.add(st4.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsD()));
+                // showtimes.add(st3.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeats3()));
+                showtimes.add(st4.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeats4()));
                 return showtimes;
         }
 
-        public static Set<Showtime> getShowtimes3() {
-                Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st5.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsA()));
-                showtimes.add(st6.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsB()));
-                return showtimes;
-        }
+        // public static Set<Showtime> getShowtimes3() {
+        // Set<Showtime> showtimes = new HashSet<>();
+        // showtimes.add(st5.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsA()));
+        // showtimes.add(st6.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsB()));
+        // return showtimes;
+        // }
 
-        public static Set<Showtime> getShowtimes4() {
-                Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st7.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsC()));
-                showtimes.add(st8.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsD()));
-                return showtimes;
-        }
+        // public static Set<Showtime> getShowtimes4() {
+        // Set<Showtime> showtimes = new HashSet<>();
+        // showtimes.add(st7.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsC()));
+        // showtimes.add(st8.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsD()));
+        // return showtimes;
+        // }
 
         @Bean
         CommandLineRunner createShowtime(ShowtimeRepository showtimeRepository) {

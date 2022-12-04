@@ -28,7 +28,7 @@ public class SeatController {
     }
 
     @PutMapping("/reserveSeat/{id}")
-    public void reserveSeatById(@PathVariable Long id){
+    public void reserveSeatById(@PathVariable Long id) {
         seatService.reserveById(id);
     }
 
