@@ -93,7 +93,7 @@ export default function Account() {
 			<h1>Account Information</h1>
 				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
 					ID:{userInfo.id} <br></br>
-					User Type:{isGuest ? 'Ordinary User' : 'Registered User'} <br></br>
+					User Type:{isGuest ? 'Ordinary' : 'Registered'} <br></br>
 					Email Address:{userInfo.email} <br></br>
 					Password:{userInfo.password} <br></br>
 					Name:{userInfo.name} <br></br>
