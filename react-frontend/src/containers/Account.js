@@ -13,10 +13,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import { globalTickets } from "./Payment.js";
 
-
 export default function Account() {
 	const [isError, setIsError] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [isGuest, setIsGuest] = useState(false);
 	const [checked, setChecked] = useState([]);
 	const [tickets,setTickets] = useState([])
 
@@ -35,6 +35,9 @@ export default function Account() {
 	}
 	
 	useEffect(()=>{
+		if (userInfo.id === 3) {
+			setIsGuest(true);
+		}
 		fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
 		.then(res=>res.json())
 		.then(result=>{
@@ -89,8 +92,8 @@ export default function Account() {
 			<Paper elevation={3} style={paperStyle}>
 			<h1>Account Information</h1>
 				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
-					UserType:<br></br>
 					ID:{userInfo.id} <br></br>
+					User Type:{isGuest ? 'Ordinary User' : 'Registered User'} <br></br>
 					Email Address:{userInfo.email} <br></br>
 					Password:{userInfo.password} <br></br>
 					Name:{userInfo.name} <br></br>
