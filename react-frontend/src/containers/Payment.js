@@ -129,7 +129,7 @@ export default function Payment() {
               Theatre:{ticket.theatre} <br></br>
               Movie:{ticket.movie} <br></br>
               Showtime:{ticket.showtime} <br></br>
-              Seat:{ticket.seat}
+              Seat:{ticket.seatDesc}
             </Paper>
           </ListItemButton>
           ))}

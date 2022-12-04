@@ -46,6 +46,7 @@ public class TicketUserController {
         Seat seat = seatService.getSeatById(s);
         ticketService.removeTicket(ticid);
         seat.unreserve();
+        seatService.unreserveById(seat.getId());
     }
 
     @GetMapping("getTicketToCancel/{ticid}")
