@@ -177,9 +177,9 @@ export default function Seats() {
             </Button>
           </Box>
         {seats.map((seat,i)=>(
-          <div>
+          <div key={seat.id}>
           {seat.reserved ? (
-                <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={seat.id}>
+                <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
                   ID:{seat.id},
                   Seat:{seat.letter_row+seat.number_row} <br></br>
                   <Typography color="error.main">
@@ -187,7 +187,7 @@ export default function Seats() {
                   </Typography>
                 </Paper>
           ) : (
-              <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={seat.id}>
+              <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}}>
               <ListItemButton role={undefined} onClick={handleToggle(i)} dense>
                 <ListItemIcon>
                   <Checkbox
