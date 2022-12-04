@@ -21,11 +21,13 @@ public class TheatreConfig {
         return args -> {
             Theatre crowfoot = new Theatre(
                     (long) 1,
-                    "Crowfoot").setShowtimes(ShowtimeConfig.getShowtimes2());
+                    "Crowfoot")
+                    .setShowtimes(ShowtimeConfig.getShowtimes1());
 
             Theatre chinook = new Theatre(
                     (long) 2,
-                    "Chinook").setShowtimes(ShowtimeConfig.getShowtimes1());
+                    "Chinook")
+                    .setShowtimes(ShowtimeConfig.getShowtimes2());
 
             theatreRepository.saveAllAndFlush(
                     List.of(crowfoot, chinook));

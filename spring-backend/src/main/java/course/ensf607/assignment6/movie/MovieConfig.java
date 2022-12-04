@@ -1,26 +1,21 @@
 package course.ensf607.assignment6.movie;
 
-import course.ensf607.assignment6.showtime.ShowtimeConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Configuration
 public class MovieConfig {
-    static Movie m1, m2, m3, m4;
+    static Movie m1, m2;
 
-    public static Movie getMovies1() {
-
+    public static Movie getInterstellar() {
         return m1;
     }
 
-    public static Movie getMovies2() {
-
+    public static Movie getCars2() {
         return m2;
     }
 

@@ -19,7 +19,7 @@ export default function Showtimes() {
   const [mId,setmId] = useState('')
 
   useEffect(()=>{
-    fetch("http://localhost:8080/api/v1/theatres/"+theatreSelected.tId+"/movies/"+movieSelected.mId+"/showtimes/")
+    fetch("http://localhost:8080/api/v1/theatres/"+theatreSelected.tId+"/showtimes/")
     .then(res=>res.json())
     .then(result=>{
       setShowtimes(sortByKey(JSON.parse(JSON.stringify(result)), "sId"));

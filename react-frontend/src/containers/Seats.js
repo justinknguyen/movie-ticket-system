@@ -37,8 +37,7 @@ export default function Seats() {
   // load seats
   useEffect(()=>{
     console.log(stSelected.sId)
-    fetch("http://localhost:8080/api/v1/theatres/"+theatreSelected.tId+"/movies/"+movieSelected.mId+
-          "/showtimes/"+stSelected.sId+"/seats")
+    fetch("http://localhost:8080/api/v1/theatres/"+stSelected.sId+"/seats")
     .then(res=>res.json())
     .then(result=>{
       setSeats(sortByKey(JSON.parse(JSON.stringify(result)), "id"));

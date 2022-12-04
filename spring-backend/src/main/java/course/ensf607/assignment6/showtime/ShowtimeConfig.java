@@ -1,14 +1,11 @@
 package course.ensf607.assignment6.showtime;
 
-import course.ensf607.assignment6.movie.Movie;
 import course.ensf607.assignment6.movie.MovieConfig;
-import course.ensf607.assignment6.movie.MovieRepository;
 import course.ensf607.assignment6.seat.SeatConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -20,15 +17,15 @@ public class ShowtimeConfig {
 
         public static Set<Showtime> getShowtimes1() {
                 Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st1.setSeats(SeatConfig.getSeatsA()));
-                showtimes.add(st2.setSeats(SeatConfig.getSeatsB()));
+                showtimes.add(st1.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsA()));
+                showtimes.add(st2.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsB()));
                 return showtimes;
         }
 
         public static Set<Showtime> getShowtimes2() {
                 Set<Showtime> showtimes = new HashSet<>();
-                showtimes.add(st3.setSeats(SeatConfig.getSeatsC()));
-                showtimes.add(st4.setSeats(SeatConfig.getSeatsD()));
+                showtimes.add(st3.setMovie(MovieConfig.getInterstellar()).setSeats(SeatConfig.getSeatsC()));
+                showtimes.add(st4.setMovie(MovieConfig.getCars2()).setSeats(SeatConfig.getSeatsD()));
                 return showtimes;
         }
 
@@ -47,21 +44,20 @@ public class ShowtimeConfig {
         }
 
         @Bean
-        CommandLineRunner createShowtimes(ShowtimeRepository showtimeRepository) {
+        CommandLineRunner createShowtime(ShowtimeRepository showtimeRepository) {
                 return args -> {
                         st1 = new Showtime(
                                         (long) 1,
-                                        LocalDateTime.of(2022, 12, 7, 2, 20)).setMovie(MovieConfig.getMovies1());
+                                        LocalDateTime.of(2022, 12, 7, 2, 20));
                         st2 = new Showtime(
                                         (long) 2,
-                                        LocalDateTime.of(2022, 12, 8, 4, 30)).setMovie(MovieConfig.getMovies2());
-                        ;
+                                        LocalDateTime.of(2022, 12, 8, 4, 30));
                         st3 = new Showtime(
                                         (long) 3,
-                                        LocalDateTime.of(2022, 12, 8, 2, 0)).setMovie(MovieConfig.getMovies1());
+                                        LocalDateTime.of(2022, 12, 8, 2, 0));
                         st4 = new Showtime(
                                         (long) 4,
-                                        LocalDateTime.of(2022, 12, 9, 3, 30)).setMovie(MovieConfig.getMovies2());
+                                        LocalDateTime.of(2022, 12, 9, 3, 30));
                         st5 = new Showtime(
                                         (long) 5,
                                         LocalDateTime.of(2022, 12, 10, 5, 10));
