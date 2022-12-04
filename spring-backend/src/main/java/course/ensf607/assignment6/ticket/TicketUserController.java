@@ -34,16 +34,16 @@ public class TicketUserController {
     }
 
     @PostMapping("add")
-    public void addNewTicket(@RequestBody Ticket ticket, @PathVariable Long sid) {
+    public void addNewTicket(@RequestBody Ticket ticket) {
         ticketService.addNewTicket(ticket);
-        Seat seat = seatService.getSeatById(sid);
-        ticketService.SetSeatToTicket(ticket, seat);
+
     }
 
     @DeleteMapping("delete/{id}")
     public void removeTicket(@PathVariable Long id) {
         Ticket ticket = ticketService.FindById(id);
-        Seat seat = ticket.getSeats();
+        Long s = ticket.getSeat();
+        Seat seat = seatService.getSeatById(s);
         ticketService.removeTicket(id);
         seat.unreserve();
     }

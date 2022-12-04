@@ -25,8 +25,7 @@ public class Ticket implements Serializable {
     private String showtime;
 
     private Double price;
-    private String seat;
-    private Long seatid;
+    private Long seat;
 
     // Work in Progress
     private long paymentId;
@@ -38,7 +37,7 @@ public class Ticket implements Serializable {
     public Ticket() {
     }
 
-    public Ticket(Long id, String theatre, String movie, String showtime, String seat, Double price) {
+    public Ticket(Long id, String theatre, String movie, String showtime, Long seat, Double price) {
         this.id = id;
         this.theatre = theatre;
         this.movie = movie;
@@ -47,7 +46,7 @@ public class Ticket implements Serializable {
         this.price = price;
     }
 
-    public Ticket(String theatre, String movie, String showtime, String seat, Double price) {
+    public Ticket(String theatre, String movie, String showtime, Long seat, Double price) {
         this.theatre = theatre;
         this.movie = movie;
         this.showtime = showtime;
@@ -95,20 +94,12 @@ public class Ticket implements Serializable {
         this.price = price;
     }
 
-    public String getSeat() {
+    public Long getSeat() {
         return seat;
     }
 
-    public void setSeat(String seat) {
+    public void setSeat(Long seat) {
         this.seat = seat;
-    }
-
-    public Long getSeatid() {
-        return seatid;
-    }
-
-    public void setSeatid(Long seatid) {
-        this.seatid = seatid;
     }
 
     public Seat getSeats() {
