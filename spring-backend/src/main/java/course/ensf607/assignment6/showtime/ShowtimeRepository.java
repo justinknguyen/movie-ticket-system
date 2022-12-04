@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
 
-//    Optional<Showtime> findByTime(LocalDate time);
-     Optional<Showtime> findById(long Id);
+     // Optional<Showtime> findByTime(LocalDate time);
+     Optional<Showtime> findById(long stId);
 
 }

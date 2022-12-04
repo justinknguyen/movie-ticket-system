@@ -58,10 +58,10 @@ public class ShowtimeConfig {
                         ;
                         st3 = new Showtime(
                                         (long) 3,
-                                        LocalDateTime.of(2022, 12, 8, 2, 0));
+                                        LocalDateTime.of(2022, 12, 8, 2, 0)).setMovie(MovieConfig.getMovies1());
                         st4 = new Showtime(
                                         (long) 4,
-                                        LocalDateTime.of(2022, 12, 9, 3, 30));
+                                        LocalDateTime.of(2022, 12, 9, 3, 30)).setMovie(MovieConfig.getMovies2());
                         st5 = new Showtime(
                                         (long) 5,
                                         LocalDateTime.of(2022, 12, 10, 5, 10));

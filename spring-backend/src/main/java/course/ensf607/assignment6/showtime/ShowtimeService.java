@@ -3,9 +3,13 @@ package course.ensf607.assignment6.showtime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import course.ensf607.assignment6.movie.Movie;
+
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ShowtimeService {
@@ -21,9 +25,10 @@ public class ShowtimeService {
         return showtimeRepository.findAll();
     }
 
-    public void addShowtime (Showtime showtime) {
+    public void addShowtime(Showtime showtime) {
         Optional<Showtime> showtimeById = showtimeRepository.findById(showtime.getsId());
-//        Optional<Showtime> showtimeById = showtimeRepository.findBy(showtime.getShowtime());
+        // Optional<Showtime> showtimeById =
+        // showtimeRepository.findBy(showtime.getShowtime());
         if (showtimeById.isPresent()) {
             throw new IllegalStateException("Showtime already exist!");
         }
@@ -40,5 +45,15 @@ public class ShowtimeService {
             throw new IllegalStateException("Showtime doesn't exist!");
         }
         return showtimeById.get();
+    }
+
+    public Set<Movie> getMoviesBasedOnShowtime(Set<Showtime> showtime) {
+        Set<Movie> mov = new HashSet<>();
+        for (Showtime s : showtime) {
+            if (s.getMovie() != null) {
+                mov.add(s.getMovie());
+            }
+        }
+        return mov;
     }
 }
