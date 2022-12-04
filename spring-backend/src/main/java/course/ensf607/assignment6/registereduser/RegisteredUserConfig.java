@@ -78,8 +78,8 @@ public class RegisteredUserConfig {
             );
 
             Payment paymentThree = new Payment(
-                    "One-Time Payment",
-                    600,
+                    "Normal User",
+                    0,
                     guest
             );
 

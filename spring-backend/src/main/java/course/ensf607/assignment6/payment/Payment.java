@@ -20,7 +20,7 @@ public class Payment {
     //Balance at time of payment
     private double accountBalance;
     @ManyToOne()
-    @JoinColumn(name = "RegisteredUserId")
+    @JoinColumn(name = "UserId")
     private RegisteredUser user;
 
     // Dates for account management

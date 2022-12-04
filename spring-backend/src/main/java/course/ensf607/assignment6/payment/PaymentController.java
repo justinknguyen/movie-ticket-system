@@ -36,9 +36,16 @@ public class PaymentController {
     }
 
     @PutMapping("/addRefundPayment/{refundAmount}/{userId}")
-    public ResponseEntity<String> refundPayment(@PathVariable long userId, @PathVariable double refundAmount, @PathVariable long ticketId) {
+    public ResponseEntity<String> refundPayment(@PathVariable long userId, @PathVariable double refundAmount) {
         paymentService.createRefundPayment(userId, refundAmount);
         return ResponseEntity.ok("Refunded");
+    }
+
+    @PutMapping("/calculateRefundMultiplier/{userId}")
+    public double calculateRefundAmount(@PathVariable long userId){
+        double refundMult = paymentService.calculateRefundMultiplier(userId);
+        return refundMult;
+
     }
 
 

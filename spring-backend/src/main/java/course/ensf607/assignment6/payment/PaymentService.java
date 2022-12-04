@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,6 +41,7 @@ public class PaymentService {
         payment.setCreationDate(LocalDate.now());
         payment.setUser(user);
         payment.setAccountBalance(user.getAccountBalance() - totalPrice);
+        user.setAccountBalance(user.getAccountBalance() - totalPrice);
         paymentRepository.save(payment);
     }
 
@@ -64,5 +66,23 @@ public class PaymentService {
         refundPayment.setUser(user);
         paymentRepository.save(refundPayment);
 
+    }
+
+    public double calculateRefundMultiplier(long userId) {
+        Optional<RegisteredUser> userCheck = registeredUserRepository.findById(userId);
+        if (userCheck.isPresent() == false) {
+            throw new IllegalStateException("There is no user with that id");
+        }
+        double refundMult;
+        List<RegisteredUser> user = (List<RegisteredUser>) registeredUserRepository.getReferenceById(userId);
+
+        if(user.get(0).getName() == "guest")
+            refundMult = 0.85;
+
+
+        else
+            refundMult = 1;
+
+        return refundMult;
     }
 }
