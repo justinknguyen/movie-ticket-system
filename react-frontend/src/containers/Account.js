@@ -101,7 +101,7 @@ export default function Account() {
 			<Paper elevation={3} style={paperStyle}>
 			<h1>Tickets</h1>
 			{tickets.map((ticket,i) =>(
-				<ListItemButton role={undefined} onClick={handleToggle(i)} dense>
+				<ListItemButton role={undefined} onClick={handleToggle(i)} key={ticket.id} dense>
 				<ListItemIcon>
 					<Checkbox
 					  edge="start"
@@ -110,7 +110,7 @@ export default function Account() {
 					  disableRipple
 					/>
 				  </ListItemIcon>
-				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={ticket.id}>
+				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
 					ID:{ticket.id} <br></br>
 					Theatre:{ticket.theatre} <br></br>
 					Movie:{ticket.movie} <br></br>

@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.time.format.DateTimeFormatter;
 //import course.ensf607.assignment6.showtime.Seat;
 
 @Entity
@@ -20,7 +21,7 @@ public class Showtime {
     @SequenceGenerator(name = "showtimesequence", sequenceName = "showtimesequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "showtimesequence")
     private long stId;
-    private LocalDateTime showtime;
+    private String showtime;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_stId", referencedColumnName = "stId")
@@ -35,7 +36,10 @@ public class Showtime {
 
     public Showtime(Long id, LocalDateTime showtime) {
         this.stId = id;
-        this.showtime = showtime;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+        String formatDateTime = showtime.format(formatter);
+        this.showtime = formatDateTime;
     }
 
     public Long getsId() {
@@ -47,12 +51,14 @@ public class Showtime {
         return this;
     }
 
-    public LocalDateTime getShowtime() {
+    public String getShowtime() {
         return showtime;
     }
 
     public Showtime setShowtime(LocalDateTime showtime) {
-        this.showtime = showtime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+        String formatDateTime = showtime.format(formatter);
+        this.showtime = formatDateTime;
         return this;
     }
 
