@@ -1,5 +1,6 @@
 package course.ensf607.assignment6.registereduser;
 
+import course.ensf607.assignment6.payment.Payment;
 import course.ensf607.assignment6.ticket.Ticket;
 
 import javax.persistence.*;
@@ -127,5 +128,13 @@ public class RegisteredUser implements Serializable {
 
     public void addTickets(Ticket ticket) {
         tickets.add(ticket);
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 }

@@ -79,4 +79,19 @@ public class Payment {
         this.accountBalance = accountBalance;
     }
 
+    public RegisteredUser getUser() {
+        return user;
+    }
+
+    public void setUser(RegisteredUser user) {
+        this.user = user;
+    }
+
+    public long getId() {
+        return pId;
+    }
+
+    public void setId(long pId) {
+        this.pId = pId;
+    }
 }
