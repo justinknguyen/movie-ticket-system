@@ -135,7 +135,7 @@ export default function Payment() {
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
-      <h1>Ticket Cart</h1>
+      <h1>Tickets</h1>
         {tickets.map((ticket,i) =>( 
           <ListItemButton role={undefined} onClick={handleToggle(i)} key={ticket.id} dense>
             <ListItemIcon>
@@ -164,8 +164,8 @@ export default function Payment() {
       </Paper>
 
       <Paper elevation={3} style={paperStyle}>
-        <h1>Payment</h1>
-        <p>Your total is ${totalPrice}</p>
+        <h1>Congratulations!</h1>
+        <p>You paid ${totalPrice}<br></br>Please check your email</p>
 
     
       <Box
@@ -198,19 +198,19 @@ export default function Payment() {
           ''
         )} */}
         
-        <Button variant="contained" onClick={handleClick}>
+        {/* <Button variant="contained" onClick={handleClick}>
           Pay
-        </Button>
+        </Button> */}
       </Box>
     </Paper>
 
-      <Paper elevation={3} style={paperStyle}>
+      {/* <Paper elevation={3} style={paperStyle}>
         <h1>Response</h1>
         {isSubmitted ? <div>Payment Successful! Please check your email.</div> : 
                         <div></div>}
         {isError ? <div>Error. Please try again.</div> : 
                         <div></div>}
-      </Paper>
+      </Paper> */}
     </Container>
   );
 }

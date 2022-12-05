@@ -15,6 +15,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
+export var paymentInfo = undefined;
 
 export default function Seats() {
   const nav = useNavigate();
@@ -22,6 +23,10 @@ export default function Seats() {
   const [seats,setSeats] = useState([])
   const [createdTicket,setTicket] = useState(undefined)
   const [createdSeat,setSeat] = useState(undefined)
+  const [cardNo,setCardNo] = useState('')
+  const [expiry,setExpiry] = useState('')
+  const [cvv,setCvv] = useState('')
+  const [name,setName] = useState('')
 
   const [isError, setIsError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -146,7 +151,39 @@ export default function Seats() {
       }
   };
 
-  const handleProceed = () =>{
+  const handleProceed = async () =>{
+    const creditCard = {cardNo, expiry, cvv, name}
+      paymentInfo = creditCard
+      console.log(creditCard)
+      console.log(userInfo.cardNo)
+    // TODO: send data to database
+    await fetch(`http://localhost:8080/api/v1/payment/addPayment/${userInfo.id}/${checked.length*10}`,
+        {
+          method:"PUT",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(creditCard)
+        }).then(()=>{
+      console.log("Payment Successful")
+      setIsSubmitted(true);
+      setIsError(false);
+      
+      console.log("getting user info")
+      fetch(`http://localhost:8080/api/v1/registereduser/getUser/${userInfo.id}`)
+      .then(res=>res.json())
+      .then(result=>{
+        console.log(result)
+        userInfo.accountBalance = result;
+      })
+    })
+    .catch(() => {
+      console.log("err2");
+      setIsError(true);
+      setIsSubmitted(false);
+    }).catch(()=>{
+      console.log("Error")
+      setIsError(true);
+      setIsSubmitted(false);
+    })
     nav('/movie-ticket-system/payment')
   }
 
@@ -168,7 +205,8 @@ export default function Seats() {
       <p>
         Theatre:{theatreSelected.name} <br></br>
         Movie:{movieSelected.name} <br></br>
-        Showtime:{stSelected.showtime}
+        Showtime:{stSelected.showtime} <br></br>
+        Total Price:${checked.length*10}
       </p>
       <p align="center">
         ___Screen___ <br></br>
