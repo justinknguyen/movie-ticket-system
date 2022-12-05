@@ -12,6 +12,7 @@ export default function AdminLogin() {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { userHasAuthenticated } = useAppContext();
+  const { adminAuth } = useAppContext();
 
   const [userDB, setUserDB] = useState();
 
@@ -61,6 +62,7 @@ export default function AdminLogin() {
           userInfo = userData;
           setIsSubmitted(true);
           userHasAuthenticated(true)
+          adminAuth(true)
           nav("/movie-ticket-system/admin");
         }
       } else {

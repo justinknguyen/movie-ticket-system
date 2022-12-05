@@ -13,6 +13,7 @@ import "./App.css";
 function App() {
   const nav = useNavigate();
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [isAdmin, adminAuth] = useState(false);
   const [isuserType, userType] = useState(false);
 
   function handleLogout() {
@@ -28,11 +29,17 @@ function App() {
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
         {isAuthenticated ? (
+          isAdmin ? (
+            <Navbar.Brand className="font-weight-bold text-muted">
+              Movie Ticket System
+            </Navbar.Brand>
+          ) : (
             <LinkContainer to="/movie-ticket-system/theatres">
             <Navbar.Brand className="font-weight-bold text-muted">
               Movie Ticket System
             </Navbar.Brand>
           </LinkContainer>
+          )
           ) : (
             <Navbar.Brand className="font-weight-bold text-muted">
               Movie Ticket System
@@ -43,12 +50,16 @@ function App() {
         <Navbar.Collapse className="justify-content-end">
           <Nav activeKey={window.location.pathname}>
           {isAuthenticated ? ( 
+            isAdmin ? (
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            ) : (
               <>
                 <LinkContainer to="/movie-ticket-system/account">
                   <Nav.Link>Account</Nav.Link>
                 </LinkContainer>
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
+            )
           ) : (
             <>
               <LinkContainer to="/movie-ticket-system/signup">
@@ -66,7 +77,7 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
       <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, 
-                                    isuserType, userType}}>
+                                    isuserType, userType, isAdmin, adminAuth}}>
         <Routes />
       </AppContext.Provider>
     </div>

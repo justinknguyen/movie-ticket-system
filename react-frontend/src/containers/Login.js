@@ -13,6 +13,7 @@ export default function Login() {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { userHasAuthenticated } = useAppContext();
+  const { adminAuth } = useAppContext();
 
   const [userDB, setUserDB] = useState();
 
@@ -57,6 +58,7 @@ export default function Login() {
           userInfo = userData;
           setIsSubmitted(true);
           userHasAuthenticated(true)
+          adminAuth(false)
           nav("/movie-ticket-system/theatres");
         }
       } else {
