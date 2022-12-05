@@ -17,11 +17,13 @@ export default function Payment() {
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
   const [isError, setIsError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
   const [cardNo,setCardNo] = useState('')
   const [expiry,setExpiry] = useState('')
   const [cvv,setCvv] = useState('')
   const [name,setName] = useState('')
   const [price,setPrice] = useState('')
+
 
   const [tickets,setTickets] = useState([])
   const [checked, setChecked] = useState([]);
@@ -35,6 +37,9 @@ export default function Payment() {
 	}
 
   useEffect(()=>{
+    if (userInfo.id === 3) {
+        setIsGuest(true)
+    }
     fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
     .then(res=>res.json())
     .then(result=>{
@@ -163,35 +168,41 @@ export default function Payment() {
         <h1>Payment</h1>
         <p>Your total is ${totalPrice}</p>
 
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: 500, maxWidth: '100%' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField required id="outlined-required" label="Credit Card Number" variant="outlined" fullWidth
-      value = {cardNo}
-      onChange={(e)=>setCardNo(e.target.value)}
-      />
-      <TextField required id="outlined-required" label="Expiry Date (MMYY)" variant="outlined" fullWidth
-      value = {expiry}
-      onChange={(e)=>setExpiry(e.target.value)}
-      />
-      <TextField required id="outlined-required" label="CVV" variant="outlined" fullWidth
-      value = {cvv}
-      onChange={(e)=>setCvv(e.target.value)}
-      />
-      <TextField required id="outlined-required" label="Cardholder Name" variant="outlined" fullWidth
-      value = {name}
-      onChange={(e)=>setName(e.target.value)}
-      />
-      
-      <Button variant="contained" onClick={handleClick}>
-        Submit
-      </Button>
-    </Box>
+    
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: 500, maxWidth: '100%' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        {isGuest ? (
+        <>
+        <TextField required id="outlined-required" label="Credit Card Number" variant="outlined" fullWidth
+        value = {cardNo}
+        onChange={(e)=>setCardNo(e.target.value)}
+        />
+        <TextField required id="outlined-required" label="Expiry Date (MMYY)" variant="outlined" fullWidth
+        value = {expiry}
+        onChange={(e)=>setExpiry(e.target.value)}
+        />
+        <TextField required id="outlined-required" label="CVV" variant="outlined" fullWidth
+        value = {cvv}
+        onChange={(e)=>setCvv(e.target.value)}
+        />
+        <TextField required id="outlined-required" label="Cardholder Name" variant="outlined" fullWidth
+        value = {name}
+        onChange={(e)=>setName(e.target.value)}
+        />
+        </>) : (
+          <br></br>
+        )}
+        
+        <Button variant="contained" onClick={handleClick}>
+          Submit
+        </Button>
+      </Box>
     </Paper>
 
       <Paper elevation={3} style={paperStyle}>

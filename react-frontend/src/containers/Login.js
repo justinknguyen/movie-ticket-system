@@ -75,6 +75,7 @@ export default function Login() {
     userInfo = userDB[2];
     setIsSubmitted(true);
     userHasAuthenticated(true)
+    adminAuth(false)
     nav("/movie-ticket-system/theatres");
 };
 
