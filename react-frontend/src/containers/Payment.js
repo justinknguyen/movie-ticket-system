@@ -17,6 +17,7 @@ export default function Payment() {
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
   const [isError, setIsError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isCancelled, setIsCancelled] = useState(false);
   const [isGuest, setIsGuest] = useState(false);
   const [cardNo,setCardNo] = useState('')
   const [expiry,setExpiry] = useState('')
@@ -103,6 +104,7 @@ export default function Payment() {
       })
         .then(() => {
           console.log("Ticket Deleted From User");
+          setIsCancelled(true)
           setIsSubmitted(true);
           setIsError(false);
 
@@ -115,6 +117,7 @@ export default function Payment() {
         })
         .catch(() => {
           console.log("err2");
+          setIsCancelled(false)
           setIsError(true);
           setIsSubmitted(false);
         })
@@ -134,34 +137,6 @@ export default function Payment() {
 
   return (
     <Container>
-      <Paper elevation={3} style={paperStyle}>
-      <h1>Tickets</h1>
-        {tickets.map((ticket,i) =>( 
-          <ListItemButton role={undefined} onClick={handleToggle(i)} key={ticket.id} dense>
-            <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={checked.indexOf(i) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-            <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}}>
-              ID:{ticket.id} <br></br>
-              Theatre:{ticket.theatre} <br></br>
-              Movie:{ticket.movie} <br></br>
-              Showtime:{ticket.showtime} <br></br>
-              Seat:{ticket.seatDesc}
-            </Paper>
-          </ListItemButton>
-          ))}
-          <br></br>
-          <Box textAlign='center'>
-            <Button variant="contained" onClick={handleDelete}>
-              Delete
-            </Button>
-          </Box>
-      </Paper>
 
       <Paper elevation={3} style={paperStyle}>
         <h1>Congratulations!</h1>
@@ -204,13 +179,44 @@ export default function Payment() {
       </Box>
     </Paper>
 
-      {/* <Paper elevation={3} style={paperStyle}>
+      
+
+      <Paper elevation={3} style={paperStyle}>
+      <h1>Tickets</h1>
+        {tickets.map((ticket,i) =>( 
+          <ListItemButton role={undefined} onClick={handleToggle(i)} key={ticket.id} dense>
+            <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={checked.indexOf(i) !== -1}
+                  tabIndex={-1}
+                  disableRipple
+                />
+              </ListItemIcon>
+            <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}}>
+              ID:{ticket.id} <br></br>
+              Theatre:{ticket.theatre} <br></br>
+              Movie:{ticket.movie} <br></br>
+              Showtime:{ticket.showtime} <br></br>
+              Seat:{ticket.seatDesc}
+            </Paper>
+          </ListItemButton>
+          ))}
+          <br></br>
+          <Box textAlign='center'>
+            <Button variant="contained" onClick={handleDelete}>
+              Delete
+            </Button>
+          </Box>
+      </Paper>
+
+      <Paper elevation={3} style={paperStyle}>
         <h1>Response</h1>
-        {isSubmitted ? <div>Payment Successful! Please check your email.</div> : 
+        {isSubmitted ? <div>Cancellation Successful! Please check your email.</div> : 
                         <div></div>}
         {isError ? <div>Error. Please try again.</div> : 
                         <div></div>}
-      </Paper> */}
+      </Paper>
     </Container>
   );
 }

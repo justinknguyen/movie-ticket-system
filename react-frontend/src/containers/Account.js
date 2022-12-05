@@ -174,7 +174,7 @@ export default function Account() {
 
 		<Paper elevation={3} style={paperStyle}>
         	<h1>Response</h1>
-        	{isSubmitted ? <div>Cancelation Successful! Please check your email.</div> : 
+        	{isSubmitted ? <div>Cancellation Successful! Please check your email.</div> : 
                         <div></div>}
         	{isError ? <div>Error. Please try again.</div> : 
                         <div></div>}
