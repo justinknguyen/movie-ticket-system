@@ -68,11 +68,13 @@ export default function Account() {
 
 	const handleDelete = (e) => {
 		const id = [];
+		var userId = userInfo.id;
 		for (var i = 0; i < checked.length; i++) {
 			id.push(tickets[checked[i]].id);
 		}
 		console.log(id)
-
+		var refundAmount = id.length * 10
+		
 		for (var i = 0; i < id.length; i++) {
 		fetch("http://localhost:8080/api/v1/ticket/delete/"+id[i], {
 			method: "DELETE",
@@ -95,6 +97,13 @@ export default function Account() {
 				setIsSubmitted(false);
 			})
 			}
+
+		fetch(`http://localhost:8080/api/v1/payment/addRefundPayment/${refundAmount}/${userId}`,
+        {
+          method:"PUT"
+        }).then(()=>{
+			console.log("Refund Successful")
+		})
 	};
 
 	const handleToggle = (value) => () => {

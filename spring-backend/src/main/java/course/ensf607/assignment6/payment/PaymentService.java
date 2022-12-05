@@ -42,14 +42,11 @@ public class PaymentService {
         payment.setUser(user);
         payment.setAccountBalance(user.getAccountBalance() - totalPrice);
         user.setAccountBalance(user.getAccountBalance() - totalPrice);
+        registeredUserRepository.save(user);
         paymentRepository.save(payment);
     }
 
 
-
-
-    public void confirmPayment(double amount) {
-    }
 
     public void createRefundPayment(long userId, double refundAmount) {
         Optional<RegisteredUser> userCheck = registeredUserRepository.findById(userId);
@@ -64,6 +61,7 @@ public class PaymentService {
         Payment refundPayment = new Payment(user);
         refundPayment.setType("Refund");
         refundPayment.setUser(user);
+        registeredUserRepository.save(user);
         paymentRepository.save(refundPayment);
 
     }
@@ -84,5 +82,8 @@ public class PaymentService {
             refundMult = 1;
 
         return refundMult;
+    }
+
+    public void confirmPayment(double amount) {
     }
 }
