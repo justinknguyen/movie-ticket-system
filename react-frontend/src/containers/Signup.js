@@ -41,7 +41,7 @@ export default function Signup() {
       //Prevent page reload
       event.preventDefault();
 
-      var { uname, pass, nme, addr } = document.forms[0];
+      var { uname, pass, nme, addr, ccv, crdnum, expir } = document.forms[0];
 
       // Find user login info
       const userData = userDB?.find((user) => user.email === uname.value);
@@ -57,7 +57,10 @@ export default function Signup() {
           email: uname.value,
           password: pass.value,
           name: nme.value,
-          address: addr.value
+          address: addr.value,
+          CCV: ccv.value,
+          CardNumber: crdnum.value,
+          Expiry: expir.value
         };
         console.log(newUser);
         fetch("http://localhost:8080/api/v1/registereduser/add", {
@@ -108,6 +111,21 @@ export default function Signup() {
           <label>Address </label>
           <input type="text" name="addr" required />
           {renderErrorMessage("addr")}
+        </div>
+        <div className="input-container">
+          <label>CCV </label>
+          <input type="text" name="ccv" required />
+          {renderErrorMessage("nme")}
+        </div>
+        <div className="input-container">
+          <label>CardNumber </label>
+          <input type="text" name="crdnum" required />
+          {renderErrorMessage("nme")}
+        </div>
+        <div className="input-container">
+          <label>Expiry </label>
+          <input type="text" name="expir" required />
+          {renderErrorMessage("nme")}
         </div>
         <div className="button-container">
         <Button variant="contained" onClick={handleSubmit}>
