@@ -9,6 +9,7 @@ import { flexbox } from "@mui/system";
 import { userInfo } from "./AdminLogin.js";
 import { globalTickets } from "./Payment.js";
 import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 export default function Admin() {
 
@@ -25,6 +26,8 @@ export default function Admin() {
 	const [Name,setName] = useState([])
 	const [Email,setEmail] = useState([])
 	const [Password,setPassword] = useState([])
+
+	const [Response,setResponse] = useState([])
 
 	const paperStyle = {
 		padding: "50px 20px",
@@ -57,31 +60,43 @@ export default function Admin() {
 	  },[]);
 
 
-	const addStaff=(e)=>{e.preventDefault()
-		var result = {name: Name, email: Email, password: Password}
+	async function addStaffFunc() {
+		console.log("Adding staff")
+		var body = {name: Name, email: Email, password: Password}
+		// console.log(body)
 		const options = {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(result)
+			body: JSON.stringify(body)
 		}
 		fetch('http://localhost:8080/api/v1/admin/addAdminStaff', options)
 		.then((response) => {
-			console.log(response.data)
-			document.getElementsByName('display')[0].value= response.data
-		})
+			console.log(response)
+			document.getElementsByName('display')[0].value= response
+		  })
+
+		.then(getStaff())
 	}
-	
-	const removeStaff=(e)=>{e.preventDefault()
-		var result = staff.find(item => item.id === Number(staffId));
+
+	const addStaff=(e)=>{e.preventDefault()
+		addStaffFunc()
+	}
+
+	async function removeStaffFunc() {
+		var body = staff.find(item => item.id === Number(staffId));
+		console.log(body)
 		const options = {
 			method: 'DELETE',
 			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(result)
+			body: JSON.stringify(body)
 		}
-		fetch('http://localhost:8080/api/v1/admin/removeAdminStaff', options)
-		.then((response) => {
-			document.getElementsByName('display')[0].value= response.data
-		})
+		const response = await fetch('http://localhost:8080/api/v1/admin/removeAdminStaff', options)
+		document.getElementsByName('display')[0].value= response
+		getStaff()
+	}
+
+	const removeStaff=(e)=>{e.preventDefault()
+		removeStaffFunc()
 	}
 
 
@@ -141,6 +156,7 @@ export default function Admin() {
 				<Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={staffMember.id}>
 				Id:{staffMember.id} <br></br>
 				Name:{staffMember.name} <br></br>
+				Email:{staffMember.email} <br></br>
 				</Paper>
 
 			))}

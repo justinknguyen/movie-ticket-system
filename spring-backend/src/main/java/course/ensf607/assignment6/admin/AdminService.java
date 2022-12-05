@@ -22,20 +22,20 @@ public class AdminService {
     }
 
     public String addAdminStaff(Admin staff) {
-        Optional<Admin> newStaff = adminRepository.findByName(staff.getName());
-        if (newStaff.isPresent()) {
-            return "Staff already exists!";
+        Optional<Admin> existStaff = adminRepository.findByEmail(staff.getEmail());
+        if (existStaff.isPresent()) {
+            return "That E-Mail already exists!";
         }
         adminRepository.save(staff);
         return "Staff added.";
     }
 
     public String removeAdminStaff(Admin staff) {
-        Optional<Admin> newStaff = adminRepository.findByName(staff.getName());
-        if (!newStaff.isPresent()) {
+        Optional<Admin> existStaff = adminRepository.findByEmail(staff.getEmail());
+        if (!existStaff.isPresent()) {
             return "Staff doesn't exist!";
         }
-        adminRepository.delete(staff);
+        adminRepository.deleteById(existStaff.get().getId());
         return "Staff removed.";
     }
 
