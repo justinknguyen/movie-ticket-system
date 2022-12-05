@@ -35,6 +35,11 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
+    public Movie(String name, LocalDate releaseDate) {
+        this.name = name;
+        this.releaseDate = releaseDate;
+    }
+
     public Long getmId() {
         return mId;
     }

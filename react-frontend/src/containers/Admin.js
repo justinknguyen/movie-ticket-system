@@ -13,8 +13,6 @@ import Axios from "axios";
 
 export default function Admin() {
 
-	const navigate = useNavigate()
-
 	const [movies,setMovies] = useState([])
 	const [staff,setStaff] = useState([])
 	const [users,setUsers] = useState([])
@@ -27,7 +25,17 @@ export default function Admin() {
 	const [Email,setEmail] = useState([])
 	const [Password,setPassword] = useState([])
 
-	const [Response,setResponse] = useState([])
+	const [UserName,setUserName] = useState([])
+	const [UserEmail,setUserEmail] = useState([])
+	const [UserPassword,setUserPassword] = useState([])
+	const [Address,setAddress] = useState([])
+	const [CCV,setCCV] = useState([])
+	const [CardNo,setCardNo] = useState([])
+	const [Expiry,setExpiry] = useState([])
+	const [AccountBalance,setAccountBalance] = useState([])
+
+	const [MovieName,setMovieName] = useState([])
+	const [ReleaseDate,setReleaseDate] = useState([])
 
 	const paperStyle = {
 		padding: "50px 20px",
@@ -61,7 +69,6 @@ export default function Admin() {
 
 
 	async function addStaffFunc() {
-		console.log("Adding staff")
 		var body = {name: Name, email: Email, password: Password}
 		// console.log(body)
 		const options = {
@@ -71,10 +78,10 @@ export default function Admin() {
 		}
 		fetch('http://localhost:8080/api/v1/admin/addAdminStaff', options)
 		.then((response) => {
-			console.log(response)
-			document.getElementsByName('display')[0].value= response
+			var test = Math.random() // to render the page since the messages are coming through as undefined and not changing the output box value
+			document.getElementsByName('staffDisplay')[0].value= test // remove this line and replace with below
+			// document.getElementsByName('display')[0].value= response
 		  })
-
 		.then(getStaff())
 	}
 
@@ -84,14 +91,15 @@ export default function Admin() {
 
 	async function removeStaffFunc() {
 		var body = staff.find(item => item.id === Number(staffId));
-		console.log(body)
 		const options = {
 			method: 'DELETE',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify(body)
 		}
 		const response = await fetch('http://localhost:8080/api/v1/admin/removeAdminStaff', options)
-		document.getElementsByName('display')[0].value= response
+		var test = Math.random() // to render the page since the messages are coming through as undefined and not changing the output box value
+		document.getElementsByName('staffDisplay')[0].value= test // remove this line and replace with below
+		// document.getElementsByName('display')[0].value= response
 		getStaff()
 	}
 
@@ -99,21 +107,83 @@ export default function Admin() {
 		removeStaffFunc()
 	}
 
+	async function addUserFunc() {
+		var body = {name: UserName, email: UserEmail, password: UserPassword, address: Address, ccv: CCV, cardNo: CardNo, expiry: Expiry, accountBalance: AccountBalance}
+		const options = {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(body)
+		}
+		console.log(body)
+		fetch('http://localhost:8080/api/v1/admin/addRegisteredUser', options)
+		.then((response) => {
+			var test = Math.random() // to render the page since the messages are coming through as undefined and not changing the output box value
+			document.getElementsByName('userDisplay')[0].value= test // remove this line and replace with below
+			// document.getElementsByName('display')[0].value= response
+		  })
+
+		.then(getUsers())
+	}
 
 	const addUser=(e)=>{e.preventDefault()
-        // addCourse()
+        addUserFunc()
     }
 	
+	async function removeUserFunc() {
+		var body = users.find(item => item.id === Number(userId));
+		const options = {
+			method: 'DELETE',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(body)
+		}
+		const response = await fetch('http://localhost:8080/api/v1/admin/removeRegisteredUser', options)
+		var test = Math.random() // to render the page since the messages are coming through as undefined and not changing the output box value
+		document.getElementsByName('userDisplay')[0].value= test // remove this line and replace with below
+		// document.getElementsByName('display')[0].value= response
+		getUsers()
+	}
+
 	const removeUser=(e)=>{e.preventDefault()
-        // addCourse()
+        removeUserFunc()
     }
 
+	async function addMovieFunc() {
+		var body = {name: MovieName, releaseDate: ReleaseDate}
+		const options = {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(body)
+		}
+		fetch('http://localhost:8080/api/v1/admin/addMovie', options)
+		.then((response) => {
+			var test = Math.random() // to render the page since the messages are coming through as undefined and not changing the output box value
+			document.getElementsByName('movieDisplay')[0].value= test // remove this line and replace with below
+			// document.getElementsByName('display')[0].value= response
+		  })
+
+		.then(getMovies())
+	}
+
 	const addMovie=(e)=>{e.preventDefault()
-        // addCourse()
+        addMovieFunc()
     }
 	
+	async function removeMovieFunc() {
+		var body = movies.find(item => item.id === Number(movieId));
+		const options = {
+			method: 'DELETE',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(body)
+		}
+		const response = await fetch('http://localhost:8080/api/v1/admin/removeMovie', options)
+		var test = Math.random() // to render the page since the messages are coming through as undefined and not changing the output box value
+		document.getElementsByName('movieDisplay')[0].value= test // remove this line and replace with below
+		// document.getElementsByName('display')[0].value= response
+		getUsers()
+	}
+
 	const removeMovie=(e)=>{e.preventDefault()
-        // addCourse()
+        removeMovieFunc()
     }
 
 	return (
@@ -140,11 +210,24 @@ export default function Admin() {
 			))}
 
 			<br/><br/>
+
 			<input type="text" placeholder="Movie Id" 
             value={movieId} 
             onChange={(e)=>setMovieId(e.target.value)}/>
-			<button onClick={addMovie} > Add Movie </button>
 			<button onClick={removeMovie} > Remove Movie </button>
+			<br/><br/>
+
+			<input type="text" placeholder="Name" 
+            value={MovieName}
+            onChange={(e)=>setMovieName(e.target.value)}/>
+			<input type="text" placeholder="ReleaseDate" 
+            value={ReleaseDate}
+            onChange={(e)=>setReleaseDate(e.target.value)}/>
+
+			<button onClick={addMovie} > Add Movie </button>
+			<br/><br/>
+			<label htmlFor="displayValue"> Output: </label>
+            <input type="textarea" name="movieDisplay"></input>
 			<br/><br/>
 
 			</Paper>
@@ -181,7 +264,7 @@ export default function Admin() {
 			<button onClick={addStaff} > Add Staff </button>
 			<br/><br/>
 			<label htmlFor="displayValue"> Output: </label>
-            <input type="textarea" name="display"></input>
+            <input type="textarea" name="staffDisplay"></input>
 
 			</Paper>
 
@@ -197,13 +280,44 @@ export default function Admin() {
 
 			))}
 
+
 			<br/><br/>
 			<input type="text" placeholder="User Id" 
             value={userId} 
             onChange={(e)=>setUserId(e.target.value)}/>
-			<button onClick={addUser} > Add User </button>
 			<button onClick={removeUser} > Remove User </button>
 			<br/><br/>
+
+			<input type="text" placeholder="Name" 
+            value={UserName}
+            onChange={(e)=>setUserName(e.target.value)}/>
+			<input type="text" placeholder="Email" 
+            value={UserEmail}
+            onChange={(e)=>setUserEmail(e.target.value)}/>
+			<input type="text" placeholder="Password" 
+            value={UserPassword}
+            onChange={(e)=>setUserPassword(e.target.value)}/>
+			<input type="text" placeholder="Address" 
+            value={Address}
+            onChange={(e)=>setAddress(e.target.value)}/>
+			<input type="text" placeholder="CCV" 
+            value={CCV}
+            onChange={(e)=>setCCV(e.target.value)}/>
+			<input type="text" placeholder="CardNo" 
+            value={CardNo}
+            onChange={(e)=>setCardNo(e.target.value)}/>
+			<input type="text" placeholder="Expiry" 
+            value={Expiry}
+            onChange={(e)=>setExpiry(e.target.value)}/>
+			<input type="text" placeholder="AccountBalance" 
+            value={AccountBalance}
+            onChange={(e)=>setAccountBalance(e.target.value)}/>
+
+
+			<button onClick={addUser} > Add User </button>
+			<br/><br/>
+			<label htmlFor="displayValue"> Output: </label>
+            <input type="textarea" name="userDisplay"></input>
 
 			</Paper>
 
