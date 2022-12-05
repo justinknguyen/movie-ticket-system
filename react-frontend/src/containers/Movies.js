@@ -38,6 +38,7 @@ export default function Movies() {
 
   return (
     <Container>
+      <h1><Link className="link" to='/movie-ticket-system/searchmovie'>Search Movie</Link></h1>
       <Paper elevation={3} style={paperStyle}>
       <h1>Movies</h1>
       <p>Theatre:{theatreSelected.name}</p>

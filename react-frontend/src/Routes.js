@@ -15,6 +15,7 @@ import Account from "./containers/Account";
 import AnnualFee from "./containers/AnnualFee";
 import Admin from "./containers/Admin";
 import AdminLogin from "./containers/AdminLogin";
+import SearchMovie from "./containers/SearchMovie";
 
 export default function Links() {
   return (
@@ -31,6 +32,7 @@ export default function Links() {
         <Route path="/movie-ticket-system/annualfee" element={<AnnualFee />} />
         <Route path="/movie-ticket-system/admin" element={<Admin />} />
         <Route path="/movie-ticket-system/adminLogin" element={<AdminLogin />} />
+        <Route path="/movie-ticket-system/searchmovie" element={<SearchMovie />} />
         {
           /* Finally, catch all unmatched routes */
         }
