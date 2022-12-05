@@ -20,32 +20,13 @@ export default function Account() {
 	const [isGuest, setIsGuest] = useState(false);
 	const [checked, setChecked] = useState([]);
 	const [tickets,setTickets] = useState([])
-	var id = userInfo.id;
-
+	const [balance, setBalance] = useState()
 
 	const paperStyle = {
 		padding: "50px 20px",
 		width: 600,
 		margin: "20px auto",
 	};
-
-	updateUser(id);
-	function updateUser(id) {
-		fetch(`http://localhost:8080/api/v1/registereduser/getUser/${id}`, {
-			method: "GET",
-			headers: { "Content-Type": "application/json" },
-	  })
-		.then((response) => {
-		  return response.json();
-		})
-		.then((data) => {
-		  userInfo.accountBalance = data;
-		})
-		.catch(() => {
-		  console.log("Error");
-		});
-	
-	}
 
 	function sortByKey(array, key) {
 		return array.sort(function (a, b) {
@@ -76,27 +57,40 @@ export default function Account() {
 		var refundAmount = id.length * 10
 		
 		for (var i = 0; i < id.length; i++) {
-		fetch("http://localhost:8080/api/v1/ticket/delete/"+id[i], {
-			method: "DELETE",
-			headers: { "Content-Type": "application/json" }
-			})
-			.then(() => {
-				console.log("Ticket Deleted From User");
-				setIsSubmitted(true);
-				setIsError(false);
-				fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
-				.then(res=>res.json())
-				.then(result=>{
-					setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
-					setChecked([]);
+			fetch("http://localhost:8080/api/v1/ticket/delete/"+id[i], {
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" }
 				})
-			})
-			.catch(() => {
-				console.log("err2");
-				setIsError(true);
-				setIsSubmitted(false);
-			})
-			}
+				.then(() => {
+					console.log("Ticket Deleted From User");
+					setIsSubmitted(true);
+					setIsError(false);
+					fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
+					.then(res=>res.json())
+					.then(result=>{
+						setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
+						setChecked([]);
+					})
+					fetch(`http://localhost:8080/api/v1/registereduser/getUser/${id}`, {
+						method: "GET",
+						headers: { "Content-Type": "application/json" },
+					})
+					.then((response) => {
+					return response.json();
+					})
+					.then((data) => {
+					  userInfo.accountBalance = data;
+					})
+					.catch(() => {
+					console.log("Error");
+					});
+				})
+				.catch(() => {
+					console.log("err2");
+					setIsError(true);
+					setIsSubmitted(false);
+				})
+		}
 
 		fetch(`http://localhost:8080/api/v1/payment/addRefundPayment/${refundAmount}/${userId}`,
         {

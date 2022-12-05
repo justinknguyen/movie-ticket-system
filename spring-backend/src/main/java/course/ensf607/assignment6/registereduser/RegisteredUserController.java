@@ -29,7 +29,7 @@ public class RegisteredUserController {
         return registeredUserService.getAllRegisteredUsers();
     }
 
-    @GetMapping("/getUser/{id}")
+    @GetMapping("getUser/{id}")
     public double getUser(@PathVariable long id){return registeredUserService.getRegisteredUser(id);}
 
     @PostMapping("add")
