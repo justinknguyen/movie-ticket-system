@@ -49,6 +49,8 @@ public class RegisteredUserService {
         if (!user.isPresent()) {
             throw new IllegalStateException("User doesn't exist!");
         }
+//        registeredUserRepository.deleteUserById(registeredUser.getId());
+//        registeredUserRepository.deleteByEmail(registeredUser.getEmail());
         registeredUserRepository.delete(registeredUser);
     }
 

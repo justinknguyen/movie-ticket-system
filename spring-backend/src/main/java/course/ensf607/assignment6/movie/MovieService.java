@@ -21,12 +21,22 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public void addMovie(Movie movie) {
+    public String addMovie(Movie movie) {
         Optional<Movie> movieByName = movieRepository.findByName(movie.getName());
         if (movieByName.isPresent()) {
-            throw new IllegalStateException("Showtime already exist!");
+            return "Movie already exist!";
         }
         movieRepository.save(movie);
+        return "Movie added.";
+    }
+
+    public String removeMovie(Movie movie) {
+        Optional<Movie> movieByName = movieRepository.findByName(movie.getName());
+        if (!movieByName.isPresent()) {
+            return "Movie already exist!";
+        }
+        movieRepository.deleteById(movieByName.get().getmId());
+        return "Movie removed.";
     }
 
     public void updateMovie(Movie movie) {

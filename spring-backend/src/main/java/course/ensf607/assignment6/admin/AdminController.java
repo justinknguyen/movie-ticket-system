@@ -67,14 +67,14 @@ public class AdminController {
     }
 
     @PostMapping("/addMovie")
-    public ResponseEntity<String> addMovie(@RequestBody Movie movie) {
+    public String addMovie(@RequestBody Movie movie) {
         movieService.addMovie(movie);
-        return ResponseEntity.ok("Movie added.");
+        return "Movie added.";
     }
 
     @DeleteMapping("/removeMovie")
-    public void removeMovie(@RequestBody Movie movie) {
-//        movieService.removeMovie(movie);
+    public String removeMovie(@RequestBody Movie movie) {
+        return movieService.removeMovie(movie);
     }
 
 
