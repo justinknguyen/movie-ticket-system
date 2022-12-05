@@ -58,9 +58,9 @@ export default function Signup() {
           password: pass.value,
           name: nme.value,
           address: addr.value,
-          CCV: ccv.value,
-          CardNumber: crdnum.value,
-          Expiry: expir.value
+          ccv: ccv.value,
+          cardNo: crdnum.value,
+          expiry: expir.value
         };
         console.log(newUser);
         fetch("http://localhost:8080/api/v1/registereduser/add", {
