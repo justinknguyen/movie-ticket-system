@@ -40,9 +40,10 @@ export default function Movies() {
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Movies</h1>
+      <p>Theatre:{theatreSelected.name}</p>
         {movies.map((movie,i) =>(
-        <Link to={'/movie-ticket-system/showtimes'} onClick={() => clickHandle(i)}>
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={movie.mId}>
+        <Link to={'/movie-ticket-system/showtimes'} onClick={() => clickHandle(i)} key={movie.mId}>
+          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
             ID:{movie.mId},
             Name:{movie.name} <br></br>
             Release Date:{movie.releaseDate}

@@ -30,8 +30,8 @@ export default function Theatres() {
       <Paper elevation={3} style={paperStyle}>
       <h1>Theatres</h1>
         {theatres.map((theatre, i)=>( 
-        <Link to={'/movie-ticket-system/movies'} onClick={() => clickHandle(i)}>
-          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={i}>
+        <Link to={'/movie-ticket-system/movies'} onClick={() => clickHandle(i)} key={i}>
+          <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
             ID:{theatre.tId},
             Name:{theatre.name}
           </Paper>

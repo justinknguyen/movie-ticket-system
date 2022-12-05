@@ -165,8 +165,20 @@ export default function Seats() {
     <Container>
       <Paper elevation={3} style={paperStyle}>
       <h1>Seats</h1>
+      <p>
+        Theatre:{theatreSelected.name} <br></br>
+        Movie:{movieSelected.name} <br></br>
+        Showtime:{stSelected.showtime}
+      </p>
+      <p align="center">
+        ___Screen___ <br></br>
+        A1, A2, A3, A4 <br></br>
+        B1, B2, B3, B4 <br></br>
+        C1, C2, C3, C4 <br></br>
+        D1, D2, D3, D4 <br></br>
+      </p>
           <Box textAlign='center'>
-            <Button variant="contained" onClick={handleProceed} fullWidth>
+            <Button variant="contained" onClick={handleProceed}>
               Pay
             </Button>
           </Box>
@@ -177,9 +189,9 @@ export default function Seats() {
             </Button>
           </Box>
         {seats.map((seat,i)=>(
-          <div>
+          <div key={seat.id}>
           {seat.reserved ? (
-                <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={seat.id}>
+                <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} >
                   ID:{seat.id},
                   Seat:{seat.letter_row+seat.number_row} <br></br>
                   <Typography color="error.main">
@@ -187,7 +199,7 @@ export default function Seats() {
                   </Typography>
                 </Paper>
           ) : (
-              <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={seat.id}>
+              <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}}>
               <ListItemButton role={undefined} onClick={handleToggle(i)} dense>
                 <ListItemIcon>
                   <Checkbox

@@ -70,7 +70,7 @@ export default function Login() {
     event.preventDefault();
     const uname = "guest";
     const pass = "guest";
-    userInfo = userDB[0];
+    userInfo = userDB[2];
     setIsSubmitted(true);
     userHasAuthenticated(true)
     nav("/movie-ticket-system/theatres");

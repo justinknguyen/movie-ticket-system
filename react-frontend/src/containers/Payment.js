@@ -10,6 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 var totalPrice = 0.00;
+export var paymentInfo = undefined;
 
 
 export default function Payment() {
@@ -50,6 +51,7 @@ export default function Payment() {
   const handleClick=(e)=>{
     e.preventDefault()
     const creditCard={cardNo, expiry, cvv, name}
+    paymentInfo = creditCard;
     console.log(creditCard)
     // TODO: send data to database
     fetch(`http://localhost:8080/api/v1/payment/addPayment/${cardNo}/${price}`,
@@ -115,7 +117,7 @@ export default function Payment() {
       <Paper elevation={3} style={paperStyle}>
       <h1>Ticket Cart</h1>
         {tickets.map((ticket,i) =>( 
-          <ListItemButton role={undefined} onClick={handleToggle(i)} dense>
+          <ListItemButton role={undefined} onClick={handleToggle(i)} key={ticket.id} dense>
             <ListItemIcon>
                 <Checkbox
                   edge="start"
@@ -124,7 +126,7 @@ export default function Payment() {
                   disableRipple
                 />
               </ListItemIcon>
-            <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={ticket.id}>
+            <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}}>
               ID:{ticket.id} <br></br>
               Theatre:{ticket.theatre} <br></br>
               Movie:{ticket.movie} <br></br>
