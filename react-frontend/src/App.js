@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -19,6 +19,10 @@ function App() {
     userHasAuthenticated(false);
     nav("/movie-ticket-system/");
   }
+
+  useEffect(()=>{
+		fetch("http://localhost:8080/api/v1/payment/annualPayment")
+  }, []);
 
   return (
     <div className="App container py-3">

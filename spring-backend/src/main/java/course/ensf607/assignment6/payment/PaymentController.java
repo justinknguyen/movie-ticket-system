@@ -29,9 +29,11 @@ public class PaymentController {
         return ResponseEntity.ok("Confirmed for Payment.");
 
     }
+
     @PutMapping("/addPayment/{cardNo}/{price}")
-    public ResponseEntity<String> registerNewPayment(@RequestBody Payment payment, @PathVariable int cardNo, @PathVariable double price ) {
-        paymentService.addPayment(payment,cardNo, price);
+    public ResponseEntity<String> registerNewPayment(@RequestBody Payment payment, @PathVariable int cardNo,
+            @PathVariable double price) {
+        paymentService.addPayment(payment, cardNo, price);
         return ResponseEntity.ok("Payment added.");
     }
 
@@ -42,13 +44,16 @@ public class PaymentController {
     }
 
     @PutMapping("/calculateRefundMultiplier/{userId}")
-    public double calculateRefundAmount(@PathVariable long userId){
+    public double calculateRefundAmount(@PathVariable long userId) {
         double refundMult = paymentService.calculateRefundMultiplier(userId);
         return refundMult;
 
     }
 
-
+    @PostMapping("annualPayment")
+    public void checkAnnualPayments() {
+        paymentService.checkAnnualPayments();
+    }
 
     /*
      * public void sendPayment(double amount){

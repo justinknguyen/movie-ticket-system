@@ -44,7 +44,7 @@ public class RegisteredUser implements Serializable {
     }
 
     public RegisteredUser(Long id, String email, String password, String name, String address, int ccv, int cardNo,
-                          int expiry, double accountBalance) {
+            int expiry, double accountBalance) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -57,7 +57,8 @@ public class RegisteredUser implements Serializable {
         this.accountBalance = accountBalance;
     }
 
-    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry, double accountBalance) {
+    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry,
+            double accountBalance) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -136,5 +137,29 @@ public class RegisteredUser implements Serializable {
 
     public void setAccountBalance(double accountBalance) {
         this.accountBalance = accountBalance;
+    }
+
+    public int getCardNo() {
+        return cardNo;
+    }
+
+    public void setCardNo(int cardNo) {
+        this.cardNo = cardNo;
+    }
+
+    public int getCcv() {
+        return ccv;
+    }
+
+    public void setCcv(int ccv) {
+        this.ccv = ccv;
+    }
+
+    public int expiry() {
+        return expiry;
+    }
+
+    public void expiry(int expiry) {
+        this.expiry = expiry;
     }
 }

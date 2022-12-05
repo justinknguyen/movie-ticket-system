@@ -66,7 +66,7 @@ export default function Payment() {
       setIsError(true);
       setIsSubmitted(false);
     })
-  }
+}
 
   const handleDelete = (e) => {
     const id = [];
@@ -157,7 +157,7 @@ export default function Payment() {
       value = {cardNo}
       onChange={(e)=>setCardNo(e.target.value)}
       />
-      <TextField required id="outlined-required" label="Expiry Date (MM/YY)" variant="outlined" fullWidth
+      <TextField required id="outlined-required" label="Expiry Date (MMYY)" variant="outlined" fullWidth
       value = {expiry}
       onChange={(e)=>setExpiry(e.target.value)}
       />
