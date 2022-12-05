@@ -17,6 +17,7 @@ export default function Payment() {
   const paperStyle = {padding:'50px 20px', width:600, margin:'20px auto'}
   const [isError, setIsError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted2, setIsSubmitted2] = useState(false);
   const [isCancelled, setIsCancelled] = useState(false);
   const [isGuest, setIsGuest] = useState(false);
   const [cardNo,setCardNo] = useState('')
@@ -24,6 +25,7 @@ export default function Payment() {
   const [cvv,setCvv] = useState('')
   const [name,setName] = useState('')
   const [price,setPrice] = useState('')
+  const [balance,setBalance] = useState([])
 
   const [tickets,setTickets] = useState([])
   const [checked, setChecked] = useState([]);
@@ -52,6 +54,13 @@ export default function Payment() {
     setPrice(totalPrice);
     console.log(tickets.length);
   },[tickets])
+
+  useEffect(()=>{
+		if (isSubmitted2 === true) {
+			userInfo.accountBalance = balance;
+			setIsSubmitted2(false);
+		}
+	  },[isSubmitted2])
 
   const handleClick=(e)=>{
     e.preventDefault()
@@ -91,11 +100,17 @@ export default function Payment() {
 }
 
   const handleDelete = (e) => {
+    e.preventDefault()
     const id = [];
+    var userId = userInfo.id;
     for (var i = 0; i < checked.length; i++) {
       id.push(tickets[checked[i]].id);
     }
     console.log(id)
+    var refundAmount = refundAmount = id.length * 10;
+		if(userId === 3) {
+			refundAmount = refundAmount * 0.85;
+		}
 
     for (var i = 0; i < id.length; i++) {
     fetch("http://localhost:8080/api/v1/ticket/delete/"+id[i], {
@@ -108,12 +123,21 @@ export default function Payment() {
           setIsSubmitted(true);
           setIsError(false);
 
-          fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
-            .then(res=>res.json())
-            .then(result=>{
-              setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
-              setChecked([]);
-            })
+          console.log("getting user info")
+					fetch(`http://localhost:8080/api/v1/registereduser/getUser/${userInfo.id}`)
+					.then(res=>res.json())
+					.then(result=>{
+						setBalance(result)
+						setIsSubmitted2(true)
+						console.log(result)
+					})
+
+					fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
+					.then(res=>res.json())
+					.then(result=>{
+						setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
+						setChecked([]);
+					})
         })
         .catch(() => {
           console.log("err2");
@@ -122,6 +146,14 @@ export default function Payment() {
           setIsSubmitted(false);
         })
       }
+
+      fetch(`http://localhost:8080/api/v1/payment/addRefundPayment/${refundAmount}/${userInfo.id}`,
+		{
+		method:"PUT"
+		}).then(()=>{
+			console.log("Refund Successful")
+		})
+
   };
 
   const handleToggle = (value) => () => {

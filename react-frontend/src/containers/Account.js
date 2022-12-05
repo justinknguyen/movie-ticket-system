@@ -65,7 +65,7 @@ export default function Account() {
 		}
 		console.log(id)
 		var refundAmount = refundAmount = id.length * 10;
-		if(userId == 3) {
+		if(userId === 3) {
 			refundAmount = refundAmount * 0.85;
 		}
 		
