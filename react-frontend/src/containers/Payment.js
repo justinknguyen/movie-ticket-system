@@ -63,6 +63,21 @@ export default function Payment() {
       console.log("Payment Successful")
       setIsSubmitted(true);
       setIsError(false);
+      
+      console.log("getting user info")
+      fetch(`http://localhost:8080/api/v1/registereduser/getUser/${userInfo.id}`)
+      .then(res=>res.json())
+      .then(result=>{
+        console.log(result)
+        userInfo.accountBalance = result;
+      })
+    })
+    .catch(() => {
+      console.log("err2");
+      setIsError(true);
+      setIsSubmitted(false);
+  
+    
     }).catch(()=>{
       console.log("Error")
       setIsError(true);

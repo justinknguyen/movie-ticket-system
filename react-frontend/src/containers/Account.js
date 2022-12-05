@@ -56,6 +56,8 @@ export default function Account() {
 		}
 		console.log(id)
 		var refundAmount = id.length * 10
+		if(userId == 3)
+			refundAmount = refundAmount *0.85;
 		
 		for (var i = 0; i < id.length; i++) {
 			fetch("http://localhost:8080/api/v1/ticket/delete/"+id[i], {
@@ -87,7 +89,7 @@ export default function Account() {
 				})
 		}
 
-		fetch(`http://localhost:8080/api/v1/payment/addRefundPayment/${refundAmount}/${userId}`,
+		fetch(`http://localhost:8080/api/v1/payment/addRefundPayment/${refundAmount}/${userInfo.id}`,
         {
           method:"PUT"
         }).then(()=>{
@@ -154,6 +156,14 @@ export default function Account() {
             </Button>
           </Box>
 			</Paper>
+
+		<Paper elevation={3} style={paperStyle}>
+        	<h1>Response</h1>
+        	{isSubmitted ? <div>Cancelation Successful! Please check your email.</div> : 
+                        <div></div>}
+        	{isError ? <div>Error. Please try again.</div> : 
+                        <div></div>}
+      	</Paper>
 
 		</Container>
 	);
