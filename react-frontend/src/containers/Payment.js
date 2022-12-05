@@ -101,6 +101,7 @@ export default function Payment() {
           console.log("Ticket Deleted From User");
           setIsSubmitted(true);
           setIsError(false);
+
           fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
             .then(res=>res.json())
             .then(result=>{
@@ -160,7 +161,7 @@ export default function Payment() {
 
       <Paper elevation={3} style={paperStyle}>
         <h1>Payment</h1>
-        <p>Your total is ${totalPrice}.00</p>
+        <p>Your total is ${totalPrice}</p>
 
     <Box
       component="form"

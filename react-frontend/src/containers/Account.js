@@ -17,10 +17,11 @@ var userType;
 export default function Account() {
 	const [isError, setIsError] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [isSubmitted2, setIsSubmitted2] = useState(false);
 	const [isGuest, setIsGuest] = useState(false);
 	const [checked, setChecked] = useState([]);
-	const [tickets,setTickets] = useState([])
-	const [balance, setBalance] = useState([])
+	const [tickets,setTickets] = useState([]);
+	const [balance,setBalance] = useState([])
 	
 	const paperStyle = {
 		padding: "50px 20px",
@@ -40,7 +41,7 @@ export default function Account() {
 		if (userInfo.id === 3) {
 			setIsGuest(true);
 		}
-		setBalance(userInfo.accountBalance)
+		
 		fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
 		.then(res=>res.json())
 		.then(result=>{
@@ -48,16 +49,26 @@ export default function Account() {
 		})
 	  },[])
 
+	  useEffect(()=>{
+		if (isSubmitted2 === true) {
+			console.log("in")
+			userInfo.accountBalance = balance;
+			setIsSubmitted2(false);
+		}
+	  },[isSubmitted2])
+
 	const handleDelete = (e) => {
+		e.preventDefault()
 		const id = [];
 		var userId = userInfo.id;
 		for (var i = 0; i < checked.length; i++) {
 			id.push(tickets[checked[i]].id);
 		}
 		console.log(id)
-		var refundAmount = id.length * 10
-		if(userId == 3)
-			refundAmount = refundAmount *0.85;
+		var refundAmount = refundAmount = id.length * 10;
+		if(userId == 3) {
+			refundAmount = refundAmount * 0.85;
+		}
 		
 		for (var i = 0; i < id.length; i++) {
 			fetch("http://localhost:8080/api/v1/ticket/delete/"+id[i], {
@@ -68,19 +79,23 @@ export default function Account() {
 					console.log("Ticket Deleted From User");
 					setIsSubmitted(true);
 					setIsError(false);
+
+					console.log("getting user info")
+					fetch(`http://localhost:8080/api/v1/registereduser/getUser/${userInfo.id}`)
+					.then(res=>res.json())
+					.then(result=>{
+						setBalance(result)
+						setIsSubmitted2(true)
+						console.log(result)
+					})
+
 					fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
 					.then(res=>res.json())
 					.then(result=>{
 						setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
 						setChecked([]);
 					})
-					console.log("getting user info")
-					fetch(`http://localhost:8080/api/v1/registereduser/getUser/${userInfo.id}`)
-					.then(res=>res.json())
-					.then(result=>{
-						console.log(result)
-						userInfo.accountBalance = result;
-					})
+					
 				})
 				.catch(() => {
 					console.log("err2");
@@ -89,10 +104,11 @@ export default function Account() {
 				})
 		}
 
+	
 		fetch(`http://localhost:8080/api/v1/payment/addRefundPayment/${refundAmount}/${userInfo.id}`,
-        {
-          method:"PUT"
-        }).then(()=>{
+		{
+		method:"PUT"
+		}).then(()=>{
 			console.log("Refund Successful")
 		})
 	};
@@ -124,7 +140,7 @@ export default function Account() {
 					Card Number:{userInfo.cardNo} <br></br>
 					Card CVV:{userInfo.ccv} <br></br>
 					Expiry:{userInfo.expiry} <br></br>
-					Account Balance:${userInfo.accountBalance}.00 <br></br>
+					Account Balance:${userInfo.accountBalance} <br></br>
 				</Paper>
 			</Paper>
 
