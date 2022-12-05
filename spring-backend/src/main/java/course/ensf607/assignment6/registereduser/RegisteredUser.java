@@ -167,11 +167,11 @@ public class RegisteredUser implements Serializable {
         this.ccv = ccv;
     }
 
-    public int expiry() {
+    public int getExpiry() {
         return expiry;
     }
 
-    public void expiry(int expiry) {
+    public void setExpiry(int expiry) {
         this.expiry = expiry;
     }
 }

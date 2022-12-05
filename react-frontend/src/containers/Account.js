@@ -22,6 +22,8 @@ export default function Account() {
 	const [checked, setChecked] = useState([]);
 	const [tickets,setTickets] = useState([]);
 	const [balance,setBalance] = useState([])
+
+	console.log(userInfo)
 	
 	const paperStyle = {
 		padding: "50px 20px",
@@ -51,7 +53,6 @@ export default function Account() {
 
 	  useEffect(()=>{
 		if (isSubmitted2 === true) {
-			console.log("in")
 			userInfo.accountBalance = balance;
 			setIsSubmitted2(false);
 		}
@@ -139,7 +140,7 @@ export default function Account() {
 					Card Name:{userInfo.name} <br></br>
 					Card Number:{userInfo.cardNo} <br></br>
 					Card CVV:{userInfo.ccv} <br></br>
-					Expiry:{userInfo.expiry} <br></br>
+					Expiry (MMYY):{userInfo.expiry} <br></br>
 					Account Balance:${userInfo.accountBalance} <br></br>
 				</Paper>
 			</Paper>

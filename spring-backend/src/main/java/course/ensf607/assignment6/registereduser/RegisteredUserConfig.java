@@ -27,7 +27,7 @@ public class RegisteredUserConfig {
                     "Joe",
                     "123 Street",
                     391,
-                    1234,
+                    123456789,
                     1828,
                     500.00);
             user2 = new RegisteredUser(
@@ -37,9 +37,9 @@ public class RegisteredUserConfig {
                     "Jim",
                     "321 Street",
                     691,
-                    5678,
+                    987654321,
                     1825,
-                    600);
+                    600.00);
 
             guest = new RegisteredUser(
                     (long) 3,
@@ -50,7 +50,7 @@ public class RegisteredUserConfig {
                     0,
                     0,
                     0,
-                    100);
+                    100.00);
 
             registeredUserRepository.saveAllAndFlush(
                     List.of(user1, user2, guest));
@@ -61,15 +61,11 @@ public class RegisteredUserConfig {
     CommandLineRunner createPayment(PaymentRepository paymentRepository) {
         return args -> {
 
-
-
-
             Payment paymentOne = new Payment(
                     "annual",
                     500.00,
                     user1
             );
-
 
             Payment paymentTwo = new Payment(
                     "annual",

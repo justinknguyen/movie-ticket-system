@@ -24,7 +24,6 @@ export default function Payment() {
   const [name,setName] = useState('')
   const [price,setPrice] = useState('')
 
-
   const [tickets,setTickets] = useState([])
   const [checked, setChecked] = useState([]);
 
@@ -55,11 +54,13 @@ export default function Payment() {
 
   const handleClick=(e)=>{
     e.preventDefault()
-    const creditCard={cardNo, expiry, cvv, name}
-    paymentInfo = creditCard;
-    console.log(creditCard)
+
+    const creditCard = {cardNo, expiry, cvv, name}
+      paymentInfo = creditCard
+      console.log(creditCard)
+      console.log(userInfo.cardNo)
     // TODO: send data to database
-    fetch(`http://localhost:8080/api/v1/payment/addPayment/${cardNo}/${price}`,
+    fetch(`http://localhost:8080/api/v1/payment/addPayment/${userInfo.cardNo}/${price}`,
         {
           method:"PUT",
           headers:{"Content-Type":"application/json"},
@@ -81,8 +82,6 @@ export default function Payment() {
       console.log("err2");
       setIsError(true);
       setIsSubmitted(false);
-  
-    
     }).catch(()=>{
       console.log("Error")
       setIsError(true);
@@ -177,7 +176,7 @@ export default function Payment() {
         noValidate
         autoComplete="off"
       >
-        {isGuest ? (
+        {/* {isGuest ? (
         <>
         <TextField required id="outlined-required" label="Credit Card Number" variant="outlined" fullWidth
         value = {cardNo}
@@ -196,11 +195,11 @@ export default function Payment() {
         onChange={(e)=>setName(e.target.value)}
         />
         </>) : (
-          <br></br>
-        )}
+          ''
+        )} */}
         
         <Button variant="contained" onClick={handleClick}>
-          Submit
+          Pay
         </Button>
       </Box>
     </Paper>
