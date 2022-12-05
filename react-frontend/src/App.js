@@ -15,6 +15,7 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAdmin, adminAuth] = useState(false);
   const [isuserType, userType] = useState(false);
+  const [isnotPaid, notPaid] = useState(false);
 
   function handleLogout() {
     userHasAuthenticated(false);
@@ -33,12 +34,19 @@ function App() {
             <Navbar.Brand className="font-weight-bold text-muted">
               Movie Ticket System
             </Navbar.Brand>
+          ) : ( isnotPaid ? (
+              <LinkContainer to="/movie-ticket-system/annualfee">
+              <Navbar.Brand className="font-weight-bold text-muted">
+                Movie Ticket System
+              </Navbar.Brand>
+            </LinkContainer>
           ) : (
             <LinkContainer to="/movie-ticket-system/theatres">
-            <Navbar.Brand className="font-weight-bold text-muted">
-              Movie Ticket System
-            </Navbar.Brand>
-          </LinkContainer>
+              <Navbar.Brand className="font-weight-bold text-muted">
+                Movie Ticket System
+              </Navbar.Brand>
+            </LinkContainer>
+          )
           )
           ) : (
             <Navbar.Brand className="font-weight-bold text-muted">
@@ -52,7 +60,7 @@ function App() {
           {isAuthenticated ? ( 
             isAdmin ? (
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            ) : (
+            ) : ( 
               <>
                 <LinkContainer to="/movie-ticket-system/account">
                   <Nav.Link>Account</Nav.Link>
@@ -77,7 +85,8 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
       <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, 
-                                    isuserType, userType, isAdmin, adminAuth}}>
+                                    isuserType, userType, isAdmin, adminAuth,
+                                    isnotPaid, notPaid}}>
         <Routes />
       </AppContext.Provider>
     </div>

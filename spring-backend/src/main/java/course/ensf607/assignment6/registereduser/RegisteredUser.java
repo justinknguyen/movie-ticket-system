@@ -82,6 +82,20 @@ public class RegisteredUser implements Serializable {
         this.accountBalance = 200.00;
     }
 
+    public RegisteredUser(Long id, String email, String password, String name, String address, int ccv, int cardNo,
+                          int expiry, double accountBalance, LocalDate date) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.dateRegistered = date;
+        this.ccv = ccv;
+        this.cardNo = cardNo;
+        this.expiry = expiry;
+        this.accountBalance = accountBalance;
+    }
+
     public Long getId() {
         return id;
     }

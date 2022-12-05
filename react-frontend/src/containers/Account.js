@@ -22,8 +22,6 @@ export default function Account() {
 	const [checked, setChecked] = useState([]);
 	const [tickets,setTickets] = useState([]);
 	const [balance,setBalance] = useState([])
-
-	console.log(userInfo)
 	
 	const paperStyle = {
 		padding: "50px 20px",

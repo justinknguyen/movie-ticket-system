@@ -29,7 +29,9 @@ public class RegisteredUserConfig {
                     391,
                     123456789,
                     1828,
-                    500.00);
+                    500.00,
+                    LocalDate.of(2014, 11, 8)
+            );
             user2 = new RegisteredUser(
                     (long) 2,
                     "user2@gmail.com",
@@ -39,7 +41,9 @@ public class RegisteredUserConfig {
                     691,
                     987654321,
                     1825,
-                    600.00);
+                    600.00,
+                    LocalDate.of(2018, 11, 8)
+            );
 
             guest = new RegisteredUser(
                     (long) 3,

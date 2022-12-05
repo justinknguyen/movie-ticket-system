@@ -14,6 +14,7 @@ export default function Login() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { userHasAuthenticated } = useAppContext();
   const { adminAuth } = useAppContext();
+  const { notPaid } = useAppContext();
 
   const [userDB, setUserDB] = useState();
 
@@ -59,7 +60,16 @@ export default function Login() {
           setIsSubmitted(true);
           userHasAuthenticated(true)
           adminAuth(false)
-          nav("/movie-ticket-system/theatres");
+          var d1 = Date.parse(userData.dateRegistered)
+          var d2 = Date.parse("2022-12-01")
+          console.log(d1)
+          console.log(d2)
+          if (d1 > d2) {
+            nav("/movie-ticket-system/theatres");
+          } else {
+            notPaid(true);
+            nav("/movie-ticket-system/annualfee");
+          }
         }
       } else {
         // Email not found
