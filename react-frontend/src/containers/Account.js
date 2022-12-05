@@ -20,8 +20,8 @@ export default function Account() {
 	const [isGuest, setIsGuest] = useState(false);
 	const [checked, setChecked] = useState([]);
 	const [tickets,setTickets] = useState([])
-	const [balance, setBalance] = useState()
-
+	const [balance, setBalance] = useState([])
+	
 	const paperStyle = {
 		padding: "50px 20px",
 		width: 600,
@@ -40,6 +40,7 @@ export default function Account() {
 		if (userInfo.id === 3) {
 			setIsGuest(true);
 		}
+		setBalance(userInfo.accountBalance)
 		fetch("http://localhost:8080/api/v1/registereduser/tickets"+userInfo.email)
 		.then(res=>res.json())
 		.then(result=>{
@@ -71,19 +72,13 @@ export default function Account() {
 						setTickets(sortByKey(JSON.parse(JSON.stringify(result)), "id"));
 						setChecked([]);
 					})
-					fetch(`http://localhost:8080/api/v1/registereduser/getUser/${id}`, {
-						method: "GET",
-						headers: { "Content-Type": "application/json" },
+					console.log("getting user info")
+					fetch(`http://localhost:8080/api/v1/registereduser/getUser/${userInfo.id}`)
+					.then(res=>res.json())
+					.then(result=>{
+						console.log(result)
+						userInfo.accountBalance = result;
 					})
-					.then((response) => {
-					return response.json();
-					})
-					.then((data) => {
-					  userInfo.accountBalance = data;
-					})
-					.catch(() => {
-					console.log("Error");
-					});
 				})
 				.catch(() => {
 					console.log("err2");
