@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import course.ensf607.assignment6.ticket.Ticket;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -49,15 +50,22 @@ public class RegisteredUserService {
         if (!user.isPresent()) {
             throw new IllegalStateException("User doesn't exist!");
         }
-//        registeredUserRepository.deleteUserById(registeredUser.getId());
-//        registeredUserRepository.deleteByEmail(registeredUser.getEmail());
+        // registeredUserRepository.deleteUserById(registeredUser.getId());
+        // registeredUserRepository.deleteByEmail(registeredUser.getEmail());
         registeredUserRepository.delete(registeredUser);
     }
 
     public double getRegisteredUser(long id) {
 
         RegisteredUser updatedUser = registeredUserRepository.getReferenceById(id);
-        return  updatedUser.getAccountBalance();
+        return updatedUser.getAccountBalance();
+
+    }
+
+    public void setDateRegisteredBasedOnAnnualFee(long id) {
+        RegisteredUser user = registeredUserRepository.findById(id).get();
+        user.setDateRegistered(LocalDate.now());
+        registeredUserRepository.save(user);
 
     }
 }

@@ -30,7 +30,9 @@ public class RegisteredUserController {
     }
 
     @GetMapping("getUser/{id}")
-    public double getUser(@PathVariable long id){return registeredUserService.getRegisteredUser(id);}
+    public double getUser(@PathVariable long id) {
+        return registeredUserService.getRegisteredUser(id);
+    }
 
     @PostMapping("add")
     public void addNewUser(@RequestBody RegisteredUser registeredUser) {
@@ -58,5 +60,10 @@ public class RegisteredUserController {
         // ticketService.updateTicket(ticket);
         registeredUserService.updateRegisteredUser(ru);
         return ru;
+    }
+
+    @PutMapping("{id}/setDate")
+    public void setNewDateBasedOnAnnualPayment(@PathVariable Long id) {
+        registeredUserService.setDateRegisteredBasedOnAnnualFee(id);
     }
 }
