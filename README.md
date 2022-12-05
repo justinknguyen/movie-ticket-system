@@ -9,8 +9,8 @@
 * user1@gmail.com : pass
 * user2@gmail.com : pass
 <br/><br/>*** Admin Users ***<br/>
-* "George@theatre.com" : pass
-* "Bob@theatre.com" : pass
+* George@theatre.com : pass
+* Bob@theatre.com : pass
 
 # Updating the Website on Github Pages
 0. Make sure you have [Node and npm](https://nodejs.org/en/download/) installed by entering:
