@@ -19,11 +19,12 @@ public class TheatreController {
 
     private final TheatreService theatreService;
     private final ShowtimeService showtimeService;
+    private final MovieService movieService;
 
     @Autowired
     public TheatreController(TheatreService theatreService,
-            ShowtimeService showtimeService) {
-
+            ShowtimeService showtimeService, MovieService movieService) {
+        this.movieService = movieService;
         this.theatreService = theatreService;
         this.showtimeService = showtimeService;
     }
@@ -44,6 +45,16 @@ public class TheatreController {
         Set<Showtime> showtime = theatre.getShowtimes();
         Set<Movie> movies = showtimeService.getMoviesBasedOnShowtime(showtime);
         return movies;
+    }
+
+    @GetMapping("/{tId}/movies/{name}")
+    public Movie getMovieBasedOnTheatreandName(@PathVariable Long tId,
+            @PathVariable String name) {
+        Theatre theatre = theatreService.getTheatreById(tId);
+        Set<Showtime> showtime = theatre.getShowtimes();
+        Set<Movie> movies = showtimeService.getMoviesBasedOnShowtime(showtime);
+        Movie movie = movieService.getMovieByName(movies, name);
+        return movie;
     }
 
     @GetMapping("/{tId}/showtimes/{mId}")
