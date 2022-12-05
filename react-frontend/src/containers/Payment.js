@@ -60,7 +60,7 @@ export default function Payment() {
       console.log(creditCard)
       console.log(userInfo.cardNo)
     // TODO: send data to database
-    fetch(`http://localhost:8080/api/v1/payment/addPayment/${userInfo.cardNo}/${price}`,
+    fetch(`http://localhost:8080/api/v1/payment/addPayment/${userInfo.id}/${price}`,
         {
           method:"PUT",
           headers:{"Content-Type":"application/json"},

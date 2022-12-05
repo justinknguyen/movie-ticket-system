@@ -32,12 +32,12 @@ public class PaymentService {
         paymentRepository.save(payment);
     }
 
-    public void addPayment(Payment payment, int cardNo, double totalPrice) {
+    public void addPayment(Payment payment, long userId, double totalPrice) {
         Optional<Payment> paymentByName = paymentRepository.findPaymentBypId(payment.getId());
         if (paymentByName.isPresent()) {
             throw new IllegalStateException("Payment already exist!");
         }
-        RegisteredUser user = registeredUserRepository.findByCardNo(cardNo);
+        RegisteredUser user = registeredUserRepository.getReferenceById(userId);
         payment.setType("Ticket Purchase");
         payment.setCreationDate(LocalDate.now());
         payment.setUser(user);
@@ -52,7 +52,7 @@ public class PaymentService {
             LocalDate tempdate = users.get(i).getDateRegistered().plusYears(1);
             if (tempdate.isAfter(LocalDate.now())) {
                 Payment pay = new Payment(users.get(i));
-                addPayment(pay, users.get(i).getCardNo(), 20);
+                addPayment(pay, users.get(i).getId(), 20);
                 users.get(i).setDateRegistered(LocalDate.now());
             }
         }

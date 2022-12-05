@@ -30,10 +30,10 @@ public class PaymentController {
 
     }
 
-    @PutMapping("/addPayment/{cardNo}/{price}")
-    public ResponseEntity<String> registerNewPayment(@RequestBody Payment payment, @PathVariable int cardNo,
+    @PutMapping("/addPayment/{userId}/{price}")
+    public ResponseEntity<String> registerNewPayment(@RequestBody Payment payment, @PathVariable long userId,
             @PathVariable double price) {
-        paymentService.addPayment(payment, cardNo, price);
+        paymentService.addPayment(payment, userId, price);
         return ResponseEntity.ok("Payment added.");
     }
 
