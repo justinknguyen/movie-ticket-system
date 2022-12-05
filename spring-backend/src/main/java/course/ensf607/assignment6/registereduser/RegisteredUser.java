@@ -70,6 +70,18 @@ public class RegisteredUser implements Serializable {
         this.accountBalance = accountBalance;
     }
 
+    public RegisteredUser(String email, String password, String name, String address, int ccv, int cardNo, int expiry) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.dateRegistered = LocalDate.now();
+        this.ccv = ccv;
+        this.cardNo = cardNo;
+        this.expiry = expiry;
+        this.accountBalance = 200.00;
+    }
+
     public Long getId() {
         return id;
     }
