@@ -60,7 +60,8 @@ export default function Signup() {
           address: addr.value,
           ccv: ccv.value,
           cardNo: crdnum.value,
-          expiry: expir.value
+          expiry: expir.value,
+          accountBalance: 100
         };
         console.log(newUser);
         fetch("http://localhost:8080/api/v1/registereduser/add", {
