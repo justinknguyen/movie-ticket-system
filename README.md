@@ -1,5 +1,5 @@
 # How to Run
-1. Open and run your local database with the provided `.sql` file (AWS database closed)
+1. Open and run your local database with the provided `.sql` file (AWS database closed after project conclusion)
 2. Open the Java files under `spring-backend` in your preferred IDE
 3. Make the necessary changes under `application.properties` file
 4. Run `Assignment6Application.java`
